@@ -18,7 +18,7 @@ HDRS = \
 	include/u8c/u8dec.h \
 	include/u8c/u8enc.h
 OBJS = $(SRCS:.c=.o)
-LIB  = u8c.so
+LIB  = libu8c.so
 $(LIB): $(OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
 $(OBJS): $(HDRS)

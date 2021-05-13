@@ -1,6 +1,6 @@
 # Maintainer: Gabriel Jensen
 pkgname=u8c
-pkgver=0.0.0
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="C library for encoding, decoding, and printing UTF-8 bytes."
 arch=("any")
