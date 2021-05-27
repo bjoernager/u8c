@@ -1,3 +1,8 @@
+# 3
+
+* Remove `include/u8c.h`.
+* Fix minor errors.
+
 # 2
 
 * Move PKGBUILD to seperate project.

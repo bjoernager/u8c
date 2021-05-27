@@ -31,7 +31,6 @@ SRCS = \
 	src/u8c/vfmt.c \
 	src/u8c/vprint.c
 HDRS = \
-	include/u8c.h \
 	include/u8c/col.h \
 	include/u8c/dbgprint.h \
 	include/u8c/debug.h \

@@ -26,7 +26,7 @@
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-extern uint_least8_t u8c_init(void) {
+uint_least8_t u8c_init(void) {
 # if defined(u8c_bethrdsafe)
 	if(mtx_init(&u8c_errlock,mtx_plain) == thrd_error) {
 		return UINT8_C(0x2);
