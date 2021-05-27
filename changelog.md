@@ -1,3 +1,7 @@
+# 4
+
+* Add link to PKGBUILD in README.
+
 # 3
 
 * Remove `include/u8c.h`.

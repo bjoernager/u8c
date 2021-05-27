@@ -2,6 +2,12 @@
 
 [*u8c*](https://mandelbrot.dk/delta/u8c) is a free and open-source C-based library for transforming Unicode codepoints, as well as encoding them into UTF-8, even on implementations that use a different 32 bit encoding.
 
+## Installing
+
+*u8c* can be installed either via the `install` target in the provided Makefile, or using the PKGBUILD found [here](https://mandelbrot.dk/pkgbuild/delta/u8c).
+
+Using the PKGBUILD is as simple as `git clone https://mandelbrot.dk/pkgbuild/delta/u8c.git && cd u8c && makepkg --clean --install --syncdeps`.
+
 ## Copyright & License
 
 Copyright 2021 Gabriel Jensen.
