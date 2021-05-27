@@ -13,15 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
-}
-# endif
+# include <u8c/debug.h>
+uint_least8_t const u8c_debug =
+# if defined(NDEBUG)
+	UINT8_C(0x0);
+# else
+	UINT8_C(0x1);
 # endif

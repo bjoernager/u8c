@@ -13,15 +13,19 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+# include "err.h"
+# include "errlock.h"
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
-}
-# endif
-# endif
+# include <stdlib.h>
+# include <u8c/u32cp.h>
+# include <u8c/geterr.h>
+uint_least8_t u8c_geterr(size_t * _sz,uint_least32_t * * _u32) {
+	# if defined(u8c_bethrdsafe)
+		mtx_lock(&u8c_errlock);
+	# endif
+		u8c_u32cp(_sz,_u32,u8c_err);
+	# if defined(u8c_bethrdsafe)
+		mtx_unlock(&u8c_errlock);
+	# endif
+		return UINT8_C(0x0);
+	}

@@ -13,15 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+# include "stat.h"
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
-}
-# endif
-# endif
+/*
+	0x0 = Finished.
+	0x1 = Initialised.
+*/
+uint_least8_t u8c_stat = UINT8_C(0x0);

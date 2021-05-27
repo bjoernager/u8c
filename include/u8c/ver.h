@@ -3,9 +3,9 @@
 
 	This file is part of u8c.
 
-	u8c is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or	(at your option) any later version.
+	u8c is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-	u8c is distributed in the hope that it will be useful,	but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	u8c is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 	See the	GNU Affero General Public License for more details.
 
@@ -13,8 +13,8 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(u8c_sym_ver)
-# define u8c_sym_ver
+/* Version */
+# if !defined(u8c_ver)
 # include <stdint.h>
-uint_least64_t const inline u8c_debug = 0x1;
+# define u8c_ver (UINT64_C(0x2))
 # endif

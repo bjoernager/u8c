@@ -13,15 +13,20 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+# include <assert.h>
+# include <stddef.h>
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
+# include <stdio.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/u32sz.h>
+uint_least8_t u8c_u32sz(size_t * _sz,uint_least32_t * _u32) {
+	assert(_sz != NULL);
+	assert(_u32 != NULL);
+	for(size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) {
+		if(_u32[n] == UINT32_C(0x0)) {
+			*_sz = n += SIZE_C(0x1);
+			return UINT8_C(0x0);
+		}
+	}
+	return UINT8_C(0x1);
 }
-# endif
-# endif

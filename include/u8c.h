@@ -13,15 +13,24 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
-# include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
-}
-# endif
-# endif
+/* Import this header to declare every single thing from u8c. */
+/* Expect long compile time. */
+# include <u8c/col.h>
+# include <u8c/dbgprint.h>
+# include <u8c/debug.h>
+# include <u8c/end.h>
+# include <u8c/fmt.h>
+# include <u8c/fmttyp.h>
+# include <u8c/geterr.h>
+# include <u8c/init.h>
+# include <u8c/print.h>
+# include <u8c/println.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/thrdsafe.h>
+# include <u8c/u32cp.h>
+# include <u8c/u32sz.h>
+# include <u8c/u8dec.h>
+# include <u8c/u8enc.h>
+# include <u8c/ver.h>
+# include <u8c/vfmt.h>
+# include <u8c/vprint.h>

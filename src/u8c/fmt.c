@@ -13,15 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+# include <u8c/fmt.h>
+# include <u8c/fmttyp.h>
+# include <u8c/u8enc.h>
+# include <u8c/vfmt.h>
+# include <stdarg.h>
+# include <stddef.h>
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
+uint_least8_t u8c_fmt(size_t * _outsz,uint_least32_t * * _out,uint_least32_t * _in,...) {
+	va_list args;
+	va_start(args,_in);
+	uint_least8_t val = u8c_vfmt(_outsz,_out,_in,args);
+	va_end(args);
+	return val;
 }
-# endif
-# endif

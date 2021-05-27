@@ -13,14 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+/* Get error */
+# if !defined(u8c_sym_geterr)
+# define u8c_sym_geterr
 # include <stdint.h>
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t const u8c_debug;
+extern uint_least8_t u8c_geterr(size_t * sz,uint_least32_t * * u32);
 # if defined(__cplusplus)
 }
 # endif

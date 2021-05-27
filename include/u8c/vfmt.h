@@ -13,14 +13,16 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+/* Variadic format */
+# if !defined(u8c_sym_vfmt)
+# define u8c_sym_vfmt
+# include <stdarg.h>
+# include <stddef.h>
 # include <stdint.h>
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t const u8c_debug;
+extern uint_least8_t u8c_vfmt(size_t * outsz,uint_least32_t * * out,uint_least32_t * in,va_list args);
 # if defined(__cplusplus)
 }
 # endif

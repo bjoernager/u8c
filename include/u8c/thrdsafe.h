@@ -13,14 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+/* Thread-safe */
+# if !defined(u8c_sym_thrdsafe)
+# define u8c_sym_thrdsafe
 # include <stdint.h>
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t const u8c_debug;
+extern uint_least8_t const u8c_thrdsafe;
 # if defined(__cplusplus)
 }
 # endif

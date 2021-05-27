@@ -13,14 +13,15 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+/* Print line */
+# if !defined(u8c_sym_println)
+# define u8c_sym_println
 # include <stdint.h>
+# include <stdio.h>
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t const u8c_debug;
+extern uint_least8_t u8c_println(FILE * fp,uint_least32_t * msg,...);
 # if defined(__cplusplus)
 }
 # endif
