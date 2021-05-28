@@ -13,13 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <u8c/fmt.h>
-# include <u8c/fmttyp.h>
-# include <u8c/u8enc.h>
-# include <u8c/vfmt.h>
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <u8c/fmt.h>
+# include <u8c/vfmt.h>
 uint_least8_t u8c_fmt(size_t * _outsz,uint_least32_t * * _out,uint_least32_t * _in,...) {
 	va_list args;
 	va_start(args,_in);

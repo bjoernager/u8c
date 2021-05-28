@@ -15,7 +15,6 @@
 */
 # include "seterr.h"
 # include <assert.h>
-# include <stddef.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/SIZE_C.h>

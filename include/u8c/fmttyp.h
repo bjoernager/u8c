@@ -18,12 +18,12 @@
 # define u8c_sym_fmttyp
 enum u8c_fmttyp {
 	u8c_fmttyp_bgcol,  /* Background colour */
-	u8c_fmttyp_bgcol0,  /* Background colour #0 */
-	u8c_fmttyp_chr,  /* Character */
+	u8c_fmttyp_bgcol0, /* Background colour #0 */
+	u8c_fmttyp_chr,    /* Character */
 	u8c_fmttyp_fgcol,  /* Foreground colour */
-	u8c_fmttyp_fgcol0,  /* Foreground colour #0 */
-	u8c_fmttyp_int,  /* Integer */
-	u8c_fmttyp_str,  /* String */
-	u8c_fmttyp_uint, /* Unsigned integer */
+	u8c_fmttyp_fgcol0, /* Foreground colour #0 */
+	u8c_fmttyp_int,    /* Integer */
+	u8c_fmttyp_str,    /* String */
+	u8c_fmttyp_uint,   /* Unsigned integer */
 };
 # endif

@@ -1,3 +1,10 @@
+# 6
+
+* Remove unneeded include directives.
+* Update `SIZE_C` to utilise the C++23 `std::size_t` literal suffix (`uz`).
+* Fix include guard in `include/u8c/stat.h`.
+* Add more error messages.
+
 # 5
 
 * Add logo (`u8c.svg`).

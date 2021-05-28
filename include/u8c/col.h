@@ -16,6 +16,7 @@
 /* Colour */
 # if !defined(u8c_sym_col)
 # define u8c_sym_col
+# include <stdint.h>
 # define u8c_col_azure      (UINT32_C(0x3DA9E1))
 # define u8c_col_ash        (UINT32_C(0xD2D2CC))
 # define u8c_col_black      (UINT32_C(0x444747))

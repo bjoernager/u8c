@@ -17,13 +17,12 @@
 # if !defined(u8c_dbgprint)
 # if defined(NDEBUG)
 # if defined(__cplusplus)
-# define u8c_dbgprint(...) static_cast<void>(0x0);
+# define u8c_dbgprint(...) (static_cast<void>(0x0));
 # else
 # define u8c_dbgprint(...) ((void)0x0)
 # endif
 # else
 # include <u8c/print.h>
-# include <stdint.h>
 # include <stdio.h>
 # define u8c_dbgprint(...) u8c_print(stderr,__VA_ARGS__)
 # endif

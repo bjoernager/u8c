@@ -19,7 +19,6 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <u8c/col.h>
 # include <u8c/u8enc.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/vfmt.h>

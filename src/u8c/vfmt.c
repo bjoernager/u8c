@@ -13,16 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <assert.h>
 # include <stdarg.h>
 # include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <u8c/fmttyp.h>
 # include <u8c/u32cp.h>
-# include <u8c/u8enc.h>
-# include <u8c/SIZE_C.h>
 # include <u8c/vfmt.h>
 uint_least8_t u8c_vfmt(size_t * _outsz,uint_least32_t * * _out,uint_least32_t * _in,va_list _args) {
 	/* To be added. */

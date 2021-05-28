@@ -16,12 +16,9 @@
 # include "err.h"
 # include "errlock.h"
 # include "stat.h"
-# include <assert.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/end.h>
 # include <u8c/init.h>
-# include <u8c/SIZE_C.h>
 # include <u8c/u32cp.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>

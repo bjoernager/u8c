@@ -19,7 +19,6 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/end.h>
-# include <u8c/print.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif

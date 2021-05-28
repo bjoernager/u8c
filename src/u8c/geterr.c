@@ -15,10 +15,10 @@
 */
 # include "err.h"
 # include "errlock.h"
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u32cp.h>
 # include <u8c/geterr.h>
+# include <u8c/u32cp.h>
 uint_least8_t u8c_geterr(size_t * _sz,uint_least32_t * * _u32) {
 	# if defined(u8c_bethrdsafe)
 		mtx_lock(&u8c_errlock);

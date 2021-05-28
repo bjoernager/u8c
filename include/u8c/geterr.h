@@ -16,6 +16,7 @@
 /* Get error */
 # if !defined(u8c_sym_geterr)
 # define u8c_sym_geterr
+# include <stddef.h>
 # include <stdint.h>
 # if defined(__cplusplus)
 extern "C" {

@@ -8,11 +8,14 @@
 # include <inttypes.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <u8c.h>
+# include <u8c/end.h>
+# include <u8c/init.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/u32sz.h>
 int main(void) {
 	u8c_init();
 	size_t           u32sz = SIZE_C(0x0);
-	uint_least32_t * u32   = U"Hello there."; /* Place string here. */
+	uint_least32_t * u32   = U"u8c_u32sz: Unterminated input."; /* Place string here. */
 	u8c_u32sz(&u32sz,u32);
 	printf("Arrray:\n{");
 	for(size_t n = SIZE_C(0x0);n < u32sz;n += SIZE_C(0x1)) {

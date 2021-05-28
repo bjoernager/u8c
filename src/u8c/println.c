@@ -14,13 +14,14 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include "seterr.h"
+# include <assert.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <u8c/println.h>
-# include <u8c/SIZE_C.h>
 # include <u8c/vprint.h>
 uint_least8_t u8c_println(FILE * _fp,uint_least32_t * _msg,...) {
+	assert(_fp != NULL);
 	va_list args;
 	va_start(args,_msg);
 	if(u8c_vprint(_fp,_msg,args)) {

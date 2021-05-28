@@ -17,7 +17,6 @@
 # include <assert.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <u8c/dbgprint.h>
 # include <u8c/u8dec.h>
 # include <u8c/SIZE_C.h>
 uint_least8_t u8c_u8dec(size_t * _outsz,uint_least32_t * * _out,uint_least8_t * _in) {

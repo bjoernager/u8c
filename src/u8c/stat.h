@@ -13,8 +13,8 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(u8c_sym_done)
-# define u8c_sym_done
+# if !defined(u8c_sym_stat)
+# define u8c_sym_stat
 # include <stdint.h>
 extern uint_least8_t u8c_stat;
 # endif
