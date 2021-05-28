@@ -24,7 +24,7 @@
 # include <threads.h>
 # endif
 uint_least8_t u8c_end(void) {
-	if(u8c_stat > UINT8_C(0x0)) {
+	if(u8c_stat) {
 		return UINT8_C(0x0);
 	}
 # if defined(u8c_bethrdsafe)

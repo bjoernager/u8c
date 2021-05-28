@@ -1,3 +1,9 @@
+# 5
+
+* Add logo (`u8c.svg`).
+* Fix UTF-8 decoder.
+* Update README.
+
 # 4
 
 * Add link to PKGBUILD in README.
@@ -28,6 +34,8 @@
 * Add test-program (run via `make runtest`).
 * Add program to make human-readable UTF-32 strings machine-readable.
 * Turn `u8c_ver` into a compile-time macro.
+* Enable more warnings when compiling.
+* Add assertions.
 
 # 1
 

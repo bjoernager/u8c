@@ -24,10 +24,6 @@ uint_least8_t u8c_u8enc(size_t * _sz,uint_least8_t * * _out,uint_least32_t * _in
 	size_t insz  = SIZE_C(0x0); /* Size of input array (bytes). */
 	size_t outsz = SIZE_C(0x0); /* Size of output array /bytes). */
 	for(size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) { /* First pass: get size of input array, and determine size of output array. */
-		if(_in[n] == UINT32_C(0x0)) { /* U+0000 is Null. */
-			insz = n;
-			goto nottoobig;
-		}
 		if(_in[n] >= UINT32_C(0x110000)) { /* Codepoint out of range. */
 			u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x65),UINT32_C(0x6E),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x43),UINT32_C(0x6F),UINT32_C(0x64),UINT32_C(0x65),UINT32_C(0x70),UINT32_C(0x6F),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x66),UINT32_C(0x20),UINT32_C(0x72),UINT32_C(0x61),UINT32_C(0x6E),UINT32_C(0x67),UINT32_C(0x65),UINT32_C(0x20),UINT32_C(0x28),UINT32_C(0x74),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x20),UINT32_C(0x62),UINT32_C(0x69),UINT32_C(0x67),UINT32_C(0x29),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_u8enc: Codepoint out of range (too big). */
 			return UINT8_C(0x1);
@@ -46,16 +42,18 @@ uint_least8_t u8c_u8enc(size_t * _sz,uint_least8_t * * _out,uint_least32_t * _in
 		}
 		/* 1 byte. */
 		outsz += SIZE_C(0x1);
+		if(_in[n] == UINT32_C(0x0)) {
+			insz = n + SIZE_C(0x1);
+			goto nottoobig;
+		}
 	}
 	u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x65),UINT32_C(0x6E),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x55),UINT32_C(0x6E),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x72),UINT32_C(0x6D),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x61),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x64),UINT32_C(0x20),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x70),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_u8enc: Unterminated input. */
 	return UINT8_C(0x1);
 nottoobig:;
-	outsz += SIZE_C(0x1); /* Reserve space for null-terminator. */
 	if(_sz != NULL) {
 		*_sz = outsz;
 	}
-	*_out                        = calloc(sizeof(uint_least8_t),outsz); /* Allocate space for output array. */
-	(*_out)[outsz - SIZE_C(0x1)] = UINT8_C(0x0); /* Create null-terminator on output array. */
+	*_out = calloc(sizeof(uint_least8_t),outsz); /* Allocate space for output array. */
 	for(size_t n = SIZE_C(0x0), outn = SIZE_C(0x0);n < insz;n += SIZE_C(0x1),outn += SIZE_C(0x1)) { /* Second pass: encode each codepoint into UTF-8. */
 		if(_in[n] >= UINT32_C(0x10000)) { // Four bytes.
 			(*_out)[outn] =  UINT8_C(0xF0) + (uint_least8_t)(_in[n] >> UINT32_C(0x12));
