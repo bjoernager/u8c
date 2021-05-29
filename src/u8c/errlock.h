@@ -13,6 +13,7 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+/* Error lock */
 # if !defined(u8c_sym_errlock)
 # define u8c_sym_errlock
 # if defined(u8c_bethrdsafe)

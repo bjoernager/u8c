@@ -13,15 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-32 size */
-# if !defined(u8c_sym_u32sz)
-# define u8c_sym_u32sz
-# include <stddef.h>
+/* UTF-32 compare */
+# if !defined(luma_sym_u32cmp)
+# define luma_sym_u32cmp
 # include <stdint.h>
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_u32sz(size_t * sz,uint_least32_t * in);
+extern uint_least8_t u8c_u32cmp(uint_least8_t * const res,uint_least32_t * const lstr,uint_least32_t * const rstr);
 # if defined(__cplusplus)
 }
 # endif

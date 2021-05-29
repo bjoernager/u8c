@@ -21,7 +21,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_geterr(size_t * const restrict sz,uint_least32_t * restrict * const restrict out);
+extern uint_least8_t u8c_geterr(size_t * const sz,uint_least32_t * * const out);
 # if defined(__cplusplus)
 }
 # endif

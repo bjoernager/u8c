@@ -15,7 +15,7 @@
 int main(void) {
 	u8c_init();
 	size_t           u32sz = SIZE_C(0x0);
-	uint_least32_t * u32   = U"u8c_u32sz: Unterminated input."; /* Place string here. */
+	uint_least32_t * u32   = U"Goodbye"; /* Place string here. */
 	u8c_u32sz(&u32sz,u32);
 	printf("Arrray:\n{");
 	for(size_t n = SIZE_C(0x0);n < u32sz;n += SIZE_C(0x1)) {

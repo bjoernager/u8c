@@ -15,6 +15,7 @@
 # include <u8c/println.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/thrdsafe.h>
+# include <u8c/u32cmp.h>
 # include <u8c/u32cp.h>
 # include <u8c/u32sz.h>
 # include <u8c/u8dec.h>
@@ -58,6 +59,7 @@ int main(void) {
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded:                       %s\n",msg1);
 		errcount1 += u8c_u8dec(NULL,&msg0,msg1);
+		free(msg1);
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded -> Decoded -> Encoded: %s\n",msg1);
 		free(msg0);
@@ -98,6 +100,27 @@ int main(void) {
 			fflush(stdout);
 		}
 		errcount1 += u8c_print(stdout,(uint_least32_t[]){UINT32_C(0xA),UINT32_C(0x0),});
+		break;
+	}
+	testmsgdone(&errcount0,&errcount1);
+	testmsg("String comparison (UTF-32)");
+	while(!errcount1) {
+		uint_least32_t * str0 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
+		uint_least32_t * str1 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
+		uint_least32_t * str2 = (uint_least32_t[]){UINT32_C(0x47),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x64),UINT32_C(0x62),UINT32_C(0x79),UINT32_C(0x65),UINT32_C(0x0),};
+		printf("str0: ");
+		u8c_println(stdout,str0);
+		printf("str1: ");
+		u8c_println(stdout,str1);
+		printf("str2: ");
+		u8c_println(stdout,str2);
+		uint_least8_t res = UINT8_C(0x0);
+		errcount1 += u8c_u32cmp(&res,str0,str1);
+		printf("str0,str1: %" PRIXLEAST8 ".\n",res);
+		errcount1 += u8c_u32cmp(&res,str1,str2);
+		printf("str0,str2: %" PRIXLEAST8 ".\n",res);
+		errcount1 += u8c_u32cmp(&res,str2,str1);
+		printf("str2,str1: %" PRIXLEAST8 ".\n",res);
 		break;
 	}
 	testmsgdone(&errcount0,&errcount1);

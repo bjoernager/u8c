@@ -1,3 +1,9 @@
+# 9
+
+* Optimisations.
+* Remove some optimisations, as they prevent C++ compatibility.
+* Fix memory leak in test program.
+
 # 8
 
 * Optimisations.

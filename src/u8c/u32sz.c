@@ -19,10 +19,10 @@
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/u32sz.h>
-uint_least8_t u8c_u32sz(size_t * const restrict _sz,uint_least32_t * const restrict _u32) {
+uint_least8_t u8c_u32sz(size_t * const _sz,uint_least32_t * const _u32) {
 	assert(_sz != NULL);
 	assert(_u32 != NULL);
-	for(size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) {
+	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) {
 		if(_u32[n] == UINT32_C(0x0)) {
 			*_sz = n + SIZE_C(0x1);
 			return UINT8_C(0x0);

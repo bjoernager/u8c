@@ -13,6 +13,7 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+/* Status */
 # if !defined(u8c_sym_stat)
 # define u8c_sym_stat
 # include <stdint.h>

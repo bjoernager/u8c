@@ -24,6 +24,7 @@ SRCS = \
 	src/u8c/seterr.c \
 	src/u8c/stat.c \
 	src/u8c/thrdsafe.c \
+	src/u8c/u32cmp.c \
 	src/u8c/u32cp.c \
 	src/u8c/u32sz.c \
 	src/u8c/u8dec.c \
@@ -43,6 +44,7 @@ HDRS = \
 	include/u8c/println.h \
 	include/u8c/SIZE_C.h \
 	include/u8c/thrdsafe.h \
+	include/u8c/u32cmp.h \
 	include/u8c/u32cp.h \
 	include/u8c/u32sz.h \
 	include/u8c/u8dec.h \

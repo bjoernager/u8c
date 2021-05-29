@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <u8c/u8dec.h>
 # include <u8c/SIZE_C.h>
-uint_least8_t u8c_u8dec(size_t * const restrict _sz,uint_least32_t * restrict * const restrict _out,uint_least8_t * const restrict _in) {
+uint_least8_t u8c_u8dec(size_t * const _sz,uint_least32_t * * const _out,uint_least8_t * const _in) {
 	assert(_in != NULL);
 	register size_t insz  = SIZE_C(0x0);
 	register size_t outsz = SIZE_C(0x1);

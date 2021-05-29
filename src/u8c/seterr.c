@@ -24,7 +24,7 @@
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-uint_least8_t u8c_seterr(uint_least32_t * const restrict _msg) {
+uint_least8_t u8c_seterr(uint_least32_t * const _msg) {
 	assert(_msg != NULL);
 	u8c_dbgprint(_msg);
 # if defined(u8c_bethrdsafe)
