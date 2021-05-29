@@ -23,7 +23,7 @@
 # include <u8c/SIZE_C.h>
 # include <u8c/vfmt.h>
 # include <u8c/vprint.h>
-uint_least8_t u8c_vprint(FILE * _fp,uint_least32_t * _msg,va_list _args) {
+uint_least8_t u8c_vprint(FILE * _fp,uint_least32_t * const restrict _msg,va_list _args) {
 	assert(_msg != NULL);
 	uint_least32_t * str0 = NULL;
 	u8c_vfmt(NULL,&str0,_msg,_args);

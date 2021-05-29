@@ -21,7 +21,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_print(FILE * fp,uint_least32_t * msg,...);
+extern uint_least8_t u8c_print(FILE * fp,uint_least32_t * const msg,...);
 # if defined(__cplusplus)
 }
 # endif

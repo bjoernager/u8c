@@ -22,7 +22,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_vfmt(size_t * outsz,uint_least32_t * * out,uint_least32_t * in,va_list args);
+extern uint_least8_t u8c_vfmt(size_t * const restrict sz,uint_least32_t * restrict * const restrict out,uint_least32_t * const restrict in,va_list args);
 # if defined(__cplusplus)
 }
 # endif

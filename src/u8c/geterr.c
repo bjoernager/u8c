@@ -19,11 +19,11 @@
 # include <stdint.h>
 # include <u8c/geterr.h>
 # include <u8c/u32cp.h>
-uint_least8_t u8c_geterr(size_t * _sz,uint_least32_t * * _u32) {
+uint_least8_t u8c_geterr(size_t * const restrict _sz,uint_least32_t * restrict * const restrict _out) {
 	# if defined(u8c_bethrdsafe)
 		mtx_lock(&u8c_errlock);
 	# endif
-		u8c_u32cp(_sz,_u32,u8c_err);
+		u8c_u32cp(_sz,_out,u8c_err);
 	# if defined(u8c_bethrdsafe)
 		mtx_unlock(&u8c_errlock);
 	# endif

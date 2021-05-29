@@ -21,7 +21,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_u8enc(size_t * sz,uint_least8_t * * out,uint_least32_t * in);
+extern uint_least8_t u8c_u8enc(size_t * const restrict sz,uint_least8_t * restrict * const restrict out,uint_least32_t * const restrict in);
 # if defined(__cplusplus)
 }
 # endif

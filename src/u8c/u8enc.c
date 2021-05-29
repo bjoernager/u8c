@@ -19,30 +19,31 @@
 # include <stdlib.h>
 # include <u8c/u8enc.h>
 # include <u8c/SIZE_C.h>
-uint_least8_t u8c_u8enc(size_t * _sz,uint_least8_t * * _out,uint_least32_t * _in) {
+uint_least8_t u8c_u8enc(size_t * const restrict _sz,uint_least8_t * restrict * const restrict _out,uint_least32_t * const restrict _in) {
 	assert(_in != NULL);
 	size_t insz  = SIZE_C(0x0); /* Size of input array (bytes). */
 	size_t outsz = SIZE_C(0x0); /* Size of output array /bytes). */
 	for(size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) { /* First pass: get size of input array, and determine size of output array. */
-		if(_in[n] >= UINT32_C(0x110000)) { /* Codepoint out of range. */
+		register uint_least32_t const tmp = _in[n];
+		if(tmp >= UINT32_C(0x110000)) { /* Codepoint out of range. */
 			u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x65),UINT32_C(0x6E),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x43),UINT32_C(0x6F),UINT32_C(0x64),UINT32_C(0x65),UINT32_C(0x70),UINT32_C(0x6F),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x66),UINT32_C(0x20),UINT32_C(0x72),UINT32_C(0x61),UINT32_C(0x6E),UINT32_C(0x67),UINT32_C(0x65),UINT32_C(0x20),UINT32_C(0x28),UINT32_C(0x74),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x20),UINT32_C(0x62),UINT32_C(0x69),UINT32_C(0x67),UINT32_C(0x29),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_u8enc: Codepoint out of range (too big). */
 			return UINT8_C(0x1);
 		}
-		if(_in[n] >= UINT32_C(0x10000)) { /* 4 bytes. */
+		if(tmp >= UINT32_C(0x10000)) { /* 4 bytes. */
 			outsz += SIZE_C(0x4);
 			continue;
 		}
-		if(_in[n] >= UINT32_C(0x800)) { /* 3 bytes. */
+		if(tmp >= UINT32_C(0x800)) { /* 3 bytes. */
 			outsz += SIZE_C(0x3);
 			continue;
 		}
-		if(_in[n] >= UINT32_C(0x80)) { /* 2 bytes. */
+		if(tmp >= UINT32_C(0x80)) { /* 2 bytes. */
 			outsz += SIZE_C(0x2);
 			continue;
 		}
 		/* 1 byte. */
 		outsz += SIZE_C(0x1);
-		if(_in[n] == UINT32_C(0x0)) {
+		if(tmp == UINT32_C(0x0)) {
 			insz = n + SIZE_C(0x1);
 			goto nottoobig;
 		}
@@ -55,32 +56,33 @@ nottoobig:;
 	}
 	*_out = calloc(sizeof(uint_least8_t),outsz); /* Allocate space for output array. */
 	for(size_t n = SIZE_C(0x0), outn = SIZE_C(0x0);n < insz;n += SIZE_C(0x1),outn += SIZE_C(0x1)) { /* Second pass: encode each codepoint into UTF-8. */
-		if(_in[n] >= UINT32_C(0x10000)) { // Four bytes.
-			(*_out)[outn] =  UINT8_C(0xF0) + (uint_least8_t)(_in[n] >> UINT32_C(0x12));
+		register uint_least32_t const tmp = _in[n];
+		if(tmp >= UINT32_C(0x10000)) { // Four bytes.
+			(*_out)[outn] =  UINT8_C(0xF0) + (uint_least8_t)(tmp >> UINT32_C(0x12));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] >> UINT32_C(0xC) & UINT8_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp >> UINT32_C(0xC) & UINT8_C(0x3F));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] >> UINT32_C(0x6) & UINT8_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp >> UINT32_C(0x6) & UINT8_C(0x3F));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] & UINT32_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp & UINT32_C(0x3F));
 			continue;
 		}
-		if(_in[n] >= UINT32_C(0x800)) { /* Three bytes. */
-			(*_out)[outn] =  UINT8_C(0xE0) + (uint_least8_t)(_in[n] >> UINT32_C(0xC));
+		if(tmp >= UINT32_C(0x800)) { /* Three bytes. */
+			(*_out)[outn] =  UINT8_C(0xE0) + (uint_least8_t)(tmp >> UINT32_C(0xC));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] >> UINT32_C(0x6) & UINT8_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp >> UINT32_C(0x6) & UINT8_C(0x3F));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] & UINT32_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp & UINT32_C(0x3F));
 			continue;
 		}
-		if(_in[n] >= UINT32_C(0x80)) { /* Two bytes. */
-			(*_out)[outn] =  UINT8_C(0xC0) + (uint_least8_t)(_in[n] >> UINT8_C(0x6));
+		if(tmp >= UINT32_C(0x80)) { /* Two bytes. */
+			(*_out)[outn] =  UINT8_C(0xC0) + (uint_least8_t)(tmp >> UINT8_C(0x6));
 			outn          += SIZE_C(0x1);
-			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(_in[n] & UINT8_C(0x3F));
+			(*_out)[outn] =  UINT8_C(0x80) + (uint_least8_t)(tmp & UINT8_C(0x3F));
 			continue;
 		}
 		/* One byte. */
-		(*_out)[outn] = (uint_least8_t)_in[n];
+		(*_out)[outn] = (uint_least8_t)tmp;
 	}
 	return UINT8_C(0x0);
 }

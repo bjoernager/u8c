@@ -18,7 +18,7 @@
 # include <stdint.h>
 # include <u8c/fmt.h>
 # include <u8c/vfmt.h>
-uint_least8_t u8c_fmt(size_t * _outsz,uint_least32_t * * _out,uint_least32_t * _in,...) {
+uint_least8_t u8c_fmt(size_t * const restrict _outsz,uint_least32_t * restrict * const restrict _out,uint_least32_t * const restrict _in,...) {
 	va_list args;
 	va_start(args,_in);
 	uint_least8_t val = u8c_vfmt(_outsz,_out,_in,args);

@@ -20,7 +20,7 @@
 # include <u8c/SIZE_C.h>
 # include <u8c/u32cp.h>
 # include <u8c/u32sz.h>
-uint_least8_t u8c_u32cp(size_t * _sz,uint_least32_t * * _out,uint_least32_t * _in) {
+uint_least8_t u8c_u32cp(size_t * const restrict _sz,uint_least32_t * restrict * const restrict _out,uint_least32_t * const restrict _in) {
 	assert(_in != NULL);
 	size_t insz = SIZE_C(0x0);
 	u8c_u32sz(&insz,_in);

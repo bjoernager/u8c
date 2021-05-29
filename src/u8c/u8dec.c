@@ -19,11 +19,11 @@
 # include <stdlib.h>
 # include <u8c/u8dec.h>
 # include <u8c/SIZE_C.h>
-uint_least8_t u8c_u8dec(size_t * _outsz,uint_least32_t * * _out,uint_least8_t * _in) {
+uint_least8_t u8c_u8dec(size_t * const restrict _sz,uint_least32_t * restrict * const restrict _out,uint_least8_t * const restrict _in) {
 	assert(_in != NULL);
-	size_t insz  = SIZE_C(0x0);
-	size_t outsz = SIZE_C(0x1);
-	for(size_t n = SIZE_C(0x0);n <= SIZE_MAX;outsz += SIZE_C(0x1)) { /* First pass: get size of input array and determine size of output array. */
+	register size_t insz  = SIZE_C(0x0);
+	register size_t outsz = SIZE_C(0x1);
+	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;outsz += SIZE_C(0x1)) { /* First pass: get size of input array and determine size of output array. */
 		if(_in[n] == UINT8_C(0x0)) { /* Null-terminator: end of string has been reached. */
 			insz = n + SIZE_C(0x1);
 			goto nottoobig;
@@ -51,11 +51,11 @@ uint_least8_t u8c_u8dec(size_t * _outsz,uint_least32_t * * _out,uint_least8_t * 
 	u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x64),UINT32_C(0x65),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x55),UINT32_C(0x6E),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x72),UINT32_C(0x6D),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x61),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x64),UINT32_C(0x20),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x70),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_u8dec: Unterminated input. */
 	return UINT8_C(0x1);
 nottoobig:;
-	if(_outsz != NULL) {
-		*_outsz = outsz;
+	if(_sz != NULL) {
+		*_sz = outsz;
 	}
 	*_out = calloc(sizeof(uint_least32_t),outsz);
-	for(size_t n = SIZE_C(0x0),outn = SIZE_C(0x0);n < insz;outn += SIZE_C(0x1)) { /* Second pass: decode UTF-8. */
+	for(register size_t n = SIZE_C(0x0),outn = SIZE_C(0x0);n < insz;outn += SIZE_C(0x1)) { /* Second pass: decode UTF-8. */
 		if(_in[n] >= UINT8_C(0xF0)) { /* Four byte. */
 			uint_least32_t codep =  (_in[n] ^ UINT32_C(0xF0)) << UINT32_C(0x12);
 			n                    += SIZE_C(0x1);
