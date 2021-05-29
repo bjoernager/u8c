@@ -24,23 +24,24 @@ uint_least8_t u8c_u8dec(size_t * const restrict _sz,uint_least32_t * restrict * 
 	register size_t insz  = SIZE_C(0x0);
 	register size_t outsz = SIZE_C(0x1);
 	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;outsz += SIZE_C(0x1)) { /* First pass: get size of input array and determine size of output array. */
-		if(_in[n] == UINT8_C(0x0)) { /* Null-terminator: end of string has been reached. */
+		register uint_least8_t const tmp = _in[n];
+		if(tmp == UINT8_C(0x0)) { /* Null-terminator: end of string has been reached. */
 			insz = n + SIZE_C(0x1);
 			goto nottoobig;
 		}
-		if(_in[n] >= UINT8_C(0xF8)) { /* Too big. */
+		if(tmp >= UINT8_C(0xF8)) { /* Too big. */
 			u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x64),UINT32_C(0x65),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x43),UINT32_C(0x68),UINT32_C(0x61),UINT32_C(0x72),UINT32_C(0x61),UINT32_C(0x63),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x72),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x6F),UINT32_C(0x66),UINT32_C(0x20),UINT32_C(0x72),UINT32_C(0x61),UINT32_C(0x6E),UINT32_C(0x67),UINT32_C(0x65),UINT32_C(0x20),UINT32_C(0x28),UINT32_C(0x74),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x20),UINT32_C(0x62),UINT32_C(0x69),UINT32_C(0x67),UINT32_C(0x29),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_u8dec: Character out of range (too big). */
 			return UINT8_C(0x1);
 		}
-		if(_in[n] >= UINT8_C(0xF0)) { /* Four byte. */
+		if(tmp >= UINT8_C(0xF0)) { /* Four byte. */
 			n += SIZE_C(0x4);
 			continue;
 		}
-		if(_in[n] >= UINT8_C(0xE0)) { /* Three bytes. */
+		if(tmp >= UINT8_C(0xE0)) { /* Three bytes. */
 			n += SIZE_C(0x3);
 			continue;
 		}
-		if(_in[n] >= UINT8_C(0xC0)) { /* Two bytes. */
+		if(tmp >= UINT8_C(0xC0)) { /* Two bytes. */
 			n += SIZE_C(0x2);
 			continue;
 		}
