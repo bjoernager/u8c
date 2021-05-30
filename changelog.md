@@ -1,8 +1,15 @@
+# ↊
+
+* Add UTF-32 alternatives to some of the functions from `ctypes.h`; `u8c_isalnum`, `u8c_isalpha`, `u8c_iscntrl`, `u8c_isdigit`, `u8c_isspace`, and `u8c_ispunct`.
+* Add assertions.
+* Create new logo (move old logo to `u8c_old.svg`).
+
 # 9
 
 * Optimisations.
 * Remove some optimisations, as they prevent C++ compatibility.
 * Fix memory leak in test program.
+* Add function for comparing UTF-32 strings; `u8c_u32cmp`.
 
 # 8
 

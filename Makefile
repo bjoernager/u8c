@@ -19,6 +19,12 @@ SRCS = \
 	src/u8c/fmt.c \
 	src/u8c/geterr.c \
 	src/u8c/init.c \
+	src/u8c/isalnum.c \
+	src/u8c/isalpha.c \
+	src/u8c/iscntrl.c \
+	src/u8c/isdigit.c \
+	src/u8c/isspace.c \
+	src/u8c/ispunct.c \
 	src/u8c/print.c \
 	src/u8c/println.c \
 	src/u8c/seterr.c \
@@ -40,6 +46,12 @@ HDRS = \
 	include/u8c/fmttyp.h \
 	include/u8c/geterr.h \
 	include/u8c/init.h \
+	include/u8c/isalnum.h \
+	include/u8c/isalpha.h \
+	include/u8c/iscntrl.h \
+	include/u8c/isdigit.h \
+	include/u8c/isspace.h \
+	include/u8c/ispunct.h \
 	include/u8c/print.h \
 	include/u8c/println.h \
 	include/u8c/SIZE_C.h \

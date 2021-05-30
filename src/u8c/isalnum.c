@@ -13,8 +13,21 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Version */
-# if !defined(u8c_ver)
+# include <assert.h>
+# include <stddef.h>
 # include <stdint.h>
-# define u8c_ver (UINT64_C(0x10))
-# endif
+# include <u8c/isalnum.h>
+# include <u8c/isalpha.h>
+# include <u8c/isdigit.h>
+uint_least8_t u8c_isalnum(uint_least8_t * const _res,uint_least32_t _chr) {
+	assert(_res != NULL);
+	uint_least8_t res = UINT8_C(0x0);
+	u8c_isalpha(&res,_chr);
+	if(res) {
+		*_res = res;
+		return UINT8_C(0x0);
+	}
+	u8c_isdigit(&res,_chr);
+	*_res = res;
+	return UINT8_C(0x0);
+}

@@ -13,8 +13,24 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Version */
-# if !defined(u8c_ver)
+# include <assert.h>
+# include <stddef.h>
 # include <stdint.h>
-# define u8c_ver (UINT64_C(0x10))
-# endif
+# include <u8c/isspace.h>
+uint_least8_t u8c_isspace(uint_least8_t * const _res,uint_least32_t _chr) {
+	assert(_res != NULL);
+	switch(_chr) {
+	default:
+		*_res = UINT8_C(0x0);
+		break;
+	case UINT32_C(0x9):  /* HORIZONTAL TABULATION */
+	case UINT32_C(0xA):  /* NEW LINE */
+	case UINT32_C(0xB):  /* VERTICAL TABULATION */
+	case UINT32_C(0xC):  /* FORM FEED */
+	case UINT32_C(0xD):  /* CARRIAGE RETURN */
+	case UINT32_C(0x20): /* SPACE */
+		*_res = UINT8_C(0x1);
+		break;
+	}
+	return UINT8_C(0x0);
+}
