@@ -1,3 +1,8 @@
+# ↋
+
+* Fix `u8c_ver`.
+* Add Turkish letters to `u8c_isalpha`.
+
 # ↊
 
 * Add UTF-32 alternatives to some of the functions from `ctypes.h`; `u8c_isalnum`, `u8c_isalpha`, `u8c_iscntrl`, `u8c_isdigit`, `u8c_isspace`, and `u8c_ispunct`.
