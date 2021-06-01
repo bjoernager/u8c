@@ -1,3 +1,7 @@
+# 12
+
+* Use `u8c_println` instead of `u8c_print` in `u8c_dbgprint`.
+
 # 11
 
 * Update README.

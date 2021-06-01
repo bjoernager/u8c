@@ -22,8 +22,8 @@
 # define u8c_dbgprint(...) ((void)0x0)
 # endif
 # else
-# include <u8c/print.h>
+# include <u8c/println.h>
 # include <stdio.h>
-# define u8c_dbgprint(...) u8c_print(stderr,__VA_ARGS__)
+# define u8c_dbgprint(...) u8c_println(stderr,__VA_ARGS__)
 # endif
 # endif

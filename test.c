@@ -179,7 +179,7 @@ int main(void) {
 # if defined(__STDC_UTF_32__)
 	testmsg("UTF-32 string literals");
 	{
-		u8c_println(stdout,u8c_txt("Can you see this?"));
+		u8c_println(stdout,u8c_txt("Can you see ðis?"));
 	}
 	testmsgdone(&errcount0,&errcount1);
 # endif
