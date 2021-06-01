@@ -19,7 +19,7 @@
 # include <u8c/seterr.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/u32cmp.h>
-uint_least8_t u8c_u32cmp(uint_least8_t * const _res,uint_least32_t * const _lstr,uint_least32_t * const _rstr) {
+uint_least8_t u8c_u32cmp(uint_least8_t * const _res,uint_least32_t const * const _lstr,uint_least32_t const * const _rstr) {
 	assert(_res != NULL);
 	assert(_lstr != NULL);
 	assert(_rstr != NULL);

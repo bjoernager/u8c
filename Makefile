@@ -1,7 +1,5 @@
-CC      =  clang
-CFLAGS  =  -std=c17 -Weverything -Wno-c99-compat -Wno-format-nonliteral -Wpedantic -Iinclude -march=native -mtune=native -O3
-CFLAGS0 =  $(CFLAGS) -g -L. -lu8c -o $@ $^
-CFLAGS  += -fPIC
+CC     =  clang
+CFLAGS =  -std=c17 -Wall -Wextra -Wpedantic -Iinclude -march=native -mtune=native -O3 -fPIC
 ifneq ($(thrdsafe),0)
 CFLAGS += -Du8c_bethrdsafe
 endif
@@ -44,6 +42,8 @@ HDRS = \
 	include/u8c/end.h \
 	include/u8c/fmt.h \
 	include/u8c/fmttyp.h \
+	include/u8c/freeu32.h \
+	include/u8c/freeu8.h \
 	include/u8c/geterr.h \
 	include/u8c/init.h \
 	include/u8c/isalnum.h \
@@ -57,6 +57,7 @@ HDRS = \
 	include/u8c/seterr.h \
 	include/u8c/SIZE_C.h \
 	include/u8c/thrdsafe.h \
+	include/u8c/txt.h \
 	include/u8c/u32cmp.h \
 	include/u8c/u32cp.h \
 	include/u8c/u32sz.h \
@@ -87,9 +88,9 @@ purge:
 runtest: test
 	export LD_LIBRARY_PATH=$(CURDIR) && ./$^
 test: $(LIB) test.c
-	$(CC) $(CFLAGS0)
+	$(CC) -std=c17 -Wall -Wextra -Wpedantic -Iinclude -march=native -mtune=native -O3 -g -L. -lu8c -o $@ $@.c
 txttolit: $(LIB) txttolit.c
-	$(CC) $(CFLAGS0)
+	$(CC) -std=c17 -Wall -Wextra -Wpedantic -Iinclude -march=native -mtune=native -O3 -g -L. -lu8c -o $@ $@.c
 	export LD_LIBRARY_PATH=$(CURDIR) && ./$@
 uninstall:
 	rm --force --recursive $(DESTDIR)/include/u8c/

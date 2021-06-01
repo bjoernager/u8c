@@ -1,3 +1,12 @@
+# 11
+
+* Update README.
+* Update Makefile.
+* Use constant variables more.
+* Create macro for creating human-readable UTF-32 strings; `u8c_txt`.
+* Add macros for deallocating UTF-32 and UTF-8 strings (use these instead of `free` og `std::free`); `u8c_freeu32` and `u8c_freeu8`.
+* Optimisations.
+
 # 10
 
 * Make `u8c_seterr` public.

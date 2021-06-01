@@ -9,6 +9,8 @@
 # include <u8c/end.h>
 # include <u8c/fmt.h>
 # include <u8c/fmttyp.h>
+# include <u8c/freeu32.h>
+# include <u8c/freeu8.h>
 # include <u8c/geterr.h>
 # include <u8c/init.h>
 # include <u8c/isalnum.h>
@@ -30,6 +32,9 @@
 # include <u8c/ver.h>
 # include <u8c/vfmt.h>
 # include <u8c/vprint.h>
+# if defined(__STDC_UTF_32__)
+# include <u8c/txt.h>
+# endif
 static void testmsg(char const * fmt,...) {
 	va_list args;
 	va_start(args,fmt);
@@ -52,24 +57,24 @@ int main(void) {
 	uint_least8_t  errcount1 = UINT8_C(0x0);
 	testmsg("Error messages");
 	{
-		uint_least32_t * err = NULL;
+		uint_least32_t const * err = NULL;
 		errcount1 += u8c_geterr(NULL,&err);
 		errcount1 += u8c_println(stdout,err);
-		free(err);
+		u8c_freeu32(err);
 	}
 	testmsgdone(&errcount0,&errcount1);
 	testmsg("UTF-8 encoding/decoding");
 	{
-		uint_least32_t * msg0 = (uint_least32_t[]){UINT32_C(0xA2),UINT32_C(0x2C),UINT32_C(0x939),UINT32_C(0x2C),UINT32_C(0x10348),UINT32_C(0x2C),UINT32_C(0x20AC),UINT32_C(0x2C),UINT32_C(0x218A),UINT32_C(0x2C),UINT32_C(0x1F44B),UINT32_C(0x0)};
-		uint_least8_t *  msg1 = NULL;
+		uint_least32_t const * msg0 = (uint_least32_t[]){UINT32_C(0xA2),UINT32_C(0x2C),UINT32_C(0x939),UINT32_C(0x2C),UINT32_C(0x10348),UINT32_C(0x2C),UINT32_C(0x20AC),UINT32_C(0x2C),UINT32_C(0x218A),UINT32_C(0x2C),UINT32_C(0x1F44B),UINT32_C(0x0)};
+		uint_least8_t const *  msg1 = NULL;
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded:                       %s\n",msg1);
 		errcount1 += u8c_u8dec(NULL,&msg0,msg1);
-		free(msg1);
+		u8c_freeu8(msg1);
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded -> Decoded -> Encoded: %s\n",msg1);
-		free(msg0);
-		free(msg1);
+		u8c_freeu32(msg0);
+		u8c_freeu8(msg1);
 	}
 	testmsgdone(&errcount0,&errcount1);
 	testmsg("Printing (u8c_print)");
@@ -105,9 +110,9 @@ int main(void) {
 	testmsgdone(&errcount0,&errcount1);
 	testmsg("String comparison (UTF-32)");
 	{
-		uint_least32_t * str0 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
-		uint_least32_t * str1 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
-		uint_least32_t * str2 = (uint_least32_t[]){UINT32_C(0x47),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x64),UINT32_C(0x62),UINT32_C(0x79),UINT32_C(0x65),UINT32_C(0x0),};
+		uint_least32_t const * str0 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
+		uint_least32_t const * str1 = (uint_least32_t[]){UINT32_C(0x48),UINT32_C(0x65),UINT32_C(0x6C),UINT32_C(0x6C),UINT32_C(0x6F),UINT32_C(0x0),};
+		uint_least32_t const * str2 = (uint_least32_t[]){UINT32_C(0x47),UINT32_C(0x6F),UINT32_C(0x6F),UINT32_C(0x64),UINT32_C(0x62),UINT32_C(0x79),UINT32_C(0x65),UINT32_C(0x0),};
 		printf("str0: ");
 		u8c_println(stdout,str0);
 		printf("str1: ");
@@ -171,6 +176,13 @@ int main(void) {
 		errcount1 += u8c_println(stdout,(uint_least32_t[]){UINT32_C(0x0),});
 	}
 	testmsgdone(&errcount0,&errcount1);
+# if defined(__STDC_UTF_32__)
+	testmsg("UTF-32 string literals");
+	{
+		u8c_println(stdout,u8c_txt("Can you see this?"));
+	}
+	testmsgdone(&errcount0,&errcount1);
+# endif
 	printf("\n");
 	printf("Test done!\n");
 	printf("Total number of errors: %" PRIuLEAST32 ".\n",errcount0);

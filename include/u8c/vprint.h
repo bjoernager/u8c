@@ -22,7 +22,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_vprint(FILE * fp,uint_least32_t * const msg,va_list args);
+extern uint_least8_t u8c_vprint(FILE * fp,uint_least32_t const * const msg,va_list args);
 # if defined(__cplusplus)
 }
 # endif

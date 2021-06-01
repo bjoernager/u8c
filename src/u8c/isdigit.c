@@ -17,7 +17,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/isdigit.h>
-uint_least8_t u8c_isdigit(uint_least8_t * const _res,uint_least32_t _chr) {
+uint_least8_t u8c_isdigit(uint_least8_t * const _res,uint_least32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:

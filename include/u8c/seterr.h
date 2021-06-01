@@ -17,5 +17,5 @@
 # if !defined(u8c_sym_seterr)
 # define u8c_sym_seterr
 # include <stdint.h>
-extern uint_least8_t u8c_seterr(uint_least32_t * const msg);
+extern uint_least8_t u8c_seterr(uint_least32_t const * const msg);
 # endif

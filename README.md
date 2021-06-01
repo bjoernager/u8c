@@ -1,6 +1,6 @@
 # u8c
 
-[*u8c*](https://mandelbrot.dk/delta/u8c) is a free, open-source, and portable C-based library for transforming Unicode codepoints, as well as encoding them into UTF-8, even on implementations that use a different 32 bit encoding (I actually don't know what else it could be).
+[*u8c*](https://mandelbrot.dk/delta/u8c) is a cross-platform, free, and open-source library for transforming Unicode codepoints, as well as encoding them into UTF-8, even on implementations that use a different 32 bit encoding.
 
 ## Installing
 

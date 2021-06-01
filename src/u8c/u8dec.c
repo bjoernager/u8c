@@ -19,7 +19,7 @@
 # include <u8c/seterr.h>
 # include <u8c/u8dec.h>
 # include <u8c/SIZE_C.h>
-uint_least8_t u8c_u8dec(size_t * const _sz,uint_least32_t * * const _out,uint_least8_t * const _in) {
+uint_least8_t u8c_u8dec(size_t * const _sz,uint_least32_t const * * const _out,uint_least8_t const * const _in) {
 	assert(_in != NULL);
 	register size_t insz  = SIZE_C(0x0);
 	register size_t outsz = SIZE_C(0x1);
@@ -55,7 +55,7 @@ nottoobig:;
 	if(_sz != NULL) {
 		*_sz = outsz;
 	}
-	*_out = calloc(sizeof(uint_least32_t),outsz);
+	uint_least32_t * out = calloc(sizeof(uint_least32_t),outsz);
 	for(register size_t n = SIZE_C(0x0),outn = SIZE_C(0x0);n < insz;outn += SIZE_C(0x1)) { /* Second pass: decode UTF-8. */
 		if(_in[n] >= UINT8_C(0xF0)) { /* Four byte. */
 			uint_least32_t codep =  (_in[n] ^ UINT32_C(0xF0)) << UINT32_C(0x12);
@@ -66,7 +66,7 @@ nottoobig:;
 			n                    += SIZE_C(0x1);
 			codep                += (uint_least32_t)(_in[n]) ^ SIZE_C(0x80);
 			n                    += SIZE_C(0x1);
-			(*_out)[outn]        =  codep;
+			out[outn]        =  codep;
 			continue;
 		}
 		if(_in[n] >= UINT8_C(0xE0)) { /* Three bytes. */
@@ -76,7 +76,7 @@ nottoobig:;
 			n                    += SIZE_C(0x1);
 			codep                += _in[n] ^ UINT32_C(0x80);
 			n                    += SIZE_C(0x1);
-			(*_out)[outn]        =  codep;
+			out[outn]        =  codep;
 			continue;
 		}
 		if(_in[n] >= UINT8_C(0xC0)) { /* Two bytes. */
@@ -84,13 +84,14 @@ nottoobig:;
 			n                    += SIZE_C(0x1);
 			codep                += _in[n] ^ UINT32_C(0x80);
 			n                    += SIZE_C(0x1);
-			(*_out)[outn] =  codep;
+			out[outn] =  codep;
 			continue;
 		}
 		/* One byte. */
-		(*_out)[outn] =  (uint_least32_t)(_in[n]);
+		out[outn] =  (uint_least32_t)(_in[n]);
 		n             += SIZE_C(0x1);
 		continue;
 	}
+	*_out = out;
 	return UINT8_C(0x0);
 }

@@ -17,7 +17,7 @@
 # include <stdint.h>
 # include <u8c/u32cp.h>
 # include <u8c/vfmt.h>
-uint_least8_t u8c_vfmt(size_t * const _sz,uint_least32_t * * const _out,uint_least32_t * const _in,va_list _args) {
+uint_least8_t u8c_vfmt(size_t * const _sz,uint_least32_t const * * const _out,uint_least32_t const * const _in,va_list _args) {
 	/* To be added. */
 	return u8c_u32cp(_sz,_out,_in);
 }

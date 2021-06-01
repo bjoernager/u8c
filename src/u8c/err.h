@@ -16,5 +16,5 @@
 # if !defined(u8c_sym_err)
 # define u8c_sym_err
 # include <stdint.h>
-extern uint_least32_t * u8c_err;
+extern uint_least32_t const * u8c_err;
 # endif

@@ -13,15 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Is digit */
-# if !defined(luma_sym_isalnum)
-# define luma_sym_isalnum
+/* Format */
+# if !defined(u8c_freeu8)
+# if defined(__cplusplus)
+# include <cstdlib>
+# define u8c_freeu8(u8) (std::free(u8))
+# else
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_isalnum(uint_least8_t * const res,uint_least32_t const chr);
-# if defined(__cplusplus)
-}
+# include <stdlib.h>
+# define u8c_freeu8(u8) (free((uint_least8_t *)u8))
 # endif
 # endif

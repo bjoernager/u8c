@@ -16,4 +16,4 @@
 # include "err.h"
 # include <stddef.h>
 # include <stdint.h>
-uint_least32_t * u8c_err = NULL;
+uint_least32_t const * u8c_err = NULL;

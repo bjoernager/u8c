@@ -19,7 +19,7 @@
 # include <u8c/seterr.h>
 # include <u8c/u8enc.h>
 # include <u8c/SIZE_C.h>
-uint_least8_t u8c_u8enc(size_t * const _sz,uint_least8_t * * const _out,uint_least32_t * const _in) {
+uint_least8_t u8c_u8enc(size_t * const _sz,uint_least8_t const * * const _out,uint_least32_t const * const _in) {
 	assert(_in != NULL);
 	size_t insz  = SIZE_C(0x0); /* Size of input array (bytes). */
 	size_t outsz = SIZE_C(0x0); /* Size of output array /bytes). */

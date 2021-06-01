@@ -17,7 +17,7 @@
 # include <stdint.h>
 # include <u8c/print.h>
 # include <u8c/vprint.h>
-uint_least8_t u8c_print(FILE * _fp,uint_least32_t * const _msg,...) {
+uint_least8_t u8c_print(FILE * _fp,uint_least32_t const * const _msg,...) {
 	va_list args;
 	va_start(args,_msg);
 	uint_least8_t val = u8c_vprint(_fp,_msg,args);

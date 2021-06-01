@@ -13,15 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Is digit */
-# if !defined(luma_sym_isalnum)
-# define luma_sym_isalnum
+/* Text */
+# if !defined(__STDC_UTF_32__)
+# error UTF-32 is required to use u8c_txt.
+# else
+# if !defined(u8c_txt)
+# if defined(__cplusplus)
+# include <cstdint>
+# define u8c_txt(txt) (reinterpret_cast<std::uint_least32_t const *>(U ## txt ## ))
+# else
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
+# define u8c_txt(txt) (uint_least32_t const *)U ## txt
 # endif
-extern uint_least8_t u8c_isalnum(uint_least8_t * const res,uint_least32_t const chr);
-# if defined(__cplusplus)
-}
 # endif
 # endif

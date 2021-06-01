@@ -20,7 +20,7 @@
 # if defined(__cplusplus)
 extern "C" {
 # endif
-extern uint_least8_t u8c_u32cmp(uint_least8_t * const res,uint_least32_t * const lstr,uint_least32_t * const rstr);
+extern uint_least8_t u8c_u32cmp(uint_least8_t * const res,uint_least32_t const * const lstr,uint_least32_t const * const rstr);
 # if defined(__cplusplus)
 }
 # endif

@@ -19,7 +19,7 @@
 # include <u8c/isalnum.h>
 # include <u8c/isalpha.h>
 # include <u8c/isdigit.h>
-uint_least8_t u8c_isalnum(uint_least8_t * const _res,uint_least32_t _chr) {
+uint_least8_t u8c_isalnum(uint_least8_t * const _res,uint_least32_t const _chr) {
 	assert(_res != NULL);
 	uint_least8_t res = UINT8_C(0x0);
 	u8c_isalpha(&res,_chr);
