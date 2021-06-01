@@ -20,7 +20,7 @@
 # if !defined(u8c_txt)
 # if defined(__cplusplus)
 # include <cstdint>
-# define u8c_txt(txt) (reinterpret_cast<std::uint_least32_t const *>(U ## txt ## ))
+# define u8c_txt(txt) (reinterpret_cast<std::uint_least32_t const *>(U ## txt))
 # else
 # include <stdint.h>
 # define u8c_txt(txt) (uint_least32_t const *)U ## txt

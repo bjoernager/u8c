@@ -1,3 +1,7 @@
+# 13
+
+* Fix `u8c_txt` in C++.
+
 # 12
 
 * Use `u8c_println` instead of `u8c_print` in `u8c_dbgprint`.
