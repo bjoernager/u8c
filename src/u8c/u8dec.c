@@ -13,10 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "seterr.h"
 # include <assert.h>
 # include <stdint.h>
 # include <stdlib.h>
+# include <u8c/seterr.h>
 # include <u8c/u8dec.h>
 # include <u8c/SIZE_C.h>
 uint_least8_t u8c_u8dec(size_t * const _sz,uint_least32_t * * const _out,uint_least8_t * const _in) {

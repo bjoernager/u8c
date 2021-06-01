@@ -13,12 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "seterr.h"
 # include <assert.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <u8c/seterr.h>
 # include <u8c/u8enc.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/vfmt.h>

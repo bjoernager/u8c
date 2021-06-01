@@ -54,6 +54,7 @@ HDRS = \
 	include/u8c/ispunct.h \
 	include/u8c/print.h \
 	include/u8c/println.h \
+	include/u8c/seterr.h \
 	include/u8c/SIZE_C.h \
 	include/u8c/thrdsafe.h \
 	include/u8c/u32cmp.h \
@@ -67,7 +68,6 @@ HDRS = \
 HDRS_PRIV = \
 	src/u8c/err.h \
 	src/u8c/errlock.h \
-	src/u8c/seterr.h \
 	src/u8c/stat.h
 OBJS = $(SRCS:.c=.o)
 LIB  = libu8c.so

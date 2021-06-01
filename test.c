@@ -19,6 +19,7 @@
 # include <u8c/isspace.h>
 # include <u8c/print.h>
 # include <u8c/println.h>
+# include <u8c/seterr.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/thrdsafe.h>
 # include <u8c/u32cmp.h>

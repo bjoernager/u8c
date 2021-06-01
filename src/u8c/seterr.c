@@ -15,11 +15,11 @@
 */
 # include "err.h"
 # include "errlock.h"
-# include "seterr.h"
 # include <assert.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/dbgprint.h>
+# include <u8c/seterr.h>
 # include <u8c/u32cp.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>

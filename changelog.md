@@ -1,3 +1,8 @@
+# 10
+
+* Make `u8c_seterr` public.
+* Update logo.
+
 # ↋
 
 * Fix `u8c_ver`.

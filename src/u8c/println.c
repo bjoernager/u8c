@@ -13,12 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "seterr.h"
 # include <assert.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <u8c/println.h>
+# include <u8c/seterr.h>
 # include <u8c/vprint.h>
 uint_least8_t u8c_println(FILE * _fp,uint_least32_t * const _msg,...) {
 	assert(_fp != NULL);
