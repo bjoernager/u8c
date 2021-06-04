@@ -9,8 +9,6 @@
 # include <u8c/end.h>
 # include <u8c/fmt.h>
 # include <u8c/fmttyp.h>
-# include <u8c/freeu32.h>
-# include <u8c/freeu8.h>
 # include <u8c/geterr.h>
 # include <u8c/init.h>
 # include <u8c/isalnum.h>
@@ -26,9 +24,11 @@
 # include <u8c/thrdsafe.h>
 # include <u8c/u32cmp.h>
 # include <u8c/u32cp.h>
+# include <u8c/u32free.h>
 # include <u8c/u32sz.h>
 # include <u8c/u8dec.h>
 # include <u8c/u8enc.h>
+# include <u8c/u8free.h>
 # include <u8c/ver.h>
 # include <u8c/vfmt.h>
 # include <u8c/vprint.h>
@@ -60,7 +60,7 @@ int main(void) {
 		uint_least32_t const * err = NULL;
 		errcount1 += u8c_geterr(NULL,&err);
 		errcount1 += u8c_println(stdout,err);
-		u8c_freeu32(err);
+		u8c_u32free(err);
 	}
 	testmsgdone(&errcount0,&errcount1);
 	testmsg("UTF-8 encoding/decoding");
@@ -70,11 +70,11 @@ int main(void) {
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded:                       %s\n",msg1);
 		errcount1 += u8c_u8dec(NULL,&msg0,msg1);
-		u8c_freeu8(msg1);
+		u8c_u8free(msg1);
 		errcount1 += u8c_u8enc(NULL,&msg1,msg0);
 		printf("Encoded -> Decoded -> Encoded: %s\n",msg1);
-		u8c_freeu32(msg0);
-		u8c_freeu8(msg1);
+		u8c_u32free(msg0);
+		u8c_u8free(msg1);
 	}
 	testmsgdone(&errcount0,&errcount1);
 	testmsg("Printing (u8c_print)");

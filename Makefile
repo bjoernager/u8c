@@ -42,8 +42,6 @@ HDRS = \
 	include/u8c/end.h \
 	include/u8c/fmt.h \
 	include/u8c/fmttyp.h \
-	include/u8c/freeu32.h \
-	include/u8c/freeu8.h \
 	include/u8c/geterr.h \
 	include/u8c/init.h \
 	include/u8c/isalnum.h \
@@ -60,9 +58,11 @@ HDRS = \
 	include/u8c/txt.h \
 	include/u8c/u32cmp.h \
 	include/u8c/u32cp.h \
+	include/u8c/u32free.h \
 	include/u8c/u32sz.h \
 	include/u8c/u8dec.h \
 	include/u8c/u8enc.h \
+	include/u8c/u8free.h \
 	include/u8c/ver.h \
 	include/u8c/vfmt.h \
 	include/u8c/vprint.h

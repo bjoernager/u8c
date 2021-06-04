@@ -14,13 +14,13 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 /* Format */
-# if !defined(u8c_freeu8)
+# if !defined(u8c_u32free)
 # if defined(__cplusplus)
 # include <cstdlib>
-# define u8c_freeu8(u8) (std::free(u8))
+# define u8c_u32free(u32) (std::free(const_cast<uint_least32_t *>(u32)))
 # else
 # include <stdint.h>
 # include <stdlib.h>
-# define u8c_freeu8(u8) (free((uint_least8_t *)u8))
+# define u8c_u32free(u32) (free((uint_least32_t *)u32))
 # endif
 # endif

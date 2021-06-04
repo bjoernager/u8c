@@ -19,9 +19,9 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/dbgprint.h>
-# include <u8c/freeu32.h>
 # include <u8c/seterr.h>
 # include <u8c/u32cp.h>
+# include <u8c/u32free.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
@@ -31,7 +31,7 @@ uint_least8_t u8c_seterr(uint_least32_t const * const _msg) {
 # if defined(u8c_bethrdsafe)
 	mtx_lock(&u8c_errlock);
 # endif
-	u8c_freeu32(u8c_err);
+	u8c_u32free(u8c_err);
 	u8c_u32cp(NULL,&u8c_err,_msg);
 # if defined(u8c_bethrdsafe)
 	mtx_unlock(&u8c_errlock);

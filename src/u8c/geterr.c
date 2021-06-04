@@ -18,12 +18,19 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/geterr.h>
+# include <u8c/seterr.h>
 # include <u8c/u32cp.h>
+# include <u8c/u8free.h>
 uint_least8_t u8c_geterr(size_t * const _sz,uint_least32_t const * * const _out) {
+	if(u8c_err == NULL) {
+		u8c_seterr((uint_least32_t[]){UINT32_C(0x0)});
+	}
 	# if defined(u8c_bethrdsafe)
 		mtx_lock(&u8c_errlock);
 	# endif
 		u8c_u32cp(_sz,_out,u8c_err);
+		u8c_u8free(u8c_err);
+		u8c_err = NULL;
 	# if defined(u8c_bethrdsafe)
 		mtx_unlock(&u8c_errlock);
 	# endif

@@ -29,8 +29,6 @@ uint_least8_t u8c_init(void) {
 		return UINT8_C(0x2);
 	}
 # endif
-	/* Set default error message: */
-	u8c_u32cp(NULL,&u8c_err,(uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x69),UINT32_C(0x74),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x44),UINT32_C(0x65),UINT32_C(0x66),UINT32_C(0x61),UINT32_C(0x75),UINT32_C(0x6C),UINT32_C(0x74),UINT32_C(0x20),UINT32_C(0x65),UINT32_C(0x72),UINT32_C(0x72),UINT32_C(0x6F),UINT32_C(0x72),UINT32_C(0x20),UINT32_C(0x6D),UINT32_C(0x65),UINT32_C(0x73),UINT32_C(0x73),UINT32_C(0x61),UINT32_C(0x67),UINT32_C(0x65),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_init: Default error message. */
 	/* Set status: */
 	u8c_stat = UINT8_C(0x0);
 	return UINT8_C(0x0);
