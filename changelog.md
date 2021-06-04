@@ -1,3 +1,7 @@
+# 15
+
+* Add missing include directives to `include/u8c/u32free.h` and `include/u8c/u8free.h`.
+
 # 14
 
 * Free error message when `u8c_geterr` is called (after copying, of course).

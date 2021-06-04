@@ -16,5 +16,5 @@
 /* Version */
 # if !defined(u8c_ver)
 # include <stdint.h>
-# define u8c_ver (UINT64_C(0x10))
+# define u8c_ver (UINT64_C(0x11))
 # endif

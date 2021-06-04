@@ -16,6 +16,7 @@
 /* Format */
 # if !defined(u8c_u32free)
 # if defined(__cplusplus)
+# include <cstdint>
 # include <cstdlib>
 # define u8c_u32free(u32) (std::free(const_cast<uint_least32_t *>(u32)))
 # else
