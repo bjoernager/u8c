@@ -24,6 +24,7 @@
 # include <threads.h>
 # endif
 bool u8c_init(void) {
+	/* Initialise mutexes: */
 # if defined(u8c_bethrdsafe)
 	if(mtx_init(&u8c_dat.errlock,mtx_plain) == thrd_error) {
 		return true;
@@ -36,6 +37,6 @@ bool u8c_init(void) {
 	u8c_dat.err = NULL;
 	u8c_seterr((uint_least32_t[]){UINT32_C(0x0),});
 	/* Set status: */
-	u8c_dat.stat = UINT8_C(0x0);
+	u8c_dat.stat = UINT8_C(0x1);
 	return false;
 }

@@ -14,7 +14,8 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 /* Debug print */
-# if !defined(u8c_dbgprint)
+# if !defined(u8c_sym_dbgprint)
+# define u8c_sym_dbgprint
 # if defined(NDEBUG)
 # define u8c_dbgprint(...) ((void)0x0)
 # else

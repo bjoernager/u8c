@@ -14,7 +14,8 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 /* Unicode maximum */
-# if !defined(u8c_unimax)
+# if !defined(u8c_sym_unimax)
+# define u8c_sym_unimax
 # include <stdint.h>
 # include <uchar.h>
 # define u8c_unimax ((char32_t)UINT32_C(0x10FFFF))

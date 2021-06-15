@@ -24,11 +24,11 @@
 # include <threads.h>
 # endif
 bool u8c_end(void) {
-	if(u8c_dat.stat) {
+	if(!u8c_dat.stat) {
 		return false;
 	}
 # if defined(u8c_bethrdsafe)
-	/* Destroy mutexes */
+	/* Destroy mutexes: */
 	mtx_destroy(&u8c_dat.errlock);
 	mtx_destroy(&u8c_dat.fmtlock);
 # endif
@@ -38,6 +38,6 @@ bool u8c_end(void) {
 	u8c_dat.fmtbase   = UINT8_C(0xC);
 	u8c_dat.fmtendian = UINT8_C(0x0);
 	/* Set status: */
-	u8c_dat.stat = UINT8_C(0x1);
+	u8c_dat.stat = UINT8_C(0x0);
 	return false;
 }

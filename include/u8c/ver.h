@@ -14,7 +14,8 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 /* Version */
-# if !defined(u8c_ver)
+# if !defined(u8c_sym_ver)
+# define u8c_sym_ver
 # include <stdint.h>
-# define u8c_ver (UINT64_C(0x12))
+# define u8c_ver (UINT64_C(0x13))
 # endif

@@ -1,3 +1,9 @@
+# 17
+
+* Create new logo.
+* Update headers.
+* Invert status values.
+
 # 16
 
 * Add function for concatenating UTF-32 strings; `u8c_u32cat`.
@@ -11,7 +17,7 @@
 * Add more format types.
 * Fix incorrect unabbreviated names in headers.
 * Add another function from `ctypes.h`; `u8c_isxdigit`.
-* Use `char32_t` (from `stdbool.h`) instead of `uint_least32_t` in UTF-32.
+* Use `char32_t` (from `uchar.h`) instead of `uint_least32_t` in UTF-32.
 * Use `unsigned char` instead of `uint_least8_t` in UTF-8.
 * Move all data into `u8c_dat` (of type `struct u8c_dattyp`).
 * Add function for setting the format (base and endian) of `u8c_fmt` and company; `u8c_setfmt`.
@@ -21,6 +27,7 @@
 * Add macro for maximum valid Unicode codepoint; `u8c_unimax`.
 * Remove `txttolit`.
 * Add function for deallocating UTF-8 strings; `u8c_u8free`.
+* Turn both `u8c_dbg` and `u8c_thrdsafe` into type `bool` from `uint_least8_t`.
 
 # 15
 

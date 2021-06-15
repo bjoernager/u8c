@@ -16,6 +16,7 @@
 # include <assert.h>
 # include <stdbool.h>
 # include <stddef.h>
+# include <stdint.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/u32fndchr.h>
 # include <u8c/u32sz.h>
@@ -23,7 +24,7 @@
 bool u8c_u32sz(size_t * const _sz,char32_t const * const _in) {
 	assert(_sz != NULL);
 	size_t sz = SIZE_C(0x0);
-	if(u8c_u32fndchr(&sz,_in,U'\0')) {
+	if(u8c_u32fndchr(&sz,_in,UINT8_C(0x0))) {
 		return true;
 	}
 	*_sz = sz;
