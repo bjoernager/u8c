@@ -14,10 +14,11 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <assert.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/isalpha.h>
-uint_least8_t u8c_isalpha(uint_least8_t * const _res,uint_least32_t const _chr) {
+bool u8c_isalpha(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
@@ -65,13 +66,30 @@ uint_least8_t u8c_isalpha(uint_least8_t * const _res,uint_least32_t const _chr) 
 	case UINT32_C(0xFC):   /* U WITH TWO DOTS */
 	case UINT32_C(0xFD):   /* LATIN SMALL LETTER Y WITH ACUTE */
 	case UINT32_C(0xFE):   /* LATIN SMALL LETTER THORN */
+	case UINT32_C(0x105):  /* LATIN SMALL LETTER A WITH OGONEK */
+	case UINT32_C(0x107):  /* LATIN SMALL LETTER C WITH ACUTE */
+	case UINT32_C(0x10D):  /* LATIN SMALL LETTER C WITH CARON */
+	case UINT32_C(0x10F):  /* LATIN SMALL LETTER D WITH CARON */
+	case UINT32_C(0x119):  /* LATIN SMALL LETTER E WITH OGONEK */
+	case UINT32_C(0x11B):  /* LATIN SMALL LETTER E WITH CARON */
 	case UINT32_C(0x11F):  /* LATIN SMALL LETTER G WITH BREVE */
 	case UINT32_C(0x131):  /* LATIN SMALL LETTER DOTLESS I */
 	case UINT32_C(0x133):  /* LATIN SMALL LIGATURE LJ */
 	case UINT32_C(0x138):  /* LATIN SMALL LETTER KRA */
+	case UINT32_C(0x142):  /* LATIN SMALL LETTER L WITH STROKE */
+	case UINT32_C(0x144):  /* LATIN SMALL LETTER N WITH ACUTE */
+	case UINT32_C(0x148):  /* LATIN SMALL LETTER N WITH CARON */
 	case UINT32_C(0x14B):  /* LATIN SMALL LETTER ENG */
 	case UINT32_C(0x153):  /* LATIN SMALL LIGATURE OE */
+	case UINT32_C(0x159):  /* LATIN SMALL LETTER R WITH CARON */
+	case UINT32_C(0x15B):  /* LATIN SMALL LETTER S WITH ACUTE */
 	case UINT32_C(0x15F):  /* LATIN SMALL LETTER S WITH CEDILLA */
+	case UINT32_C(0x161):  /* LATIN SMALL LETTER S WITH CARON */
+	case UINT32_C(0x165):  /* LATIN SMALL LETTER T WITH CARON */
+	case UINT32_C(0x16F):  /* LATIN SMALL LETTER U WITH RING ABOVE */
+	case UINT32_C(0x17A):  /* LATIN SMALL LETTER Z WITH ACUTE */
+	case UINT32_C(0x17C):  /* LATIN SMALL LETTER Z WITH DOT ABOVE */
+	case UINT32_C(0x17E):  /* LATIN SMALL LETTER Z WITH CARON */
 	case UINT32_C(0x1BF):  /* LATIN LETTER WYNN */
 	case UINT32_C(0x1DD):  /* LATIN SMALL LETTER TURNED E */
 	case UINT32_C(0x21D):  /* LATIN SMALL LETTER YOGH */
@@ -86,10 +104,36 @@ uint_least8_t u8c_isalpha(uint_least8_t * const _res,uint_least32_t const _chr) 
 	case UINT32_C(0x28B):  /* LATIN SMALL LETTER V WITH HOOK */
 	case UINT32_C(0x292):  /* LATIN SMALL LETTER EZH */
 	case UINT32_C(0x294):  /* LATIN SMALL LETTER GLOTTAL STOP */
+	case UINT32_C(0x3B1):  /* GREEK SMALL LETTER ALPHA */
+	case UINT32_C(0x3B2):  /* GREEK SMALL LETTER BETA */
+	case UINT32_C(0x3B3):  /* GREEK SMALL LETTER GAMMA */
+	case UINT32_C(0x3B4):  /* GREEK SMALL LETTER DELTA */
+	case UINT32_C(0x3B5):  /* GREEK SMALL LETTER EPSILON */
+	case UINT32_C(0x3B6):  /* GREEK SMALL LETTER ZETA */
+	case UINT32_C(0x3B7):  /* GREEK SMALL LETTER ETA */
+	case UINT32_C(0x3B8):  /* GREEK SMALL LETTER THETA */
+	case UINT32_C(0x3B9):  /* GREEK SMALL LETTER IOTA */
+	case UINT32_C(0x3BA):  /* GREEK SMALL LETTER KAPPA */
+	case UINT32_C(0x3BB):  /* GREEK SMALL LETTER LAMBDA */
+	case UINT32_C(0x3BC):  /* GREEK SMALL LETTER MU */
+	case UINT32_C(0x3BD):  /* GREEK SMALL LETTER NU */
+	case UINT32_C(0x3BE):  /* GREEK SMALL LETTER XI */
+	case UINT32_C(0x3BF):  /* GREEK SMALL LETTER OMICRON */
+	case UINT32_C(0x3C0):  /* GREEK SMALL LETTER PI */
+	case UINT32_C(0x3C1):  /* GREEK SMALL LETTER RHO */
+	case UINT32_C(0x3C2):  /* GREEK SMALL LETTER FINAL SIGMA */
+	case UINT32_C(0x3C3):  /* GREEK SMALL LETTER SIGMA */
+	case UINT32_C(0x3C4):  /* GREEK SMALL LETTER TAU */
+	case UINT32_C(0x3C5):  /* GREEK SMALL LETTER UPSILON */
+	case UINT32_C(0x3C6):  /* GREEK SMALL LETTER PHI */
+	case UINT32_C(0x3C7):  /* GREEK SMALL LETTER CHI */
+	case UINT32_C(0x3C8):  /* GREEK SMALL LETTER PSI */
+	case UINT32_C(0x3C9):  /* GREEK SMALL LETTER OMEGA */
 	case UINT32_C(0x1D79): /* LATIN SMALL LETTER INSULAR G */
 	case UINT32_C(0xA7B7): /* LATIN SMALL LETTER OMEGA */
+	case UINT32_C(0xFB00): /* LATIN SMALL LIGATURE FF */
 		*_res = UINT8_C(0x1);
 		break;
 	}
-	return UINT8_C(0x0);
+	return false;
 }

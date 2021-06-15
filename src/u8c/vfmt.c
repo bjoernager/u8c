@@ -14,10 +14,13 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdarg.h>
-# include <stdint.h>
+# include <stdbool.h>
 # include <u8c/u32cp.h>
 # include <u8c/vfmt.h>
-uint_least8_t u8c_vfmt(size_t * const _sz,uint_least32_t const * * const _out,uint_least32_t const * const _in,va_list _args) {
-	/* To be added. */
+# include <uchar.h>
+# if defined(u8c_bethrdsafe)
+# include <threads.h>
+# endif
+bool u8c_vfmt(size_t * const _sz,char32_t const * * const _out,char32_t const * const _in,va_list _args) {
 	return u8c_u32cp(_sz,_out,_in);
 }

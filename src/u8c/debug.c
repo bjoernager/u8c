@@ -13,11 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+# include <stdbool.h>
 # include <stdint.h>
-# include <u8c/debug.h>
-uint_least8_t const u8c_debug =
+# include <u8c/dbg.h>
+bool const u8c_dbg =
 # if defined(NDEBUG)
-	UINT8_C(0x0);
+	false;
 # else
-	UINT8_C(0x1);
+	true;
 # endif

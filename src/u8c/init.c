@@ -13,23 +13,29 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "err.h"
-# include "errlock.h"
-# include "stat.h"
+# include "dat.h"
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/init.h>
+# include <u8c/seterr.h>
 # include <u8c/u32cp.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-uint_least8_t u8c_init(void) {
+bool u8c_init(void) {
 # if defined(u8c_bethrdsafe)
-	if(mtx_init(&u8c_errlock,mtx_plain) == thrd_error) {
-		return UINT8_C(0x2);
+	if(mtx_init(&u8c_dat.errlock,mtx_plain) == thrd_error) {
+		return true;
+	}
+	if(mtx_init(&u8c_dat.fmtlock,mtx_plain) == thrd_error) {
+		return true;
 	}
 # endif
+	/* Set default error message: */
+	u8c_dat.err = NULL;
+	u8c_seterr((uint_least32_t[]){UINT32_C(0x0),});
 	/* Set status: */
-	u8c_stat = UINT8_C(0x0);
-	return UINT8_C(0x0);
+	u8c_dat.stat = UINT8_C(0x0);
+	return false;
 }

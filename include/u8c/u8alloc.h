@@ -13,9 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* UTF-8 allocate */
+# if !defined(u8c_sym_u8alloc)
+# define u8c_sym_u8alloc
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stddef.h>
+extern bool u8c_u8alloc(unsigned char * * const u32,size_t const sz);
 # endif

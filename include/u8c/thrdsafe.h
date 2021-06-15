@@ -16,12 +16,6 @@
 /* Thread-safe */
 # if !defined(u8c_sym_thrdsafe)
 # define u8c_sym_thrdsafe
-# include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_thrdsafe;
-# if defined(__cplusplus)
-}
-# endif
+# include <stdbool.h>
+extern bool const u8c_thrdsafe;
 # endif

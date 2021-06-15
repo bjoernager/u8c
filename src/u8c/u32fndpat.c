@@ -14,32 +14,38 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <assert.h>
-# include <stdarg.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/seterr.h>
+# include <u8c/u32cmp.h>
+# include <u8c/u32fndpat.h>
 # include <u8c/u32free.h>
-# include <u8c/u8enc.h>
-# include <u8c/u8free.h>
-# include <u8c/vfmt.h>
-# include <u8c/vprint.h>
-# include <uchar.h>
-bool u8c_vprint(FILE * _fp,char32_t const * const _msg,va_list _args) {
-	assert(_msg != NULL);
-	char32_t const * str0 = NULL;
-	u8c_vfmt(NULL,&str0,_msg,_args);
-	size_t                str1sz = SIZE_C(0x0);
-	unsigned char const * str1   = NULL;
-	u8c_u8enc(&str1sz,&str1,str0);
-	assert(str1sz > SIZE_C(0x0));
-	if(fwrite(str1,sizeof(uint_least8_t),str1sz - SIZE_C(0x1),_fp) < str1sz - SIZE_C(0x1)) {
-		u8c_seterr(U"u8c_vprint: fwrite: Unable to write to stdout.");
-		return true;
+# include <u8c/u32substr.h>
+# include <u8c/u32sz.h>
+bool u8c_u32fndpat(size_t * const _pos,char32_t const * const _in,char32_t const * const _pat) {
+	assert(_pos != NULL);
+	assert(_in != NULL);
+	size_t insz  = SIZE_C(0x0);
+	size_t patsz = SIZE_C(0x0);
+	u8c_u32sz(&insz,_in);
+	u8c_u32sz(&patsz,_pat);
+	if(insz == SIZE_C(0x1) || insz < patsz) {
+		*_pos = SIZE_C(-0x1);
+		return false;
 	}
-	u8c_u32free(&str0);
-	u8c_u8free(&str1);
+	for(register size_t n = SIZE_C(0x0);n < insz - patsz;n += SIZE_C(0x1)) {
+		char32_t const * str = NULL;
+		u8c_u32substr(&str,n,patsz - SIZE_C(0x1),_in);
+		uint_least8_t cmpres = UINT8_C(0x0);
+		u8c_u32cmp(&cmpres,str,_pat);
+		u8c_u32free(&str);
+		if(cmpres == UINT8_C(0x1)) {
+			*_pos = n;
+			return false;
+		}
+	}
+	*_pos = SIZE_C(-0x1);
 	return false;
 }

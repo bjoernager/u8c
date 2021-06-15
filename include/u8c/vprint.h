@@ -17,13 +17,8 @@
 # if !defined(u8c_sym_vprint)
 # define u8c_sym_vprint
 # include <stdarg.h>
-# include <stdint.h>
+# include <stdbool.h>
 # include <stdio.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_vprint(FILE * fp,uint_least32_t const * const msg,va_list args);
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+extern bool u8c_vprint(FILE * fp,char32_t const * const msg,va_list args);
 # endif

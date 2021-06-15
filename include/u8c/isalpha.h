@@ -13,15 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Is digit */
+/* Is alphabetic */
 # if !defined(luma_sym_isalpha)
 # define luma_sym_isalpha
+# include <stdbool.h>
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_isalpha(uint_least8_t * const res,uint_least32_t const chr);
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+extern bool u8c_isalpha(uint_least8_t * const res,char32_t const chr);
 # endif

@@ -13,11 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+# include <stdbool.h>
 # include <stdint.h>
 # include <u8c/thrdsafe.h>
-uint_least8_t const u8c_thrdsafe =
+bool const u8c_thrdsafe =
 # if defined(u8c_bethrdsafe)
-	UINT8_C(0x1);
+	true;
 # else
-	UINT8_C(0x0);
+	false;
 # endif

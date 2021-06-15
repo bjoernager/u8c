@@ -13,15 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Format */
-# if !defined(u8c_u32free)
-# if defined(__cplusplus)
-# include <cstdint>
-# include <cstdlib>
-# define u8c_u32free(u32) (std::free(const_cast<uint_least32_t *>(u32)))
-# else
-# include <stdint.h>
-# include <stdlib.h>
-# define u8c_u32free(u32) (free((uint_least32_t *)u32))
-# endif
+/* UTF-32 free */
+# if !defined(u8c_sym_u32free)
+# define u8c_sym_u32free
+# include <stdbool.h>
+# include <uchar.h>
+extern bool u8c_u32free(char32_t const * * const u32);
 # endif

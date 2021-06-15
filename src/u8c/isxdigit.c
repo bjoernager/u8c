@@ -17,19 +17,29 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/isspace.h>
-bool u8c_isspace(uint_least8_t * const _res,char32_t const _chr) {
+# include <u8c/isxdigit.h>
+bool u8c_isxdigit(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x9):  /* HORIZONTAL TABULATION */
-	case UINT32_C(0xA):  /* NEW LINE */
-	case UINT32_C(0xB):  /* VERTICAL TABULATION */
-	case UINT32_C(0xC):  /* FORM FEED */
-	case UINT32_C(0xD):  /* CARRIAGE RETURN */
-	case UINT32_C(0x20): /* SPACE */
+	case UINT32_C(0x30):   /* DIGIT ZERO */
+	case UINT32_C(0x31):   /* DIGIT ONE */
+	case UINT32_C(0x32):   /* DIGIT TWO */
+	case UINT32_C(0x33):   /* DIGIT THREE */
+	case UINT32_C(0x34):   /* DIGIT FOUR */
+	case UINT32_C(0x35):   /* DIGIT FIVE */
+	case UINT32_C(0x36):   /* DIGIT SIX */
+	case UINT32_C(0x37):   /* DIGIT SEVEN */
+	case UINT32_C(0x38):   /* DIGIT EIGHT */
+	case UINT32_C(0x39):   /* DIGIT NINE */
+	case UINT32_C(0x41):   /* LATIN CAPITAL LETTER A */
+	case UINT32_C(0x42):   /* LATIN CAPITAL LETTER B */
+	case UINT32_C(0x43):   /* LATIN CAPITAL LETTER C */
+	case UINT32_C(0x44):   /* LATIN CAPITAL LETTER D */
+	case UINT32_C(0x45):   /* LATIN CAPITAL LETTER E */
+	case UINT32_C(0x46):   /* LATIN CAPITAL LETTER F */
 		*_res = UINT8_C(0x1);
 		break;
 	}

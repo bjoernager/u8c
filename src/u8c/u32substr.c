@@ -13,31 +13,36 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include <assert.h>
 # include <stdbool.h>
-# include <stdint.h>
 # include <stdlib.h>
-# include <u8c/end.h>
 # include <u8c/SIZE_C.h>
+# include <u8c/u32alloc.h>
 # include <u8c/u32free.h>
-# if defined(u8c_bethrdsafe)
-# include <threads.h>
-# endif
-bool u8c_end(void) {
-	if(u8c_dat.stat) {
+# include <u8c/u32substr.h>
+# include <u8c/u32sz.h>
+# include <uchar.h>
+bool u8c_u32substr(char32_t const * * const _out,size_t const _start,size_t const _len,char32_t const * const _in) {
+	assert(_out != NULL);
+	assert(_in != NULL);
+	u8c_u32free(_out);
+	size_t insz = SIZE_C(0x0);
+	u8c_u32sz(&insz,_in);
+	size_t len = _len;
+	if(_len == SIZE_C(0x0)) {
+		len = insz - _start;
+	}
+	if(insz < _start + len) {
 		return false;
 	}
-# if defined(u8c_bethrdsafe)
-	/* Destroy mutexes */
-	mtx_destroy(&u8c_dat.errlock);
-	mtx_destroy(&u8c_dat.fmtlock);
-# endif
-	/* Free error message: */
-	u8c_u32free(&u8c_dat.err);
-	/* Set default formatting options: */
-	u8c_dat.fmtbase   = UINT8_C(0xC);
-	u8c_dat.fmtendian = UINT8_C(0x0);
-	/* Set status: */
-	u8c_dat.stat = UINT8_C(0x1);
+	size_t const outsz = len + SIZE_C(0x2);
+	char32_t *   out   = NULL;
+	if(u8c_u32alloc(&out,outsz)) {
+		return false;
+	}
+	for(register size_t n = SIZE_C(0x0);n <= len;n += SIZE_C(0x1)) {
+		out[n] = _in[n + _start];
+	}
+	*_out = out;
 	return false;
 }

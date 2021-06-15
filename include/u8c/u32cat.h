@@ -13,8 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "errlock.h"
-# if defined(u8c_bethrdsafe)
-# include <threads.h>
-mtx_t u8c_errlock;
+/* UTF-32 concatenate */
+# if !defined(luma_sym_u32cat)
+# define luma_sym_u32cat
+# include <stdbool.h>
+# include <stddef.h>
+# include <uchar.h>
+extern bool u8c_u32cat(size_t * const sz,char32_t const * * const out,char32_t const * const lstr,char32_t const * const rstr);
 # endif

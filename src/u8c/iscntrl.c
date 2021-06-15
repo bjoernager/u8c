@@ -14,10 +14,11 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <assert.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/iscntrl.h>
-uint_least8_t u8c_iscntrl(uint_least8_t * const _res,uint_least32_t const _chr) {
+bool u8c_iscntrl(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
@@ -58,5 +59,5 @@ uint_least8_t u8c_iscntrl(uint_least8_t * const _res,uint_least32_t const _chr) 
 		*_res = UINT8_C(0x1);
 		break;
 	}
-	return UINT8_C(0x0);
+	return false;
 }

@@ -13,9 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Status */
-# if !defined(u8c_sym_stat)
-# define u8c_sym_stat
+# include <stdbool.h>
 # include <stdint.h>
-extern uint_least8_t u8c_stat;
-# endif
+# include <stdlib.h>
+# include <u8c/u32free.h>
+bool u8c_u32free(char32_t const * * const _u32) {
+	free((char32_t *)*_u32);
+	*_u32 = NULL;
+	return false;
+}

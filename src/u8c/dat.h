@@ -13,9 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
-# include <stdbool.h>
-extern bool u8c_end(void);
+/* Data */
+# if !defined(u8c_sym_dat)
+# define u8c_sym_dat
+# include "dattyp.h"
+extern struct u8c_dattyp u8c_dat;
 # endif

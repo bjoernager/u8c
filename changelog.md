@@ -1,3 +1,27 @@
+# 16
+
+* Add function for concatenating UTF-32 strings; `u8c_u32cat`.
+* Add functions for allocating UTF-32 and UTF-8 strings; `u8c_u32alloc` and `u8c_u8alloc`.
+* Add function for finding a given codepoint in an UTF-32 string; `u8c_u32fndchr`.
+* Add function for finding a given pattern (string) in an UTF-32 string; `u8c_u32fndpat`.
+* Update `SIZE_C`.
+* Add function for aborting; `u8c_abrt`.
+* Rename `u8c_debug` to `u8c_dbg`.
+* Use `bool` (`_Bool`) for return values instead of `uint_least8_t`.
+* Add more format types.
+* Fix incorrect unabbreviated names in headers.
+* Add another function from `ctypes.h`; `u8c_isxdigit`.
+* Use `char32_t` (from `stdbool.h`) instead of `uint_least32_t` in UTF-32.
+* Use `unsigned char` instead of `uint_least8_t` in UTF-8.
+* Move all data into `u8c_dat` (of type `struct u8c_dattyp`).
+* Add function for setting the format (base and endian) of `u8c_fmt` and company; `u8c_setfmt`.
+* Remove `u8c_txt` in favour of Unicode string literals (much clearer code, but less portable).
+* Add function for getting a sub-string of an UTF-32 string; `u8c_u32substr`.
+* Don't count the null-terminator in string sizes.
+* Add macro for maximum valid Unicode codepoint; `u8c_unimax`.
+* Remove `txttolit`.
+* Add function for deallocating UTF-8 strings; `u8c_u8free`.
+
 # 15
 
 * Add missing include directives to `include/u8c/u32free.h` and `include/u8c/u8free.h`.

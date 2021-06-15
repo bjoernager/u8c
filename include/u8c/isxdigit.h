@@ -13,7 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "err.h"
-# include <stddef.h>
+/* Is hexadecimal digit */
+# if !defined(luma_sym_isxdigit)
+# define luma_sym_isxdigit
+# include <stdbool.h>
 # include <stdint.h>
-uint_least32_t const * u8c_err = NULL;
+# include <uchar.h>
+extern bool u8c_isxdigit(uint_least8_t * const res,char32_t const chr);
+# endif

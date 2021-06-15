@@ -13,8 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(u8c_sym_err)
-# define u8c_sym_err
+# include "dat.h"
+# include "dattyp.h"
+# include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-extern uint_least32_t const * u8c_err;
-# endif
+# include <u8c/SIZE_C.h>
+struct u8c_dattyp u8c_dat = (struct u8c_dattyp){
+	.err       = NULL,
+	.fmtendian = false,
+	.stat      = UINT8_C(0x0),
+};

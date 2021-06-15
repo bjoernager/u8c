@@ -16,13 +16,8 @@
 /* Print */
 # if !defined(u8c_sym_print)
 # define u8c_sym_print
-# include <stdint.h>
+# include <stdbool.h>
 # include <stdio.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_print(FILE * fp,uint_least32_t const * const msg,...);
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+extern bool u8c_print(FILE * fp,char32_t const * const msg,...);
 # endif

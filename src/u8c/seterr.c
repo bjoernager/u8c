@@ -13,9 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "err.h"
-# include "errlock.h"
+# include "dat.h"
 # include <assert.h>
+# include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/dbgprint.h>
@@ -25,16 +25,16 @@
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-uint_least8_t u8c_seterr(uint_least32_t const * const _msg) {
+bool u8c_seterr(char32_t const * const _msg) {
 	assert(_msg != NULL);
-	u8c_dbgprint(_msg);
+	//u8c_dbgprint(_msg);
 # if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_errlock);
+	mtx_lock(&u8c_dat.errlock);
 # endif
-	u8c_u32free(u8c_err);
-	u8c_u32cp(NULL,&u8c_err,_msg);
+	u8c_u32free(&u8c_dat.err);
+	u8c_u32cp(NULL,&u8c_dat.err,_msg);
 # if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_errlock);
+	mtx_unlock(&u8c_dat.errlock);
 # endif
-	return UINT8_C(0x0);
+	return false;
 }

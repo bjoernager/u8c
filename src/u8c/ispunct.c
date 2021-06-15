@@ -14,10 +14,11 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <assert.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/ispunct.h>
-uint_least8_t u8c_ispunct(uint_least8_t * const _res,uint_least32_t const _chr) {
+bool u8c_ispunct(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
@@ -89,13 +90,51 @@ uint_least8_t u8c_ispunct(uint_least8_t * const _res,uint_least32_t const _chr) 
 	case UINT32_C(0x20AC):  /* EURO SIGN */
 	case UINT32_C(0x20B9):  /* INDIAN RUPEE SIGN */
 	case UINT32_C(0x20BF):  /* BITCOIN SIGN */
+	case UINT32_C(0x2103):  /* DEGREE CELSIUS */
+	case UINT32_C(0x2107):  /* EULER CONSTANT */
+	case UINT32_C(0x2109):  /* DEGREE FAHRENHEIT */
+	case UINT32_C(0x210E):  /* PLANCK CONSTANT */
+	case UINT32_C(0x2117):  /* SOUND RECORDING COPYRIGHT */
+	case UINT32_C(0x2122):  /* TRADE MARK SIGN */
+	case UINT32_C(0x2125):  /* OUNCE SIGN */
+	case UINT32_C(0x2126):  /* OHM SIGN */
+	case UINT32_C(0x212A):  /* KELVIN SIGN */
+	case UINT32_C(0x214D):  /* AKTIESELSKAB */
 	case UINT32_C(0x2205):  /* EMPTY SET */
 	case UINT32_C(0x2212):  /* MINUS SIGN */
+	case UINT32_C(0x221A):  /* SQUARE ROOT */
+	case UINT32_C(0x221B):  /* CUBE ROOT */
+	case UINT32_C(0x221C):  /* FOURTH ROOT */
 	case UINT32_C(0x221E):  /* INFINITY */
 	case UINT32_C(0x2248):  /* ALMOST EQUAL TO */
 	case UINT32_C(0x2260):  /* NOT EQUAL TO */
 	case UINT32_C(0x2264):  /* LESS-THAN OR EQUAL TO */
 	case UINT32_C(0x2265):  /* GREATER-THAN OR EQUAL TO */
+	case UINT32_C(0x2609):  /* SUN */
+	case UINT32_C(0x263F):  /* MERCURY */
+	case UINT32_C(0x2640):  /* FEMALE SIGN */
+	case UINT32_C(0x2641):  /* EARTH */
+	case UINT32_C(0x2642):  /* MALE SIGN */
+	case UINT32_C(0x2643):  /* JUPITER */
+	case UINT32_C(0x2644):  /* SATURN */
+	case UINT32_C(0x2645):  /* URANUS */
+	case UINT32_C(0x2646):  /* NEPTUNE */
+	case UINT32_C(0x2647):  /* PLUTO */
+	case UINT32_C(0x26A2):  /* DOUBLED FEMALE SIGN */
+	case UINT32_C(0x26A3):  /* DOUBLED MALE SIGN */
+	case UINT32_C(0x26A4):  /* INTERLOCKED FEMALE AND MALE SIGN */
+	case UINT32_C(0x26A5):  /* MALE AND FEMALE SIGN */
+	case UINT32_C(0x26B3):  /* CERES */
+	case UINT32_C(0x26B4):  /* PALLAS */
+	case UINT32_C(0x26B5):  /* JUNO */
+	case UINT32_C(0x26B6):  /* VESTA */
+	case UINT32_C(0x26B7):  /* CHIRON */
+	case UINT32_C(0x2BD8):  /* PROSERPINA */
+	case UINT32_C(0x2BD9):  /* ASTRAEA */
+	case UINT32_C(0x2BDA):  /* HYGIEA */
+	case UINT32_C(0x2BDB):  /* PHOLOS */
+	case UINT32_C(0x2BDC):  /* NESSUS */
+	case UINT32_C(0x33D7):  /* SQUARE PH */
 	case UINT32_C(0xFDFC):  /* RIAL SIGN */
 	case UINT32_C(0x1F10D): /* CIRCLED ZERO WITH SLASH */
 	case UINT32_C(0x1F10E): /* CIRCLED ANTICKLOCKWISE ARROW */
@@ -107,5 +146,5 @@ uint_least8_t u8c_ispunct(uint_least8_t * const _res,uint_least32_t const _chr) 
 		*_res = UINT8_C(0x1);
 		break;
 	}
-	return UINT8_C(0x0);
+	return false;
 }

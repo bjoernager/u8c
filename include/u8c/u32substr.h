@@ -13,9 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* UTF-32 sub-string */
+# if !defined(luma_sym_u32substr)
+# define luma_sym_u32substr
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stddef.h>
+# include <uchar.h>
+extern bool u8c_u32substr(char32_t const * * const out,size_t const start,size_t const len,char32_t const * const in);
 # endif

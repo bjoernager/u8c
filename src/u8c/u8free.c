@@ -13,17 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Text */
-# if !defined(__STDC_UTF_32__)
-# error UTF-32 is required to use u8c_txt.
-# else
-# if !defined(u8c_txt)
-# if defined(__cplusplus)
-# include <cstdint>
-# define u8c_txt(txt) (reinterpret_cast<std::uint_least32_t const *>(U ## txt))
-# else
+# include <stdbool.h>
 # include <stdint.h>
-# define u8c_txt(txt) (uint_least32_t const *)U ## txt
-# endif
-# endif
-# endif
+# include <stdlib.h>
+# include <u8c/u8free.h>
+bool u8c_u8free(unsigned char const * * const _u8) {
+	free((unsigned char *)*_u8);
+	*_u8 = NULL;
+	return false;
+}

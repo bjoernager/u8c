@@ -13,9 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* UTF-32 find pattern */
+# if !defined(luma_sym_u32fndpat)
+# define luma_sym_u32fndpat
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stddef.h>
+# include <uchar.h>
+extern bool u8c_u32fndpat(size_t * const pos,char32_t const * const in,char32_t const * const pat);
 # endif

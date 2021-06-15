@@ -13,9 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* Set format */
+# if !defined(u8c_sym_setfmt)
+# define u8c_sym_setfmt
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stdint.h>
+extern bool u8c_setfmt(uint_least8_t const base,uint_least8_t const endian);
 # endif

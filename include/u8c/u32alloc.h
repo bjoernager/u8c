@@ -13,10 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "stat.h"
-# include <stdint.h>
-/*
-	0x0 = Finished.
-	0x1 = Initialised.
-*/
-uint_least8_t u8c_stat = UINT8_C(0x0);
+/* UTF-32 allocate */
+# if !defined(u8c_sym_u32alloc)
+# define u8c_sym_u32alloc
+# include <stdbool.h>
+# include <stddef.h>
+# include <uchar.h>
+extern bool u8c_u32alloc(char32_t * * const u32,size_t const sz);
+# endif

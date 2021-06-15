@@ -13,9 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* Debug */
+# if !defined(u8c_sym_debug)
+# define u8c_sym_debug
 # include <stdbool.h>
-extern bool u8c_end(void);
+extern bool const u8c_dbg;
 # endif

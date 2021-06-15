@@ -16,12 +16,8 @@
 /* UTF-32 compare */
 # if !defined(luma_sym_u32cmp)
 # define luma_sym_u32cmp
+# include <stdbool.h>
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_u32cmp(uint_least8_t * const res,uint_least32_t const * const lstr,uint_least32_t const * const rstr);
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+extern bool u8c_u32cmp(uint_least8_t * const res,char32_t const * const lstr,char32_t const * const rstr);
 # endif

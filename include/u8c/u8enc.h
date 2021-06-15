@@ -16,13 +16,8 @@
 /* UTF-8 encode */
 # if !defined(u8c_sym_enc)
 # define u8c_sym_enc
+# include <stdbool.h>
 # include <stddef.h>
-# include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_u8enc(size_t * const sz,uint_least8_t const * * const out,uint_least32_t const * const in);
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+extern bool u8c_u8enc(size_t * const sz,unsigned char const * * const out,char32_t const * const in);
 # endif

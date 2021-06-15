@@ -16,11 +16,7 @@
 /* Debug print */
 # if !defined(u8c_dbgprint)
 # if defined(NDEBUG)
-# if defined(__cplusplus)
-# define u8c_dbgprint(...) (static_cast<void>(0x0));
-# else
 # define u8c_dbgprint(...) ((void)0x0)
-# endif
 # else
 # include <u8c/println.h>
 # include <stdio.h>

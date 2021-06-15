@@ -16,12 +16,6 @@
 /* Initialise */
 # if !defined(u8c_sym_init)
 # define u8c_sym_init
-# include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t u8c_init(void);
-# if defined(__cplusplus)
-}
-# endif
+# include <stdbool.h>
+extern bool u8c_init(void);
 # endif

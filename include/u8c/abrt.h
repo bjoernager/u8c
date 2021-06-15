@@ -13,9 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+/* Abort */
+# if !defined(u8c_sym_abrt)
+# define u8c_sym_abrt
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stdnoreturn.h>
+# include <uchar.h>
+extern noreturn bool u8c_abrt(char const * const fl,long long const ln,char const * const fn,char const * const why);
 # endif

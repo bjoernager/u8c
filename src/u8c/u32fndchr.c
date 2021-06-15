@@ -13,9 +13,28 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+# include <assert.h>
 # include <stdbool.h>
-extern bool u8c_end(void);
-# endif
+# include <stddef.h>
+# include <stdint.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/seterr.h>
+# include <u8c/u32fndchr.h>
+# include <u8c/u32sz.h>
+bool u8c_u32fndchr(size_t * const _pos,char32_t const * const _in,char32_t const _chr) {
+	assert(_pos != NULL);
+	assert(_in != NULL);
+	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) {
+		if(_in[n] == UINT32_C(0x0) && _chr != UINT32_C(0x0)) {
+			*_pos = SIZE_C(-0x1);
+			return true;
+		}
+		if(_in[n] == _chr) {
+			*_pos = n;
+			return false;
+		}
+	}
+	u8c_seterr(U"u8c_u32fndchr: Unterminated input.");
+	*_pos = SIZE_C(-0x1);
+	return true;
+}

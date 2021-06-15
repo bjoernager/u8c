@@ -13,26 +13,23 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "err.h"
-# include "errlock.h"
+# include "dat.h"
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/geterr.h>
 # include <u8c/seterr.h>
 # include <u8c/u32cp.h>
-# include <u8c/u8free.h>
-uint_least8_t u8c_geterr(size_t * const _sz,uint_least32_t const * * const _out) {
-	if(u8c_err == NULL) {
-		u8c_seterr((uint_least32_t[]){UINT32_C(0x0)});
-	}
+# include <u8c/u32free.h>
+bool u8c_geterr(size_t * const _sz,char32_t const * * const _out) {
 	# if defined(u8c_bethrdsafe)
-		mtx_lock(&u8c_errlock);
+		mtx_lock(&u8c_dat.errlock);
 	# endif
-		u8c_u32cp(_sz,_out,u8c_err);
-		u8c_u8free(u8c_err);
-		u8c_err = NULL;
+		u8c_u32cp(_sz,_out,u8c_dat.err);
+		u8c_u32free(&u8c_dat.err);
 	# if defined(u8c_bethrdsafe)
-		mtx_unlock(&u8c_errlock);
+		mtx_unlock(&u8c_dat.errlock);
 	# endif
-		return UINT8_C(0x0);
+		u8c_seterr((uint_least32_t[]){UINT32_C(0x0),});
+		return false;
 	}

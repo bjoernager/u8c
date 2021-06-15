@@ -13,11 +13,30 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Error lock */
-# if !defined(u8c_sym_errlock)
-# define u8c_sym_errlock
+# include "dat.h"
+# include <stdbool.h>
+# include <stdint.h>
+# include <u8c/seterr.h>
+# include <u8c/setfmt.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
-extern mtx_t u8c_errlock;
 # endif
+bool u8c_setfmt(unsigned char const _base,unsigned char const _endian) {
+	uint_least8_t base   = _base;
+	uint_least8_t endian = _endian;
+	if(_base > UINT8_C(0x20)) {
+		base = UINT8_C(0xC);
+	}
+	if(_endian > UINT8_C(0x1)) {
+		endian = UINT8_C(0x0);
+	}
+# if defined(u8c_bethrdsafe)
+	mtx_lock(&u8c_dat.fmtlock);
 # endif
+	u8c_dat.fmtbase   = base;
+	u8c_dat.fmtendian = endian;
+# if defined(u8c_bethrdsafe)
+	mtx_unlock(&u8c_dat.fmtlock);
+# endif
+	return false;
+}

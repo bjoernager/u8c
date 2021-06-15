@@ -13,15 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Format */
-# if !defined(u8c_u8free)
-# if defined(__cplusplus)
-# include <cstdint>
-# include <cstdlib>
-# define u8c_u8free(u8) (std::free(const_cast<std::uint_least8_t *>(u8)))
-# else
-# include <stdint.h>
-# include <stdlib.h>
-# define u8c_u8free(u8) (free((uint_least8_t *)u8))
-# endif
+/* UTF-8 free */
+# if !defined(u8c_sym_u8free)
+# define u8c_sym_u8free
+# include <stdbool.h>
+extern bool u8c_u8free(unsigned char const * * const u8);
 # endif

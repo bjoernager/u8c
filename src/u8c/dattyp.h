@@ -13,9 +13,24 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
+# if !defined(u8c_sym_dattyp)
+# define u8c_sym_dattyp
 # include <stdbool.h>
-extern bool u8c_end(void);
+# include <stdint.h>
+# include <u8c/SIZE_C.h>
+# include <uchar.h>
+# if defined(u8c_bethrdsafe)
+# include <threads.h>
+# endif
+struct u8c_dattyp {
+	bool             fmtendian;
+	char32_t const * err;
+	unsigned char    pad0[sizeof(void(*)(void)) - SIZE_C(0x1)];
+	uint_least8_t    fmtbase;
+	uint_least8_t    stat;
+# if defined(u8c_bethrdsafe)
+	mtx_t errlock;
+	mtx_t fmtlock;
+# endif
+};
 # endif

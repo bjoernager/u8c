@@ -14,20 +14,21 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <assert.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/isalnum.h>
 # include <u8c/isalpha.h>
 # include <u8c/isdigit.h>
-uint_least8_t u8c_isalnum(uint_least8_t * const _res,uint_least32_t const _chr) {
+bool u8c_isalnum(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	uint_least8_t res = UINT8_C(0x0);
 	u8c_isalpha(&res,_chr);
 	if(res) {
 		*_res = res;
-		return UINT8_C(0x0);
+		return false;
 	}
 	u8c_isdigit(&res,_chr);
 	*_res = res;
-	return UINT8_C(0x0);
+	return false;
 }

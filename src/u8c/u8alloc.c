@@ -13,9 +13,16 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
-# if !defined(u8c_sym_end)
-# define u8c_sym_end
 # include <stdbool.h>
-extern bool u8c_end(void);
-# endif
+# include <stdlib.h>
+# include <u8c/seterr.h>
+# include <u8c/u8alloc.h>
+bool u8c_u8alloc(unsigned char * * const _u8,size_t const _sz) {
+	unsigned char * arr = NULL;
+	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
+		u8c_seterr(U"u8c_u8alloc: Unable to allocate resources (not enough memory?).");
+		return true;
+	}
+	*_u8 = arr;
+	return false;
+}

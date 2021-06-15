@@ -13,15 +13,9 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Debug */
-# if !defined(u8c_sym_debug)
-# define u8c_sym_debug
+/* Unicode maximum */
+# if !defined(u8c_unimax)
 # include <stdint.h>
-# if defined(__cplusplus)
-extern "C" {
-# endif
-extern uint_least8_t const u8c_debug;
-# if defined(__cplusplus)
-}
-# endif
+# include <uchar.h>
+# define u8c_unimax ((char32_t)UINT32_C(0x10FFFF))
 # endif
