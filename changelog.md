@@ -1,3 +1,8 @@
+# 18
+
+* Update `.gitignore`.
+* Remove core dump.
+
 # 17
 
 * Create new logo.
@@ -28,6 +33,7 @@
 * Remove `txttolit`.
 * Add function for deallocating UTF-8 strings; `u8c_u8free`.
 * Turn both `u8c_dbg` and `u8c_thrdsafe` into type `bool` from `uint_least8_t`.
+* Add more letters to `u8c_isalpha`.
 
 # 15
 
