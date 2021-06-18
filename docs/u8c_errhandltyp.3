@@ -1,0 +1,20 @@
+.TH "u8c_errhandltyp" "3" "" "u8c" "u8c API Manual"
+.SH NAME
+.PP
+u8c_errhandltyp - Error handler type - Type to be used for error handlers passerd to \f[B]u8c_regerrhandl\f[R].
+.SH DECLARATION
+.PP
+.nf
+\f[C]
+# include <u8c/errtyp.h>
+typedef void (* u8c_errhandltyp)(enum u8c_errtyp);
+\f[R]
+.fi
+.SH DESCRIPTION
+.PP
+The type definition \f[B]u8c_errhandltyp\f[R] is for convenience.
+.PP
+It is to be the type of the error handler accepted by \f[B]u8c_regerrhandl\f[R].
+.SH VERSION
+.PP
+u8c 19

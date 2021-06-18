@@ -33,19 +33,19 @@ bool u8c_u32cat(size_t * const _sz,char32_t const * * const _out,char32_t const 
 	size_t rsz = SIZE_C(0x0);
 	u8c_u32sz(&lsz,_lstr);
 	u8c_u32sz(&rsz,_rstr);
-	sz = lsz + rsz - SIZE_C(0x1);
+	sz = lsz + rsz;
 	if(_sz != NULL) {
 		*_sz = sz;
 	}
 	char32_t * out = NULL;
 	if(u8c_u32alloc(&out,sz + SIZE_C(0x1))) {
-		return false;
+		return true;
 	}
-	for(register size_t n = SIZE_C(0x0);n < lsz - SIZE_C(0x1);n += SIZE_C(0x1)) {
+	for(register size_t n = SIZE_C(0x0);n < lsz;n += SIZE_C(0x1)) {
 		out[n] = _lstr[n];
 	}
 	for(register size_t n = SIZE_C(0x0);n < rsz;n += SIZE_C(0x1)) {
-		out[n + lsz - SIZE_C(0x1)] = _rstr[n];
+		out[n + lsz] = _rstr[n];
 	}
 	u8c_u32free(_out);
 	*_out = out;

@@ -1,0 +1,19 @@
+.TH "u8c_geterr" "3" "" "u8c" "u8c API Manual"
+.SH NAME
+.PP
+u8c_geterr - Get error - Get last error set by \f[C]u8c_seterr\f[R].
+.SH DECLARATION
+.PP
+.nf
+\f[C]
+# include <stdbool.h>
+# include <stddef.h>
+# include <uchar.h>
+extern bool u8c_geterr(size_t * const sz,char32_t const * * const out);
+\f[R]
+.fi
+.SH DESCRIPTION
+.PP
+.SH VERSION
+.PP
+u8c 2

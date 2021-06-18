@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <u8c/u32free.h>
 bool u8c_u32free(char32_t const * * const _u32) {
-	free((char32_t *)*_u32);
+	free((char32_t *)*_u32); /* This cast does indeed discard a const-qualifier, but it is not undefined behaviour, as the array must have been allocated by calloc or malloc, meaning it's original type is not const-qualified. */
 	*_u32 = NULL;
 	return false;
 }

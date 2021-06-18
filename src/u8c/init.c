@@ -14,16 +14,18 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include "dat.h"
+# include <setjmp.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <u8c/errtyp.h>
 # include <u8c/init.h>
 # include <u8c/seterr.h>
 # include <u8c/u32cp.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_init(void) {
+bool u8c_init() {
 	/* Initialise mutexes: */
 # if defined(u8c_bethrdsafe)
 	if(mtx_init(&u8c_dat.errlock,mtx_plain) == thrd_error) {
@@ -35,7 +37,7 @@ bool u8c_init(void) {
 # endif
 	/* Set default error message: */
 	u8c_dat.err = NULL;
-	u8c_seterr((uint_least32_t[]){UINT32_C(0x0),});
+	u8c_seterr(U"",u8c_errtyp_deferr);
 	/* Set status: */
 	u8c_dat.stat = UINT8_C(0x1);
 	return false;

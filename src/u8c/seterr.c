@@ -16,16 +16,17 @@
 # include "dat.h"
 # include <assert.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
 # include <u8c/dbgprint.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u32cp.h>
 # include <u8c/u32free.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_seterr(char32_t const * const _msg) {
+bool u8c_seterr(char32_t const * const _msg,enum u8c_errtyp _typ) {
 	assert(_msg != NULL);
 	//u8c_dbgprint(_msg);
 # if defined(u8c_bethrdsafe)
@@ -35,6 +36,15 @@ bool u8c_seterr(char32_t const * const _msg) {
 	u8c_u32cp(NULL,&u8c_dat.err,_msg);
 # if defined(u8c_bethrdsafe)
 	mtx_unlock(&u8c_dat.errlock);
+# endif
+# if defined(u8c_bethrdsafe)
+	mtx_lock(&u8c_dat.errhandlslock);
+# endif
+	if(u8c_dat.errhandls[(size_t)_typ] != NULL) {
+		u8c_dat.errhandls[(size_t)_typ](_typ);
+	}
+# if defined(u8c_bethrdsafe)
+	mtx_unlock(&u8c_dat.errhandlslock);
 # endif
 	return false;
 }

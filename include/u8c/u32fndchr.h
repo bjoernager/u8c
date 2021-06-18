@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-32 find character */
 # if !defined(luma_sym_u32fndchr)
 # define luma_sym_u32fndchr
 # include <stdbool.h>

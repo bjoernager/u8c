@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-32 copy */
 # if !defined(luma_sym_u32cp)
 # define luma_sym_u32cp
 # include <stdbool.h>

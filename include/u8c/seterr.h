@@ -17,6 +17,7 @@
 # if !defined(u8c_sym_seterr)
 # define u8c_sym_seterr
 # include <stdbool.h>
+# include <u8c/errtyp.h>
 # include <uchar.h>
-extern bool u8c_seterr(char32_t const * const msg);
+extern bool u8c_seterr(char32_t const * const msg,enum u8c_errtyp _typ);
 # endif

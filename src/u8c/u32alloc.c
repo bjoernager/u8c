@@ -13,16 +13,19 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+# include "dat.h"
+# include <setjmp.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u32alloc.h>
 # include <uchar.h>
 bool u8c_u32alloc(char32_t * * const _u32,size_t const _sz) {
 	char32_t * arr = NULL;
 	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
-		u8c_seterr(U"u8c_u32alloc: Unable to allocate resources (not enough memory?).");
-		return true;
+		u8c_seterr(U"u8c_u32alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
+		return false;
 	}
 	*_u32 = arr;
 	return false;

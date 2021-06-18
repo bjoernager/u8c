@@ -1,4 +1,5 @@
 # include <inttypes.h>
+# include <setjmp.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -22,6 +23,7 @@
 # include <u8c/isspace.h>
 # include <u8c/print.h>
 # include <u8c/println.h>
+# include <u8c/regerrhandl.h>
 # include <u8c/seterr.h>
 # include <u8c/setfmt.h>
 # include <u8c/thrdsafe.h>
@@ -31,6 +33,7 @@
 # include <u8c/u32fndchr.h>
 # include <u8c/u32fndpat.h>
 # include <u8c/u32free.h>
+# include <u8c/u32ins.h>
 # include <u8c/u32substr.h>
 # include <u8c/u32sz.h>
 # include <u8c/u8dec.h>
@@ -42,20 +45,25 @@
 static void testmsg(char const * fmt,...) {
 	va_list args;
 	va_start(args,fmt);
-	printf("\n+->\n| \x1b[38:2::169:225:61mTesting\x1b[0m \"");
+	/* printf("\n+->\n| \x1b[38:2:169:225:61mTesting\x1b[0m \""); */  /* This command works in all of the terminals I tested, except Konsole (whic is funny, because it's xterm-based, and xterm supports it). */
+	printf("\n+->\n| \x1b[38;2;169;225;61mTesting\x1b[0m \"");
 	vprintf(fmt,args);
 	printf("\"...\n+->\n\n");
 	va_end(args);
 }
 static void testmsgdone() {
-	printf("\n+->\n| \x1b[38:2::61:225:169mDone\x1b[0m!\n+->\n");
+	/* printf("\n+->\n| \x1b[38:2::61:225:169mDone\x1b[0m!\n+->\n"); */
+	printf("\n+->\n| \x1b[38;2;61;225;169mDone\x1b[0m!\n+->\n");
+}
+static void errhandl(enum u8c_errtyp errtyp) {
+	printf(":: Error handler called with type %d.\n",(int)errtyp);
 }
 int main(void) {
 	if(u8c_init()) {
 		printf("Unable to initialise u8c!\n");
 		exit(EXIT_FAILURE);
 	}
-	atexit((void (*)(void))&u8c_end);
+	u8c_regerrhandl(u8c_errtyp_all,errhandl);
 	u8c_setfmt(UINT8_C(0xC),UINT8_C(0x1));
 	printf("u8c version: %" PRIXLEAST64 ".\n",u8c_ver);
 	printf("Debug build: %" PRIXLEAST8 ".\n",u8c_dbg);
@@ -66,9 +74,9 @@ int main(void) {
 		u8c_geterr(NULL,&err);
 		printf("default error message: ");
 		u8c_println(stdout,err);
-		u8c_seterr(U"Gluchwein!");
+		u8c_seterr(U"Gluchwein!",u8c_errtyp_deferr);
 		u8c_geterr(NULL,&err);
-		printf("    set error message: ");
+		printf("set error message:     ");
 		u8c_println(stdout,err);
 		u8c_u32free(&err);
 	}
@@ -193,8 +201,8 @@ int main(void) {
 	testmsgdone();
 	testmsg("string concatenation");
 	{
-		char32_t const * str0 = U"Free as in freedom!";
-		char32_t const * str1 = U" GNU";
+		char32_t const * str0 = U"Free_as_in";
+		char32_t const * str1 = U"_freedom!";
 		char32_t const * str2 = NULL;
 		u8c_u32cat(NULL,&str2,str0,str1);
 		printf("string #0: ");
@@ -209,7 +217,7 @@ int main(void) {
 	testmsgdone();
 	testmsg("sub-strings");
 	{
-		char32_t const * str0 = U"I wish to suck big duck.";
+		char32_t const * str0 = U"I_wish_to_suck_big_duck.";
 		char32_t const * str1 = NULL;
 		u8c_u32substr(&str1,SIZE_C(0x0),SIZE_C(0xE),str0);
 		char32_t const * str2 = NULL;
@@ -268,5 +276,21 @@ int main(void) {
 		printf("Position of \"forever\": %zu\n",pos1);
 	}
 	testmsgdone();
-	u8c_abrt(__FILE__,(long long)__LINE__,__func__,"Testing u8c_abort");
+	testmsg("string insertion");
+	{
+		char32_t const * str0 = U"There_is_I_love.";
+		char32_t const * str1 = U"just_somebody_that_";
+		char32_t const * str2 = NULL;
+		u8c_u32ins(NULL,&str2,SIZE_C(0x9),str0,str1);
+		printf("String #0: ");
+		u8c_println(stdout,str0);
+		printf("String #1: ");
+		u8c_println(stdout,str1);
+		printf("String #2: ");
+		u8c_println(stdout,str2);
+		u8c_u32free(&str2);
+	}
+	testmsgdone();
+	u8c_end();
+	exit(EXIT_SUCCESS);
 }

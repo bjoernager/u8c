@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <u8c/SIZE_C.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u32free.h>
 # include <u8c/u8enc.h>
@@ -36,7 +37,7 @@ bool u8c_vprint(FILE * _fp,char32_t const * const _msg,va_list _args) {
 	u8c_u8enc(&str1sz,&str1,str0);
 	assert(str1sz > SIZE_C(0x0));
 	if(fwrite(str1,sizeof(uint_least8_t),str1sz - SIZE_C(0x1),_fp) < str1sz - SIZE_C(0x1)) {
-		u8c_seterr(U"u8c_vprint: fwrite: Unable to write to stdout.");
+		u8c_seterr(U"u8c_vprint: fwrite: Unable to write to stdout.",u8c_errtyp_badio);
 		return true;
 	}
 	u8c_u32free(&str0);

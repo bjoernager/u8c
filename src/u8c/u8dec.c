@@ -18,6 +18,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u32alloc.h>
 # include <u8c/u32free.h>
@@ -35,7 +36,7 @@ bool u8c_u8dec(size_t * const _sz,char32_t const * * const _out,unsigned char co
 			goto nottoobig;
 		}
 		if(tmp >= UINT8_C(0xF8)) { /* Too big. */
-			u8c_seterr(U"u8c_u8dec: Character out of range (too big).");
+			u8c_seterr(U"u8c_u8dec: Character out of range (too big).",u8c_errtyp_u8oor);
 			return true;
 		}
 		if(tmp >= UINT8_C(0xF0)) { /* Four byte. */
@@ -54,7 +55,7 @@ bool u8c_u8dec(size_t * const _sz,char32_t const * * const _out,unsigned char co
 		n += SIZE_C(0x1);
 	}
 	/* Input is not null-terminated. */
-	u8c_seterr(U"u8c_u8dec: Unterminated input.");
+	u8c_seterr(U"u8c_u8dec: Unterminated input.",u8c_errtyp_untermin);
 	return true;
 nottoobig:;
 	if(_sz != NULL) {

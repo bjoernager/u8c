@@ -19,7 +19,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
-struct u8c_dattyp u8c_dat = (struct u8c_dattyp){
+struct u8c_dattyp u8c_dat = {
 	.err       = NULL,
 	.fmtendian = false,
 	.stat      = UINT8_C(0x0),

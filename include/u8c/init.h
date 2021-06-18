@@ -17,5 +17,6 @@
 # if !defined(u8c_sym_init)
 # define u8c_sym_init
 # include <stdbool.h>
+# include <u8c/errtyp.h>
 extern bool u8c_init(void);
 # endif

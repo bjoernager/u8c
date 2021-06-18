@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* End */
 # if !defined(u8c_sym_end)
 # define u8c_sym_end
 # include <stdbool.h>

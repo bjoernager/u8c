@@ -18,6 +18,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u8alloc.h>
 # include <u8c/u8enc.h>
@@ -32,7 +33,7 @@ bool u8c_u8enc(size_t * const _sz,unsigned char const * * const _out,char32_t co
 	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) { /* First pass: get size of input array, and determine size of output array. */
 		register char32_t const tmp = _in[n];
 		if(tmp > u8c_unimax) { /* Codepoint out of range. */
-			u8c_seterr(U"u8c_u8enc: Codepoint out of range (too big).");
+			u8c_seterr(U"u8c_u8enc: Codepoint out of range (too big).",u8c_errtyp_u32oor);
 			return true;
 		}
 		if(tmp >= UINT32_C(0x10000)) { /* 4 bytes. */
@@ -54,7 +55,7 @@ bool u8c_u8enc(size_t * const _sz,unsigned char const * * const _out,char32_t co
 			goto nottoobig;
 		}
 	}
-	u8c_seterr(U"u8c_u8enc: Unterminated input.");
+	u8c_seterr(U"u8c_u8enc: Unterminated input.",u8c_errtyp_untermin);
 	return true;
 nottoobig:;
 	if(_sz != NULL) {
@@ -62,7 +63,6 @@ nottoobig:;
 	}
 	unsigned char * out = NULL;
 	if(u8c_u8alloc(&out,outsz + SIZE_C(0x1))) {
-		u8c_seterr(U"u8c_u32enc: Unable to allocate resources (not enough memory?).");
 		return true;
 	}
 	for(register size_t n = SIZE_C(0x0), outn = SIZE_C(0x0);n < insz;n += SIZE_C(0x1),outn += SIZE_C(0x1)) { /* Second pass: encode each codepoint into UTF-8. */

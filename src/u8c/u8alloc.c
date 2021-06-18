@@ -13,15 +13,18 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
+# include "dat.h"
+# include <setjmp.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <u8c/errtyp.h>
 # include <u8c/seterr.h>
 # include <u8c/u8alloc.h>
 bool u8c_u8alloc(unsigned char * * const _u8,size_t const _sz) {
 	unsigned char * arr = NULL;
 	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
-		u8c_seterr(U"u8c_u8alloc: Unable to allocate resources (not enough memory?).");
-		return true;
+		u8c_seterr(U"u8c_u8alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
+		return false;
 	}
 	*_u8 = arr;
 	return false;

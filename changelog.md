@@ -1,3 +1,16 @@
+# 19
+
+* Fix error when compiling with GCC: *src/u8c/dat.c:22:29: error: initializer element is not constant [-Wpedantic]*.
+* Improve error handling:
+	* Add enumeration type for error types; `u8c_errtyp`.
+	* Add function for registering error handlers; `u8c_regerrhandl` (see `test.c`).
+* Add function for inserting UTF-32 strings into UTF-32 strings; `u8c_u32ins`.
+* Enable more warnings.
+* Add man pages.
+* Fix `u8c_u32cat` skipping the last character in `lstr`.
+* Remove the `uninstall` target (it was deemed to unsafe).
+* Add *Zstandard* as a dependency.
+
 # 18
 
 * Update `.gitignore`.

@@ -1,0 +1,19 @@
+.TH "u8c_init" "3" "" "u8c" "u8c API Manual"
+.SH NAME
+.PP
+u8c_init - Initialise - Initialise and start an u8c session.
+.SH DECLARATION
+.PP
+.nf
+\f[C]
+# include <stdbool.h>
+# include <u8c/errtyp.h>
+extern bool u8c_init(void);
+\f[R]
+.fi
+.SH DESCRIPTION
+.PP
+Even if \f[B]u8c_thrdsafe\f[R] evaluates to \f[B]true\f[R], this function is never thread-safe.
+.SH VERSION
+.PP
+u8c 2

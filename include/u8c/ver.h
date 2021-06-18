@@ -17,5 +17,5 @@
 # if !defined(u8c_sym_ver)
 # define u8c_sym_ver
 # include <stdint.h>
-# define u8c_ver (UINT64_C(0x14))
+# define u8c_ver (UINT64_C(0x15))
 # endif

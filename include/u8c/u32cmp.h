@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-32 compare */
 # if !defined(luma_sym_u32cmp)
 # define luma_sym_u32cmp
 # include <stdbool.h>

@@ -1,0 +1,23 @@
+.TH "u8c_dbgprint" "3" "" "u8c" "u8c API Manual"
+.SH NAME
+.PP
+u8c_dbgprint - Debug print - Print line if debug mode is enabled.
+.SH DECLARATION
+.PP
+.nf
+\f[C]
+# if defined(NDEBUG)
+# define u8c_dbgprint(...) ((void)0x0)
+# else
+# include <u8c/println.h>
+# include <stdio.h>
+# define u8c_dbgprint(...) u8c_println(stderr,__VA_ARGS__)
+# endif
+\f[R]
+.fi
+.SH DESCRIPTION
+.PP
+The function-like macro \f[B]u8c_dbgprint\f[R] passes it\[cq]s input to \f[B]u8c_println\f[R] (if the \f[B]NDEBUG\f[R] macro is defined, nothing is done).
+.SH VERSION
+.PP
+u8c 0

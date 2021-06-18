@@ -18,6 +18,7 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <u8c/errtyp.h>
 # include <u8c/println.h>
 # include <u8c/seterr.h>
 # include <u8c/vprint.h>
@@ -29,7 +30,7 @@ bool u8c_println(FILE * _fp,char32_t const * const _msg,...) {
 		return true;
 	}
 	if(fputc(0xA,stdout) == EOF) {
-		u8c_seterr((uint_least32_t[]){UINT32_C(0x75),UINT32_C(0x38),UINT32_C(0x63),UINT32_C(0x5F),UINT32_C(0x70),UINT32_C(0x72),UINT32_C(0x69),UINT32_C(0x6E),UINT32_C(0x74),UINT32_C(0x6C),UINT32_C(0x6E),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x66),UINT32_C(0x70),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x63),UINT32_C(0x3A),UINT32_C(0x20),UINT32_C(0x55),UINT32_C(0x6E),UINT32_C(0x61),UINT32_C(0x62),UINT32_C(0x6C),UINT32_C(0x65),UINT32_C(0x20),UINT32_C(0x74),UINT32_C(0x6F),UINT32_C(0x20),UINT32_C(0x77),UINT32_C(0x72),UINT32_C(0x69),UINT32_C(0x74),UINT32_C(0x65),UINT32_C(0x20),UINT32_C(0x74),UINT32_C(0x6F),UINT32_C(0x20),UINT32_C(0x73),UINT32_C(0x74),UINT32_C(0x64),UINT32_C(0x6F),UINT32_C(0x75),UINT32_C(0x74),UINT32_C(0x2E),UINT32_C(0x0),}); /* u8c_println: fputc: Unable to write to stdout. */
+		u8c_seterr(U"u8c_println: Unable to write to stdout (end of file).",u8c_errtyp_badio);
 		return false;
 	}
 	va_end(args);

@@ -27,9 +27,9 @@ bool u8c_geterr(size_t * const _sz,char32_t const * * const _out) {
 	# endif
 		u8c_u32cp(_sz,_out,u8c_dat.err);
 		u8c_u32free(&u8c_dat.err);
+		u8c_u32cp(_sz,&u8c_dat.err,U"");
 	# if defined(u8c_bethrdsafe)
 		mtx_unlock(&u8c_dat.errlock);
 	# endif
-		u8c_seterr((uint_least32_t[]){UINT32_C(0x0),});
 		return false;
 	}

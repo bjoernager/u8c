@@ -33,12 +33,12 @@ bool u8c_u32substr(char32_t const * * const _out,size_t const _start,size_t cons
 		len = insz - _start;
 	}
 	if(insz < _start + len) {
-		return false;
+		return true;
 	}
 	size_t const outsz = len + SIZE_C(0x2);
 	char32_t *   out   = NULL;
 	if(u8c_u32alloc(&out,outsz)) {
-		return false;
+		return true;
 	}
 	for(register size_t n = SIZE_C(0x0);n <= len;n += SIZE_C(0x1)) {
 		out[n] = _in[n + _start];
