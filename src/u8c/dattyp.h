@@ -16,6 +16,7 @@
 # if !defined(u8c_sym_dattyp)
 # define u8c_sym_dattyp
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
 # include <u8c/errhandltyp.h>
 # include <u8c/errtyp.h>
@@ -28,7 +29,7 @@ struct u8c_dattyp {
 	bool             fmtendian;
 	unsigned char    pad0[sizeof(void(*)(void)) - SIZE_C(0x1)]; /* Padding. */
 	char32_t const * err;
-	u8c_errhandltyp  errhandls[u8c_errtyp_maxerrtyp];
+	u8c_errhandltyp  errhandls[(size_t)u8c_errtyp_maxerrtyp];
 	uint_least8_t    fmtbase;
 	uint_least8_t    stat;
 # if defined(u8c_bethrdsafe)

@@ -113,7 +113,7 @@ DOCS = \
 	docs/u8c_isalnum.3.zst     \
 	docs/u8c_isalpha.3.zst     \
 	docs/u8c_iscntrl.3.zst     \
-	docs/u8c_digit.3.zst       \
+	docs/u8c_isdigit.3.zst      \
 	docs/u8c_ispunct.3.zst     \
 	docs/u8c_isspace.3.zst     \
 	docs/u8c_isxdigit.3.zst    \

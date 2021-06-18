@@ -28,6 +28,9 @@
 bool u8c_init() {
 	/* Initialise mutexes: */
 # if defined(u8c_bethrdsafe)
+	if(mtx_init(&u8c_dat.errhandlslock,mtx_plain) == thrd_error) {
+		return true;
+	}
 	if(mtx_init(&u8c_dat.errlock,mtx_plain) == thrd_error) {
 		return true;
 	}
@@ -38,6 +41,10 @@ bool u8c_init() {
 	/* Set default error message: */
 	u8c_dat.err = NULL;
 	u8c_seterr(U"",u8c_errtyp_deferr);
+	/* Initialise error handler array: */
+	for(register size_t n = SIZE_C(0x0);n < u8c_errtyp_maxerrtyp;n += SIZE_C(0x1)) {
+		u8c_dat.errhandls[n] = NULL;
+	}
 	/* Set status: */
 	u8c_dat.stat = UINT8_C(0x1);
 	return false;

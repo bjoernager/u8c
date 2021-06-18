@@ -29,6 +29,7 @@ bool u8c_end(void) {
 	}
 # if defined(u8c_bethrdsafe)
 	/* Destroy mutexes: */
+	mtx_destroy(&u8c_dat.errhandlslock);
 	mtx_destroy(&u8c_dat.errlock);
 	mtx_destroy(&u8c_dat.fmtlock);
 # endif

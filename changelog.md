@@ -1,3 +1,10 @@
+# 1↊
+
+* Initialise error handler array.
+* Initialise and destroy error handler array mutex.
+* Fix Makefile.
+* Update gitignore.
+
 # 19
 
 * Fix error when compiling with GCC: *src/u8c/dat.c:22:29: error: initializer element is not constant [-Wpedantic]*.
