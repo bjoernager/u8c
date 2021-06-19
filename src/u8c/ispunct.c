@@ -134,6 +134,7 @@ bool u8c_ispunct(uint_least8_t * const _res,char32_t const _chr) {
 	case UINT32_C(0x2BDA):  /* HYGIEA */
 	case UINT32_C(0x2BDB):  /* PHOLOS */
 	case UINT32_C(0x2BDC):  /* NESSUS */
+	case UINT32_C(0x2E2E):  /* INVERTED QUESTION MARK */
 	case UINT32_C(0x33D7):  /* SQUARE PH */
 	case UINT32_C(0xFDFC):  /* RIAL SIGN */
 	case UINT32_C(0x1F10D): /* CIRCLED ZERO WITH SLASH */

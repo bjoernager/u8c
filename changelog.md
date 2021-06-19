@@ -1,3 +1,10 @@
+# 1↋
+
+* Add more codepoints to `u8c_ispunct`.
+* Don't use Zstandard for man page compression. Use Gzip.
+* Remove Zstandard as a dependency.
+* Update gitignore.
+
 # 1↊
 
 * Initialise error handler array.

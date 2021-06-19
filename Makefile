@@ -99,50 +99,50 @@ $(LIB): $(OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
 $(OBJS): $(HDRS) $(HDRS_PRIV)
 DOCS = \
-	docs/u8c_abrt.3.zst        \
-	docs/u8c_col.3.zst         \
-	docs/u8c_dbg.3.zst         \
-	docs/u8c_dbgprint.3.zst    \
-	docs/u8c_end.3.zst         \
-	docs/u8c_errhandltyp.3.zst \
-	docs/u8c_errtyp.3.zst      \
-	docs/u8c_fmt.3.zst         \
-	docs/u8c_fmttyp.3.zst      \
-	docs/u8c_geterr.3.zst      \
-	docs/u8c_init.3.zst        \
-	docs/u8c_isalnum.3.zst     \
-	docs/u8c_isalpha.3.zst     \
-	docs/u8c_iscntrl.3.zst     \
-	docs/u8c_isdigit.3.zst      \
-	docs/u8c_ispunct.3.zst     \
-	docs/u8c_isspace.3.zst     \
-	docs/u8c_isxdigit.3.zst    \
-	docs/u8c_print.3.zst       \
-	docs/u8c_println.3.zst     \
-	docs/u8c_regerrhandl.3.zst \
-	docs/u8c_seterr.3.zst      \
-	docs/u8c_setfmt.3.zst      \
-	docs/u8c_thrdsafe.3.zst    \
-	docs/u8c_u8alloc.3.zst     \
-	docs/u8c_u8dec.3.zst       \
-	docs/u8c_u8enc.3.zst       \
-	docs/u8c_u8free.3.zst      \
-	docs/u8c_u32alloc.3.zst    \
-	docs/u8c_u32cat.3.zst      \
-	docs/u8c_u32cmp.3.zst      \
-	docs/u8c_u32cp.3.zst       \
-	docs/u8c_u32fndchr.3.zst   \
-	docs/u8c_u32fndpat.3.zst   \
-	docs/u8c_u32free.3.zst     \
-	docs/u8c_u32ins.3.zst      \
-	docs/u8c_u32substr.3.zst   \
-	docs/u8c_u32sz.3.zst       \
-	docs/u8c_unimax.3.zst      \
-	docs/u8c_ver.3.zst         \
-	docs/u8c_vfmt.3.zst        \
-	docs/u8c_vprint.3.zst
+	docs/u8c_abrt.3.gz        \
+	docs/u8c_col.3.gz         \
+	docs/u8c_dbg.3.gz         \
+	docs/u8c_dbgprint.3.gz    \
+	docs/u8c_end.3.gz         \
+	docs/u8c_errhandltyp.3.gz \
+	docs/u8c_errtyp.3.gz      \
+	docs/u8c_fmt.3.gz         \
+	docs/u8c_fmttyp.3.gz      \
+	docs/u8c_geterr.3.gz      \
+	docs/u8c_init.3.gz        \
+	docs/u8c_isalnum.3.gz     \
+	docs/u8c_isalpha.3.gz     \
+	docs/u8c_iscntrl.3.gz     \
+	docs/u8c_isdigit.3.gz      \
+	docs/u8c_ispunct.3.gz     \
+	docs/u8c_isspace.3.gz     \
+	docs/u8c_isxdigit.3.gz    \
+	docs/u8c_print.3.gz       \
+	docs/u8c_println.3.gz     \
+	docs/u8c_regerrhandl.3.gz \
+	docs/u8c_seterr.3.gz      \
+	docs/u8c_setfmt.3.gz      \
+	docs/u8c_thrdsafe.3.gz    \
+	docs/u8c_u8alloc.3.gz     \
+	docs/u8c_u8dec.3.gz       \
+	docs/u8c_u8enc.3.gz       \
+	docs/u8c_u8free.3.gz      \
+	docs/u8c_u32alloc.3.gz    \
+	docs/u8c_u32cat.3.gz      \
+	docs/u8c_u32cmp.3.gz      \
+	docs/u8c_u32cp.3.gz       \
+	docs/u8c_u32fndchr.3.gz   \
+	docs/u8c_u32fndpat.3.gz   \
+	docs/u8c_u32free.3.gz     \
+	docs/u8c_u32ins.3.gz      \
+	docs/u8c_u32substr.3.gz   \
+	docs/u8c_u32sz.3.gz       \
+	docs/u8c_unimax.3.gz      \
+	docs/u8c_ver.3.gz         \
+	docs/u8c_vfmt.3.gz        \
+	docs/u8c_vprint.3.gz
 $(DOCS):
-	zstd -f $(DOCS:.zst=)
+	gzip --keep $(DOCS:.gz=)
 test: $(LIB) test.c
 	$(CC) -std=c17 -Wall -Wextra -Wpedantic -Iinclude -O3 -g -L. -lu8c -o $@ $@.c
 .PHONY: clean docs install runtest

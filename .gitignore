@@ -1,6 +1,6 @@
+*.gz
 *.o
 *.so
-*.zst
 /test
 /txttolit
 vgcore.*
