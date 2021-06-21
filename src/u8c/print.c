@@ -16,8 +16,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdint.h>
-# include <u8c/print.h>
-# include <u8c/vprint.h>
+# include <u8c/fmt.h>
 bool u8c_print(FILE * _fp,char32_t const * const _msg,...) {
 	va_list args;
 	va_start(args,_msg);

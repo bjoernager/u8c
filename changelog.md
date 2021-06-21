@@ -1,3 +1,68 @@
+# 20
+
+* Update documentation.
+* Optimise `u8c_println`,
+* Make `u8c_print`, `u8c_println`, and `u8c_vprint` thread-safe (if thread-safe is not disabled).
+* Create base for UTF-16 related functions:
+ 	* Add function for allocating UTF-16 strings; `u8c_u16alloc`.
+	* Add function for deallocating UTF-16 strings; `u8c_u16free`.
+* Restructure headers:
+	* `u8c/SIZE_C.h`:
+		* `SIZE_C`
+	* `u8c/err.h`:
+		* `u8c_errtyp`
+		* `u8c_errhandltyp`
+		* `u8c_geterr`
+		* `u8c_regerrhandl`
+		* `u8c_seterr`
+	* `u8c/fmt`:
+		* `u8c_dbgprint`
+		* `u8c_fmt`
+		* `u8c_fmttyp`
+		* `u8c_print`
+		* `u8c_println`
+		* `u8c_setfmt`
+		* `u8c_vfmt`
+		* `u8c_vprint`
+	* `u8c/is.h`:
+		* `u8c_isalnum`
+		* `u8c_isalpha`
+		* `u8c_iscntrl`
+		* `u8c_isdigit`
+		* `u8c_ispunct`
+		* `u8c_isspace`
+		* `u8c_isxdigit`
+	* `u8c/main.h`:
+		* `u8c_dbg`
+		* `u8c_abrt`
+		* `u8c_end`
+		* `u8c_init`
+		* `u8c_thrdsafe`
+		* `u8c_unimax`
+		* `u8c_ver`
+	* `u8c/u16.h`:
+		* `u8c_u16alloc`
+		* `u8c_u16free`
+	* `u8c/u32.h`:
+		* `u8c_u32alloc`
+		* `u8c_u32cat`
+		* `u8c_u32cmp`
+		* `u8c_u32cp`
+		* `u8c_u32fndchr`
+		* `u8c_u32fndpat`
+		* `u8c_u32free`
+		* `u8c_u32ins`
+		* `u8c_u32substr`
+		* `u8c_u32sz`
+	* `u8c/u8.h`:
+		* `u8c_u8alloc`
+		* `u8c_u8dec`
+		* `u8c_u8enc`
+		* `u8c_u8free`
+* Disable *-Wpadded*.
+* Update `SIZE_C`.
+* Always use character constants (instead of numerical values).
+
 # 1↋
 
 * Add more codepoints to `u8c_ispunct`.

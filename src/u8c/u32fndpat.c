@@ -18,12 +18,8 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/seterr.h>
-# include <u8c/u32cmp.h>
-# include <u8c/u32fndpat.h>
-# include <u8c/u32free.h>
-# include <u8c/u32substr.h>
-# include <u8c/u32sz.h>
+# include <u8c/err.h>
+# include <u8c/u32.h>
 bool u8c_u32fndpat(size_t * const _pos,char32_t const * const _in,char32_t const * const _pat) {
 	assert(_pos != NULL);
 	assert(_in != NULL);

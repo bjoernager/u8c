@@ -13,8 +13,7 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
-# include "dattyp.h"
+# include "intern.h"
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>

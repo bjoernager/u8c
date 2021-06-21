@@ -13,10 +13,75 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Format */
-# if !defined(u8c_sym_fmt)
-# define u8c_sym_fmt
+# if !defined(u8c_hdr_fmt)
+# define u8c_hdr_fmt
+# include <stdarg.h>
+# include <stdbool.h>
 # include <stddef.h>
+# include <stdint.h>
+# include <stdio.h>
 # include <uchar.h>
-extern bool u8c_fmt(size_t * const outsz,char32_t const * * const out,char32_t const * const in,...);
+/* Enumerations: */
+enum u8c_fmttyp {
+	u8c_fmttyp_bgcol,  /* Background colour (uint_least32_t) */
+	u8c_fmttyp_bgcol0, /* Background colour #0 */
+	u8c_fmttyp_bool,   /* Boolean (bool) */
+	u8c_fmttyp_byt,    /* Byte (char) */
+	u8c_fmttyp_chr,    /* Character (uint_least32_t) */
+	u8c_fmttyp_fgcol,  /* Foreground colour (uint_least32_t) */
+	u8c_fmttyp_fgcol0, /* Foreground colour #0 */
+	u8c_fmttyp_int,    /* Integer (int) */
+	u8c_fmttyp_int16,  /* Integer 16 bit (int_least16_t) */
+	u8c_fmttyp_int32,  /* Integer 32 bit (int_least32_t) */
+	u8c_fmttyp_int64,  /* Integer 64 bit (int_least64_t) */
+	u8c_fmttyp_int8,   /* Integer 8 bit (int_least8_t) */
+	u8c_fmttyp_llong,  /* Long long (long long) */
+	u8c_fmttyp_long,   /* Long (long) */
+	u8c_fmttyp_sbyt,   /* Signed byte (signed char) */
+	u8c_fmttyp_shrt,   /* Short (short) */
+	u8c_fmttyp_str,    /* String (char32_t const *) */
+	u8c_fmttyp_sz,     /* Size (size_t) */
+	u8c_fmttyp_tm,     /* Time (uint_least64_t) */
+	u8c_fmttyp_ubyt,   /* Unsigned byte (unsigned char) */
+	u8c_fmttyp_uint,   /* Unsigned integer (unsigned int) */
+	u8c_fmttyp_uint16, /* Unsigned integer 16 bit (uint_least16_t) */
+	u8c_fmttyp_uint32, /* Unsigned integer 32 bit (uint_least32_t) */
+	u8c_fmttyp_uint64, /* Unsigned integer 64 bit (uint_least64_t) */
+	u8c_fmttyp_uint8,  /* Unsigned integer 8 bit (uint_least8_t) */
+	u8c_fmttyp_ulong,  /* Unsigned long (unsigned long) */
+	u8c_fmttyp_ullong, /* Unsigned long long (unsigned long long) */
+	u8c_fmttyp_ushrt,  /* Unsigned short (unsigned short) */
+};
+/* Type definitions: */
+/* Structures: */
+/* Functions */
+extern bool u8c_fmt(    size_t * const      outsz,char32_t const * * const out,   char32_t const * const in,...);
+extern bool u8c_print(  FILE *              fp,   char32_t const * const   msg,   ...);
+extern bool u8c_println(FILE *              fp,   char32_t const * const   msg,   ...);
+extern bool u8c_setfmt( uint_least8_t const base, uint_least8_t const      endian);
+extern bool u8c_vfmt(   size_t * const      sz,   char32_t const * * const out,   char32_t const * const in,va_list args);
+extern bool u8c_vprint( FILE *              fp,   char32_t const * const   msg,   va_list                args);
+/* Constants & Variables: */
+static uint_least32_t const u8c_col_azure      = UINT32_C(0x3DA9E1);
+static uint_least32_t const u8c_col_ash        = UINT32_C(0xD2D2CC);
+static uint_least32_t const u8c_col_black      = UINT32_C(0x444747);
+static uint_least32_t const u8c_col_blue       = UINT32_C(0x3D3DE1);
+static uint_least32_t const u8c_col_chartreuse = UINT32_C(0xA9E13D);
+static uint_least32_t const u8c_col_cyan       = UINT32_C(0x3DE1E1);
+static uint_least32_t const u8c_col_green      = UINT32_C(0x3ED13D);
+static uint_least32_t const u8c_col_magenta    = UINT32_C(0xE13DE1);
+static uint_least32_t const u8c_col_mint       = UINT32_C(0x3DE1A9);
+static uint_least32_t const u8c_col_orange     = UINT32_C(0xE1A93D);
+static uint_least32_t const u8c_col_red        = UINT32_C(0xE13D3D);
+static uint_least32_t const u8c_col_rose       = UINT32_C(0xE13DA9);
+static uint_least32_t const u8c_col_silver     = UINT32_C(0x9CA1A1);
+static uint_least32_t const u8c_col_violet     = UINT32_C(0xA93dE1);
+static uint_least32_t const u8c_col_white      = UINT32_C(0xF8F8F1);
+static uint_least32_t const u8c_col_yellow     = UINT32_C(0xE1E13D);
+/* Macros: */
+# if defined(NDEBUG)
+# define u8c_dbgprint(...) ((void)0x0)
+# else
+# define u8c_dbgprint(...) u8c_println(stderr,__VA_ARGS__)
+# endif
 # endif

@@ -13,11 +13,24 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-8 decode */
-# if !defined(u8c_sym_dec)
-# define u8c_sym_dec
+/* Abort */
+# if !defined(u8c_hdr_main)
+# define u8c_hdr_main
 # include <stdbool.h>
-# include <stddef.h>
+# include <stdint.h>
+# include <stdnoreturn.h>
 # include <uchar.h>
-extern bool u8c_u8dec(size_t * const sz,char32_t const * * const out,unsigned char const * const in);
+/* Enumerations: */
+/* Type definitions: */
+/* Structures: */
+/* Functions */
+extern noreturn bool u8c_abrt(char const * const fl,long long const ln,char const * const fn,char const * const why);
+extern bool          u8c_end( void);
+extern bool          u8c_init(void);
+/* Constants & Variables: */
+extern bool const           u8c_dbg;
+extern bool const           u8c_thrdsafe;
+static char32_t const       u8c_unimax   = (char32_t)UINT32_C(0x10FFFF);
+static uint_least64_t const u8c_ver      = UINT64_C(0x19);
+/* Macros: */
 # endif

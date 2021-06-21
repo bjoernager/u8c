@@ -17,133 +17,134 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/ispunct.h>
+# include <u8c/is.h>
 bool u8c_ispunct(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x21):    /* EXCLAMATION MARK */
-	case UINT32_C(0x22):    /* QUOTATION MARK */
-	case UINT32_C(0x23):    /* NUMBER SIGN */
-	case UINT32_C(0x24):    /* DOLLAR SIGN */
-	case UINT32_C(0x25):    /* PERCENT SIGN */
-	case UINT32_C(0x26):    /* AMPERSAND */
-	case UINT32_C(0x27):    /* APOSTROPHE */
-	case UINT32_C(0x28):    /* LEFT PARANTHESIS */
-	case UINT32_C(0x29):    /* RIGHT PARANTHESIS */
-	case UINT32_C(0x2A):    /* ASTERISK */
-	case UINT32_C(0x2B):    /* PLUS SIGN */
-	case UINT32_C(0x2C):    /* COMMA */
-	case UINT32_C(0x2D):    /* HYPHEN-MINUS */
-	case UINT32_C(0x2E):    /* FULL STOP */
-	case UINT32_C(0x2F):    /* SOLIDUS */
-	case UINT32_C(0x3A):    /* COLON */
-	case UINT32_C(0x3B):    /* SEMICOLON */
-	case UINT32_C(0x3C):    /* LESS-THAN SIGN */
-	case UINT32_C(0x3D):    /* EQUALS SIGN */
-	case UINT32_C(0x3E):    /* GREATER-THAN SIGN */
-	case UINT32_C(0x3F):    /* QUESTION MARK */
-	case UINT32_C(0x40):    /* COMMERCIAL AT */
-	case UINT32_C(0x5B):    /* LEFT SQUARE BRACKET */
-	case UINT32_C(0x5C):    /* REVERSE SOLIDUS */
-	case UINT32_C(0x5D):    /* RIGHT SQUARE BRACKET */
-	case UINT32_C(0x5E):    /* CIRCUMFLEX ACCENT */
-	case UINT32_C(0x5F):    /* LOW LINE */
-	case UINT32_C(0x60):    /* GRAVE ACCENT */
-	case UINT32_C(0x7B):    /* LEFT CURLY BRACKET */
-	case UINT32_C(0x7C):    /* VERTICAL LINE */
-	case UINT32_C(0x7D):    /* RIGHT CURLY BRACKET */
-	case UINT32_C(0x7E):    /* TILDE */
-	case UINT32_C(0xA1):    /* INVERT EXCLAMATION MARK */
-	case UINT32_C(0xA2):    /* CENT SIGN */
-	case UINT32_C(0xA3):    /* POUND SIGN */
-	case UINT32_C(0xA4):    /* CURRENCY SIGN */
-	case UINT32_C(0xA5):    /* YEN SIGN */
-	case UINT32_C(0xA7):    /* SECTION SIGN */
-	case UINT32_C(0xA8):    /* DIAERESIS */
-	case UINT32_C(0xA9):    /* COPYRIGHT SIGN */
-	case UINT32_C(0xAB):    /* LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
-	case UINT32_C(0xAE):    /* REGISTERED SIGN */
-	case UINT32_C(0xB0):    /* DEGREE SIGN */
-	case UINT32_C(0xB4):    /* ACUTE ACCENT */
-	case UINT32_C(0xB6):    /* PILCROW SIGN */
-	case UINT32_C(0xBB):    /* RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
-	case UINT32_C(0xB1):    /* PLUS MINUS SIGN */
-	case UINT32_C(0xBF):    /* INVERT QUESTION MARK */
-	case UINT32_C(0xD7):    /* MULTIPLICATION SIGN */
-	case UINT32_C(0xF7):    /* DIVISION SIGN */
-	case UINT32_C(0x2010):  /* HYPHEN */
-	case UINT32_C(0x2013):  /* EN DASH */
-	case UINT32_C(0x2014):  /* EM DASH */
-	case UINT32_C(0x2018):  /* LEFT SINGLE QUOTATION MARK */
-	case UINT32_C(0x2019):  /* RIGHT SINGLE QUOTATION MARK */
-	case UINT32_C(0x201C):  /* LEFT DOUBLE QUOTATION MARK */
-	case UINT32_C(0x201D):  /* RIGHT DOUBLE QUOTATION MARK */
-	case UINT32_C(0x2026):  /* HORIZONTAL ELLIPSIS */
-	case UINT32_C(0x2030):  /* PER MILLE SIGN */
-	case UINT32_C(0x20A3):  /* FRENCH FRANC SIGN */
-	case UINT32_C(0x20A4):  /* LIRA SIGN */
-	case UINT32_C(0x20A8):  /* RUPEE SIGN */
-	case UINT32_C(0x20A9):  /* WON SIGN */
-	case UINT32_C(0x20AC):  /* EURO SIGN */
-	case UINT32_C(0x20B9):  /* INDIAN RUPEE SIGN */
-	case UINT32_C(0x20BF):  /* BITCOIN SIGN */
-	case UINT32_C(0x2103):  /* DEGREE CELSIUS */
-	case UINT32_C(0x2107):  /* EULER CONSTANT */
-	case UINT32_C(0x2109):  /* DEGREE FAHRENHEIT */
-	case UINT32_C(0x210E):  /* PLANCK CONSTANT */
-	case UINT32_C(0x2117):  /* SOUND RECORDING COPYRIGHT */
-	case UINT32_C(0x2122):  /* TRADE MARK SIGN */
-	case UINT32_C(0x2125):  /* OUNCE SIGN */
-	case UINT32_C(0x2126):  /* OHM SIGN */
-	case UINT32_C(0x212A):  /* KELVIN SIGN */
-	case UINT32_C(0x214D):  /* AKTIESELSKAB */
-	case UINT32_C(0x2205):  /* EMPTY SET */
-	case UINT32_C(0x2212):  /* MINUS SIGN */
-	case UINT32_C(0x221A):  /* SQUARE ROOT */
-	case UINT32_C(0x221B):  /* CUBE ROOT */
-	case UINT32_C(0x221C):  /* FOURTH ROOT */
-	case UINT32_C(0x221E):  /* INFINITY */
-	case UINT32_C(0x2248):  /* ALMOST EQUAL TO */
-	case UINT32_C(0x2260):  /* NOT EQUAL TO */
-	case UINT32_C(0x2264):  /* LESS-THAN OR EQUAL TO */
-	case UINT32_C(0x2265):  /* GREATER-THAN OR EQUAL TO */
-	case UINT32_C(0x2609):  /* SUN */
-	case UINT32_C(0x263F):  /* MERCURY */
-	case UINT32_C(0x2640):  /* FEMALE SIGN */
-	case UINT32_C(0x2641):  /* EARTH */
-	case UINT32_C(0x2642):  /* MALE SIGN */
-	case UINT32_C(0x2643):  /* JUPITER */
-	case UINT32_C(0x2644):  /* SATURN */
-	case UINT32_C(0x2645):  /* URANUS */
-	case UINT32_C(0x2646):  /* NEPTUNE */
-	case UINT32_C(0x2647):  /* PLUTO */
-	case UINT32_C(0x26A2):  /* DOUBLED FEMALE SIGN */
-	case UINT32_C(0x26A3):  /* DOUBLED MALE SIGN */
-	case UINT32_C(0x26A4):  /* INTERLOCKED FEMALE AND MALE SIGN */
-	case UINT32_C(0x26A5):  /* MALE AND FEMALE SIGN */
-	case UINT32_C(0x26B3):  /* CERES */
-	case UINT32_C(0x26B4):  /* PALLAS */
-	case UINT32_C(0x26B5):  /* JUNO */
-	case UINT32_C(0x26B6):  /* VESTA */
-	case UINT32_C(0x26B7):  /* CHIRON */
-	case UINT32_C(0x2BD8):  /* PROSERPINA */
-	case UINT32_C(0x2BD9):  /* ASTRAEA */
-	case UINT32_C(0x2BDA):  /* HYGIEA */
-	case UINT32_C(0x2BDB):  /* PHOLOS */
-	case UINT32_C(0x2BDC):  /* NESSUS */
-	case UINT32_C(0x2E2E):  /* INVERTED QUESTION MARK */
-	case UINT32_C(0x33D7):  /* SQUARE PH */
-	case UINT32_C(0xFDFC):  /* RIAL SIGN */
-	case UINT32_C(0x1F10D): /* CIRCLED ZERO WITH SLASH */
-	case UINT32_C(0x1F10E): /* CIRCLED ANTICKLOCKWISE ARROW */
-	case UINT32_C(0x1F10F): /* CIRCLED DOLLAR SIGN WITH OVERLAID BACKSLASH */
-	case UINT32_C(0x1F12F): /* COPYLEFT SYMBOL */
-	case UINT32_C(0x1F16D): /* CIRCLED CC */
-	case UINT32_C(0x1F16E): /* CIRCLED C WITH OVERLAID BACKSLASH */
-	case UINT32_C(0x1F16F): /* CIRCLED HUMAN FIGURE */
+	case U'!':          /* EXCLAMATION MARK */
+	case U'\"':          /* QUOTATION MARK */
+	case U'#':          /* NUMBER SIGN */
+	case U'\u0024':     /* DOLLAR SIGN */
+	case U'%':          /* PERCENT SIGN */
+	case U'&':          /* AMPERSAND */
+	case U'\'':         /* APOSTROPHE */
+	case U'(':          /* LEFT PARANTHESIS */
+	case U')':          /* RIGHT PARANTHESIS */
+	case U'*':          /* ASTERISK */
+	case U'+':          /* PLUS SIGN */
+	case U',':          /* COMMA */
+	case U'-':          /* HYPHEN-MINUS */
+	case U'.':          /* FULL STOP */
+	case U'/':          /* SOLIDUS */
+	case U':':          /* COLON */
+	case U';':          /* SEMICOLON */
+	case U'<':          /* LESS-THAN SIGN */
+	case U'=':          /* EQUALS SIGN */
+	case U'>':          /* GREATER-THAN SIGN */
+	case U'\?':          /* QUESTION MARK */
+	case U'\u0040':     /* COMMERCIAL AT */
+	case U'[':          /* LEFT SQUARE BRACKET */
+	case U'\\':         /* REVERSE SOLIDUS */
+	case U']':          /* RIGHT SQUARE BRACKET */
+	case U'^':          /* CIRCUMFLEX ACCENT */
+	case U'_':          /* LOW LINE */
+	case U'\u0060':     /* GRAVE ACCENT */
+	case U'{':          /* LEFT CURLY BRACKET */
+	case U'|':          /* VERTICAL LINE */
+	case U'}':          /* RIGHT CURLY BRACKET */
+	case U'~':          /* TILDE */
+	case U'\u00A1':     /* INVERT EXCLAMATION MARK */
+	case U'\u00A2':     /* CENT SIGN */
+	case U'\u00A3':     /* POUND SIGN */
+	case U'\u00A4':     /* CURRENCY SIGN */
+	case U'\u00A5':     /* YEN SIGN */
+	case U'\u00A7':     /* SECTION SIGN */
+	case U'\u00A8':     /* DIAERESIS */
+	case U'\u00A9':     /* COPYRIGHT SIGN */
+	case U'\u00AB':     /* LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+	case U'\u00AE':     /* REGISTERED SIGN */
+	case U'\u00B0':     /* DEGREE SIGN */
+	case U'\u00B4':     /* ACUTE ACCENT */
+	case U'\u00B6':     /* PILCROW SIGN */
+	case U'\u00BB':     /* RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+	case U'\u00B1':     /* PLUS MINUS SIGN */
+	case U'\u00BF':     /* INVERT QUESTION MARK */
+	case U'\u00D7':     /* MULTIPLICATION SIGN */
+	case U'\u00F7':     /* DIVISION SIGN */
+	case U'\u2010':     /* HYPHEN */
+	case U'\u2013':     /* EN DASH */
+	case U'\u2014':     /* EM DASH */
+	case U'\u2018':     /* LEFT SINGLE QUOTATION MARK */
+	case U'\u2019':     /* RIGHT SINGLE QUOTATION MARK */
+	case U'\u201C':     /* LEFT DOUBLE QUOTATION MARK */
+	case U'\u201D':     /* RIGHT DOUBLE QUOTATION MARK */
+	case U'\u2026':     /* HORIZONTAL ELLIPSIS */
+	case U'\u2030':     /* PER MILLE SIGN */
+	case U'\u20A3':     /* FRENCH FRANC SIGN */
+	case U'\u20A4':     /* LIRA SIGN */
+	case U'\u20A8':     /* RUPEE SIGN */
+	case U'\u20A9':     /* WON SIGN */
+	case U'\u20AC':     /* EURO SIGN */
+	case U'\u20B9':     /* INDIAN RUPEE SIGN */
+	case U'\u20BF':     /* BITCOIN SIGN */
+	case U'\u2103':     /* DEGREE CELSIUS */
+	case U'\u2107':     /* EULER CONSTANT */
+	case U'\u2109':     /* DEGREE FAHRENHEIT */
+	case U'\u210E':     /* PLANCK CONSTANT */
+	case U'\u2117':     /* SOUND RECORDING COPYRIGHT */
+	case U'\u2122':     /* TRADE MARK SIGN */
+	case U'\u2125':     /* OUNCE SIGN */
+	case U'\u2126':     /* OHM SIGN */
+	case U'\u212A':     /* KELVIN SIGN */
+	case U'\u214D':     /* AKTIESELSKAB */
+	case U'\u2205':     /* EMPTY SET */
+	case U'\u2212':     /* MINUS SIGN */
+	case U'\u221A':     /* SQUARE ROOT */
+	case U'\u221B':     /* CUBE ROOT */
+	case U'\u221C':     /* FOURTH ROOT */
+	case U'\u221E':     /* INFINITY */
+	case U'\u2228':     /* LOGICAL OR */
+	case U'\u2248':     /* ALMOST EQUAL TO */
+	case U'\u2260':     /* NOT EQUAL TO */
+	case U'\u2264':     /* LESS-THAN OR EQUAL TO */
+	case U'\u2265':     /* GREATER-THAN OR EQUAL TO */
+	case U'\u2609':     /* SUN */
+	case U'\u263F':     /* MERCURY */
+	case U'\u2640':     /* FEMALE SIGN */
+	case U'\u2641':     /* EARTH */
+	case U'\u2642':     /* MALE SIGN */
+	case U'\u2643':     /* JUPITER */
+	case U'\u2644':     /* SATURN */
+	case U'\u2645':     /* URANUS */
+	case U'\u2646':     /* NEPTUNE */
+	case U'\u2647':     /* PLUTO */
+	case U'\u26A2':     /* DOUBLED FEMALE SIGN */
+	case U'\u26A3':     /* DOUBLED MALE SIGN */
+	case U'\u26A4':     /* INTERLOCKED FEMALE AND MALE SIGN */
+	case U'\u26A5':     /* MALE AND FEMALE SIGN */
+	case U'\u26B3':     /* CERES */
+	case U'\u26B4':     /* PALLAS */
+	case U'\u26B5':     /* JUNO */
+	case U'\u26B6':     /* VESTA */
+	case U'\u26B7':     /* CHIRON */
+	case U'\u2BD8':     /* PROSERPINA */
+	case U'\u2BD9':     /* ASTRAEA */
+	case U'\u2BDA':     /* HYGIEA */
+	case U'\u2BDB':     /* PHOLOS */
+	case U'\u2BDC':     /* NESSUS */
+	case U'\u2E2E':     /* INVERTED QUESTION MARK */
+	case U'\u33D7':     /* SQUARE PH */
+	case U'\uFDFC':     /* RIAL SIGN */
+	case U'\U0001F10D': /* CIRCLED ZERO WITH SLASH */
+	case U'\U0001F10E': /* CIRCLED ANTICKLOCKWISE ARROW */
+	case U'\U0001F10F': /* CIRCLED DOLLAR SIGN WITH OVERLAID BACKSLASH */
+	case U'\U0001F12F': /* COPYLEFT SYMBOL */
+	case U'\U0001F16D': /* CIRCLED CC */
+	case U'\U0001F16E': /* CIRCLED C WITH OVERLAID BACKSLASH */
+	case U'\U0001F16F': /* CIRCLED HUMAN FIGURE */
 		*_res = UINT8_C(0x1);
 		break;
 	}

@@ -17,45 +17,45 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/iscntrl.h>
+# include <u8c/is.h>
 bool u8c_iscntrl(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x0):  /* NULL */
-	case UINT32_C(0x1):  /* START OF HEADING */
-	case UINT32_C(0x2):  /* START OF TEXT */
-	case UINT32_C(0x3):  /* END OF TEXT */
-	case UINT32_C(0x4):  /* END OF TRANSMISSION */
-	case UINT32_C(0x5):  /* ENQUIRY */
-	case UINT32_C(0x6):  /* ACKNOWLEDGE */
-	case UINT32_C(0x7):  /* BELL */
-	case UINT32_C(0x8):  /* BACKSPACE */
-	case UINT32_C(0x9):  /* HORIZONTAL TABULATION */
-	case UINT32_C(0xA):  /* NEW LINE */
-	case UINT32_C(0xB):  /* VERTICAL TABULATION */
-	case UINT32_C(0xC):  /* FORM FEED */
-	case UINT32_C(0xD):  /* CARRIAGE RETURN */
-	case UINT32_C(0xE):  /* SHIFT OUT */
-	case UINT32_C(0xF):  /* SHIFT IN */
-	case UINT32_C(0x10): /* DATA LINK ESCAPE */
-	case UINT32_C(0x11): /* DEVICE CONTROL ONE */
-	case UINT32_C(0x12): /* DEVICE CONTROL TWO */
-	case UINT32_C(0x13): /* DEVICE CONTROL THREE */
-	case UINT32_C(0x14): /* DEVICE CONTROL FOUR */
-	case UINT32_C(0x15): /* NEGATIVE ACKNOWLEDGE */
-	case UINT32_C(0x16): /* SYNCHRONOUS IDLE */
-	case UINT32_C(0x17): /* END OF TRANSMISSION BLOCK */
-	case UINT32_C(0x18): /* CANCEL */
-	case UINT32_C(0x19): /* END OF MEDIUM */
-	case UINT32_C(0x1A): /* SUBSTITUTE */
-	case UINT32_C(0x1B): /* ESCAPE */
-	case UINT32_C(0x1C): /* FILE SEPERATOR */
-	case UINT32_C(0x1D): /* GROUP SEPERATOR */
-	case UINT32_C(0x1E): /* RECORD SEPERATOR */
-	case UINT32_C(0x1F): /* UNIT SEPERATOR */
+	case U'\x0':   /* NULL */
+	case U'\x1':  /* START OF HEADING */
+	case U'\x2':  /* START OF TEXT */
+	case U'\x3':  /* END OF TEXT */
+	case U'\x4':  /* END OF TRANSMISSION */
+	case U'\x5':  /* ENQUIRY */
+	case U'\x6':  /* ACKNOWLEDGE */
+	case U'\a':   /* BELL */
+	case U'\b':   /* BACKSPACE */
+	case U'\t':   /* HORIZONTAL TABULATION */
+	case U'\n':   /* NEW LINE */
+	case U'\v':   /* VERTICAL TABULATION */
+	case U'\f':   /* FORM FEED */
+	case U'\r':   /* CARRIAGE RETURN */
+	case U'\xE':  /* SHIFT OUT */
+	case U'\xF':  /* SHIFT IN */
+	case U'\x10': /* DATA LINK ESCAPE */
+	case U'\x11': /* DEVICE CONTROL ONE */
+	case U'\x12': /* DEVICE CONTROL TWO */
+	case U'\x13': /* DEVICE CONTROL THREE */
+	case U'\x14': /* DEVICE CONTROL FOUR */
+	case U'\x15': /* NEGATIVE ACKNOWLEDGE */
+	case U'\x16': /* SYNCHRONOUS IDLE */
+	case U'\x17': /* END OF TRANSMISSION BLOCK */
+	case U'\x18': /* CANCEL */
+	case U'\x19': /* END OF MEDIUM */
+	case U'\x1A': /* SUBSTITUTE */
+	case U'\x1B': /* ESCAPE */
+	case U'\x1C': /* FILE SEPERATOR */
+	case U'\x1D': /* GROUP SEPERATOR */
+	case U'\x1E': /* RECORD SEPERATOR */
+	case U'\x1F': /* UNIT SEPERATOR */
 		*_res = UINT8_C(0x1);
 		break;
 	}

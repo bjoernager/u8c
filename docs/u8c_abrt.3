@@ -6,6 +6,7 @@ u8c_abrt - Abort - Abort program with diagnostic information.
 .PP
 .nf
 \f[C]
+/* # include <u8c/main.h> */
 # include <stdbool.h
 # include <stdnoreturn.h>
 # include <uchar.h>
@@ -16,7 +17,7 @@ extern noreturn bool u8c_abrt(char const * const fl,long long const ln,char cons
 .PP
 The function \f[B]u8c_abrt\f[R] aborts the program and prints diagnostic infiormation to \f[B]stderr\f[R].
 .PP
-\f[B]__FILE__\f[R] is to be passed at \f[B]fl\f[R], \f[B](long long)__LINE__\f[R] at \f[B]ln\f[B], and \f[B]__func__\f[R] at \f[B]fn\f[R]. A standard string (\f[B]char const *\f[R]) must be passed at \f[B]why\f[R], which explains the reason for aborting.
+\f[B]__FILE__\f[R] is to be passed at \f[B]fl\f[R], \f[B](long long)__LINE__\f[R] at \f[B]ln\f[R], and \f[B]__func__\f[R] at \f[B]fn\f[R]. A standard string (\f[B]char const *\f[R]) must be passed at \f[B]why\f[R], which explains the reason for aborting.
 .PP
 All arguments are printed, in the end followed by a timestamp representing the number of seconds passed since the current epoch (as returned by \f[B]time(NULL)\f[R]).
 .SH VERSION

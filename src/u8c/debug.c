@@ -15,7 +15,7 @@
 */
 # include <stdbool.h>
 # include <stdint.h>
-# include <u8c/dbg.h>
+# include <u8c/main.h>
 bool const u8c_dbg =
 # if defined(NDEBUG)
 	false;

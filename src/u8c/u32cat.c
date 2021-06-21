@@ -17,12 +17,8 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/seterr.h>
-# include <u8c/u32alloc.h>
-# include <u8c/u32cat.h>
-# include <u8c/u32cp.h>
-# include <u8c/u32free.h>
-# include <u8c/u32sz.h>
+# include <u8c/err.h>
+# include <u8c/u32.h>
 # include <uchar.h>
 bool u8c_u32cat(size_t * const _sz,char32_t const * * const _out,char32_t const * const _lstr,char32_t const * const _rstr) {
 	assert(_out != NULL);

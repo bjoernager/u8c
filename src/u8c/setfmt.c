@@ -13,11 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include "intern.h"
 # include <stdbool.h>
 # include <stdint.h>
-# include <u8c/seterr.h>
-# include <u8c/setfmt.h>
+# include <u8c/fmt.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif

@@ -13,8 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(u8c_sym_errhandltyp)
-# define u8c_sym_errhandltyp
-# include <u8c/errtyp.h>
-typedef void (* u8c_errhandltyp)(enum u8c_errtyp);
-# endif
+# include <stdbool.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <u8c/u16.h>
+bool u8c_u16free(char16_t const * * const _u16) {
+	free((char16_t *)*_u16);
+	*_u16 = NULL;
+	return false;
+}

@@ -15,8 +15,8 @@
 */
 # include <stdarg.h>
 # include <stdbool.h>
-# include <u8c/u32cp.h>
-# include <u8c/vfmt.h>
+# include <u8c/fmt.h>
+# include <u8c/u32.h>
 # include <uchar.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>

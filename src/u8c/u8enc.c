@@ -18,12 +18,9 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/errtyp.h>
-# include <u8c/seterr.h>
-# include <u8c/u8alloc.h>
-# include <u8c/u8enc.h>
-# include <u8c/u8free.h>
-# include <u8c/unimax.h>
+# include <u8c/err.h>
+# include <u8c/main.h>
+# include <u8c/u8.h>
 # include <uchar.h>
 bool u8c_u8enc(size_t * const _sz,unsigned char const * * const _out,char32_t const * const _in) {
 	assert(_out != NULL);

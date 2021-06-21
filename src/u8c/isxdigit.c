@@ -17,29 +17,29 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/isxdigit.h>
+# include <u8c/is.h>
 bool u8c_isxdigit(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x30):   /* DIGIT ZERO */
-	case UINT32_C(0x31):   /* DIGIT ONE */
-	case UINT32_C(0x32):   /* DIGIT TWO */
-	case UINT32_C(0x33):   /* DIGIT THREE */
-	case UINT32_C(0x34):   /* DIGIT FOUR */
-	case UINT32_C(0x35):   /* DIGIT FIVE */
-	case UINT32_C(0x36):   /* DIGIT SIX */
-	case UINT32_C(0x37):   /* DIGIT SEVEN */
-	case UINT32_C(0x38):   /* DIGIT EIGHT */
-	case UINT32_C(0x39):   /* DIGIT NINE */
-	case UINT32_C(0x41):   /* LATIN CAPITAL LETTER A */
-	case UINT32_C(0x42):   /* LATIN CAPITAL LETTER B */
-	case UINT32_C(0x43):   /* LATIN CAPITAL LETTER C */
-	case UINT32_C(0x44):   /* LATIN CAPITAL LETTER D */
-	case UINT32_C(0x45):   /* LATIN CAPITAL LETTER E */
-	case UINT32_C(0x46):   /* LATIN CAPITAL LETTER F */
+	case U'0': /* DIGIT ZERO */
+	case U'1': /* DIGIT ONE */
+	case U'2': /* DIGIT TWO */
+	case U'3': /* DIGIT THREE */
+	case U'4': /* DIGIT FOUR */
+	case U'5': /* DIGIT FIVE */
+	case U'6': /* DIGIT SIX */
+	case U'7': /* DIGIT SEVEN */
+	case U'8': /* DIGIT EIGHT */
+	case U'9': /* DIGIT NINE */
+	case U'A': /* LATIN CAPITAL LETTER A */
+	case U'B': /* LATIN CAPITAL LETTER B */
+	case U'C': /* LATIN CAPITAL LETTER C */
+	case U'D': /* LATIN CAPITAL LETTER D */
+	case U'E': /* LATIN CAPITAL LETTER E */
+	case U'F': /* LATIN CAPITAL LETTER F */
 		*_res = UINT8_C(0x1);
 		break;
 	}

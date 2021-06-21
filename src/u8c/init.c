@@ -13,15 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# if !defined(__STDC_UTF_32__)
+# error UTF-32 is required.
+# endif
+# include "intern.h"
 # include <setjmp.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/errtyp.h>
-# include <u8c/init.h>
-# include <u8c/seterr.h>
-# include <u8c/u32cp.h>
+# include <u8c/err.h>
+# include <u8c/main.h>
+# include <u8c/u32.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
@@ -35,6 +37,9 @@ bool u8c_init() {
 		return true;
 	}
 	if(mtx_init(&u8c_dat.fmtlock,mtx_plain) == thrd_error) {
+		return true;
+	}
+	if(mtx_init(&u8c_dat.outlock,mtx_plain) == thrd_error) {
 		return true;
 	}
 # endif

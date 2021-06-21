@@ -13,12 +13,10 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include "intern.h"
 # include <stdbool.h>
 # include <stddef.h>
-# include <u8c/errhandltyp.h>
-# include <u8c/errtyp.h>
-# include <u8c/regerrhandl.h>
+# include <u8c/err.h>
 static void u8c_regerrhandl_seterrhandl(enum u8c_errtyp _typ,u8c_errhandltyp _errhandl) {
 	u8c_dat.errhandls[(size_t)_typ] = _errhandl;
 }

@@ -6,6 +6,7 @@ u8c_dbgprint - Debug print - Print line if debug mode is enabled.
 .PP
 .nf
 \f[C]
+/* # include <u8c/fmt.h> */
 # if defined(NDEBUG)
 # define u8c_dbgprint(...) ((void)0x0)
 # else

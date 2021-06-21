@@ -17,11 +17,7 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/u32alloc.h>
-# include <u8c/u32cat.h>
-# include <u8c/u32free.h>
-# include <u8c/u32ins.h>
-# include <u8c/u32substr.h>
+# include <u8c/u32.h>
 # include <uchar.h>
 bool u8c_u32ins(size_t * const _sz,char32_t const * * const _out,size_t const _pos,char32_t const * const _str0,char32_t const * const _str1) {
 	assert(_out != NULL);

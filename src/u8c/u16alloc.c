@@ -13,9 +13,18 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Thread-safe */
-# if !defined(u8c_sym_thrdsafe)
-# define u8c_sym_thrdsafe
+# include "intern.h"
 # include <stdbool.h>
-extern bool const u8c_thrdsafe;
-# endif
+# include <stdlib.h>
+# include <u8c/err.h>
+# include <u8c/u16.h>
+# include <uchar.h>
+bool u8c_u16alloc(char16_t * * const _u16,size_t const _sz) {
+	char16_t * arr = NULL;
+	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
+		u8c_seterr(U"u8c_u16alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
+		return false;
+	}
+	*_u16 = arr;
+	return false;
+}

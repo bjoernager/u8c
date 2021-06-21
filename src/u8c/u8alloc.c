@@ -13,13 +13,11 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
-# include <setjmp.h>
+# include "intern.h"
 # include <stdbool.h>
 # include <stdlib.h>
-# include <u8c/errtyp.h>
-# include <u8c/seterr.h>
-# include <u8c/u8alloc.h>
+# include <u8c/err.h>
+# include <u8c/u8.h>
 bool u8c_u8alloc(unsigned char * * const _u8,size_t const _sz) {
 	unsigned char * arr = NULL;
 	if((arr = calloc(sizeof *arr,_sz)) == NULL) {

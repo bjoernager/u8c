@@ -1,11 +1,12 @@
 .TH "u8c_u32free" "3" "" "u8c" "u8c API Manual"
 .SH NAME
 .PP
-u8c_u32free - UTF-32 free - Free UTF-32 string.
+u8c_u32free - UTF-32 free - Deallocate UTF-32 string and set it to \f[B]NULL\f[R].
 .SH DECLARATION
 .PP
 .nf
 \f[C]
+/* # include <u8c/u32.h> */
 # include <stdbool.h>
 # include <uchar.h>
 extern bool u8c_u32free(char32_t const * * const u32);

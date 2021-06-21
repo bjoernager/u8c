@@ -18,8 +18,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/fmt.h>
-# include <u8c/u32cp.h>
-# include <u8c/vfmt.h>
+# include <u8c/u32.h>
 bool u8c_fmt(size_t * const _outsz,char32_t const * * const _out,char32_t const * const _in,...) {
 	va_list args;
 	va_start(args,_in);

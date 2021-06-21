@@ -17,19 +17,19 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/isspace.h>
+# include <u8c/is.h>
 bool u8c_isspace(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x9):  /* HORIZONTAL TABULATION */
-	case UINT32_C(0xA):  /* NEW LINE */
-	case UINT32_C(0xB):  /* VERTICAL TABULATION */
-	case UINT32_C(0xC):  /* FORM FEED */
-	case UINT32_C(0xD):  /* CARRIAGE RETURN */
-	case UINT32_C(0x20): /* SPACE */
+	case U'\t':  /* HORIZONTAL TABULATION */
+	case U'\n':  /* NEW LINE */
+	case U'\v':  /* VERTICAL TABULATION */
+	case U'\f':  /* FORM FEED */
+	case U'\r':  /* CARRIAGE RETURN */
+	case U' ':   /* SPACE */
 		*_res = UINT8_C(0x1);
 		break;
 	}

@@ -13,11 +13,22 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* UTF-8 encode */
-# if !defined(u8c_sym_enc)
-# define u8c_sym_enc
+# if !defined(u8c_hdr_is)
+# define u8c_hdr_is
 # include <stdbool.h>
-# include <stddef.h>
+# include <stdint.h>
 # include <uchar.h>
-extern bool u8c_u8enc(size_t * const sz,unsigned char const * * const out,char32_t const * const in);
+/* Enumerations: */
+/* Type definitions: */
+/* Structures: */
+/* Functions */
+extern bool u8c_isalnum( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_isalpha( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_iscntrl( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_isdigit( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_ispunct( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_isspace( uint_least8_t * const res,char32_t const chr);
+extern bool u8c_isxdigit(uint_least8_t * const res,char32_t const chr);
+/* Constants & Variables: */
+/* Macros: */
 # endif

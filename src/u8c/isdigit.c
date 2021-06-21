@@ -17,25 +17,25 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/isdigit.h>
+# include <u8c/is.h>
 bool u8c_isdigit(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	switch(_chr) {
 	default:
 		*_res = UINT8_C(0x0);
 		break;
-	case UINT32_C(0x30):   /* DIGIT ZERO */
-	case UINT32_C(0x31):   /* DIGIT ONE */
-	case UINT32_C(0x32):   /* DIGIT TWO */
-	case UINT32_C(0x33):   /* DIGIT THREE */
-	case UINT32_C(0x34):   /* DIGIT FOUR */
-	case UINT32_C(0x35):   /* DIGIT FIVE */
-	case UINT32_C(0x36):   /* DIGIT SIX */
-	case UINT32_C(0x37):   /* DIGIT SEVEN */
-	case UINT32_C(0x38):   /* DIGIT EIGHT */
-	case UINT32_C(0x39):   /* DIGIT NINE */
-	case UINT32_C(0x218A): /* TURNED DIGIT TWO */
-	case UINT32_C(0x218B): /* TURNED DIGIT THREE */
+	case U'0':      /* DIGIT ZERO */
+	case U'1':      /* DIGIT ONE */
+	case U'2':      /* DIGIT TWO */
+	case U'3':      /* DIGIT THREE */
+	case U'4':      /* DIGIT FOUR */
+	case U'5':      /* DIGIT FIVE */
+	case U'6':      /* DIGIT SIX */
+	case U'7':      /* DIGIT SEVEN */
+	case U'8':      /* DIGIT EIGHT */
+	case U'9':      /* DIGIT NINE */
+	case U'\u218A': /* TURNED DIGIT TWO */
+	case U'\u218B': /* TURNED DIGIT THREE */
 		*_res = UINT8_C(0x1);
 		break;
 	}

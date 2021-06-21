@@ -15,7 +15,7 @@
 */
 # include <stdbool.h>
 # include <stdint.h>
-# include <u8c/thrdsafe.h>
+# include <u8c/main.h>
 bool const u8c_thrdsafe =
 # if defined(u8c_bethrdsafe)
 	true;

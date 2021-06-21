@@ -13,10 +13,36 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(luma_sym_u32fndchr)
-# define luma_sym_u32fndchr
+# if !defined(u8c_sym_dattyp)
+# define u8c_sym_dattyp
+# include <stdalign.h>
 # include <stdbool.h>
 # include <stddef.h>
+# include <stdint.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/err.h>
 # include <uchar.h>
-extern bool u8c_u32fndchr(size_t * const pos,char32_t const * const in,char32_t const chr);
+# if defined(u8c_bethrdsafe)
+# include <threads.h>
+# endif
+/* Enumerations: */
+/* Type definitions: */
+/* Structures: */
+struct u8c_dattyp {
+	char32_t const * err;
+	u8c_errhandltyp  errhandls[(size_t)u8c_errtyp_maxerrtyp];
+	uint_least8_t    fmtbase;
+	bool             fmtendian;
+	uint_least8_t    stat;
+# if defined(u8c_bethrdsafe)
+	mtx_t         errlock;
+	mtx_t         errhandlslock;
+	mtx_t         fmtlock;
+	mtx_t         outlock;
+# endif
+};
+/* Functions */
+/* Constants & Variables: */
+extern struct u8c_dattyp u8c_dat;
+/* Macros: */
 # endif

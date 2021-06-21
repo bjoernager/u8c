@@ -13,12 +13,19 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Variadic print */
-# if !defined(u8c_sym_vprint)
-# define u8c_sym_vprint
-# include <stdarg.h>
+# if !defined(u8c_hdr_u8)
+# define u8c_hdr_u8
 # include <stdbool.h>
-# include <stdio.h>
+# include <stddef.h>
 # include <uchar.h>
-extern bool u8c_vprint(FILE * fp,char32_t const * const msg,va_list args);
+/* Enumerations: */
+/* Type definitions: */
+/* Structures: */
+/* Functions */
+extern bool u8c_u8alloc(unsigned char * * const       u32,size_t const                  sz);
+extern bool u8c_u8dec(  size_t * const                sz, char32_t const * * const      out,unsigned char const * const in);
+extern bool u8c_u8enc(  size_t * const                sz, unsigned char const * * const out,char32_t const * const      in);
+extern bool u8c_u8free( unsigned char const * * const u8);
+/* Constants & Variables: */
+/* Macros: */
 # endif

@@ -17,10 +17,9 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/errtyp.h>
-# include <u8c/seterr.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/u32cmp.h>
+# include <u8c/err.h>
+# include <u8c/u32.h>
 bool u8c_u32cmp(uint_least8_t * const _res,char32_t const * const _lstr,char32_t const * const _rstr) {
 	assert(_res != NULL);
 	assert(_lstr != NULL);

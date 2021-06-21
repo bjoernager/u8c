@@ -13,13 +13,13 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include "intern.h"
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <u8c/end.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/u32free.h>
+# include <u8c/main.h>
+# include <u8c/u32.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
@@ -32,6 +32,7 @@ bool u8c_end(void) {
 	mtx_destroy(&u8c_dat.errhandlslock);
 	mtx_destroy(&u8c_dat.errlock);
 	mtx_destroy(&u8c_dat.fmtlock);
+	mtx_destroy(&u8c_dat.outlock);
 # endif
 	/* Free error message: */
 	u8c_u32free(&u8c_dat.err);

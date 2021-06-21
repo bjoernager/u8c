@@ -13,17 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Error type */
-# if !defined(u8c_sym_errtyp)
-# define u8c_sym_errtyp
-enum u8c_errtyp {
-	u8c_errtyp_badalloc,  /* Bad allocation */
-	u8c_errtyp_badio,     /* Bad input or output */
-	u8c_errtyp_u32oor,    /* UTF-32 out of range */
-	u8c_errtyp_u8oor,     /* UTF-8 out of range */
-	u8c_errtyp_deferr,    /* Default error */
-	u8c_errtyp_untermin,  /* Unterminated input */
-	u8c_errtyp_maxerrtyp, /* Maximum error type */
-	u8c_errtyp_all,       /* All */
-};
+# if !defined(u8c_hdr_u16)
+# define u8c_hdr_u16
+# include <stdbool.h>
+# include <stddef.h>
+# include <uchar.h>
+/* Enumerations: */
+/* Type definitions: */
+/* Structures: */
+/* Functions */
+extern bool u8c_u16alloc(char16_t * * const u16,size_t const sz);
+extern bool u8c_u16free(char16_t const * * const u16);
+/* Constants & Variables: */
+/* Macros: */
 # endif

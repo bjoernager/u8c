@@ -16,7 +16,7 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <u8c/u8free.h>
+# include <u8c/u8.h>
 bool u8c_u8free(unsigned char const * * const _u8) {
 	free((unsigned char *)*_u8);
 	*_u8 = NULL;

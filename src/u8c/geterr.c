@@ -13,14 +13,12 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include "intern.h"
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/geterr.h>
-# include <u8c/seterr.h>
-# include <u8c/u32cp.h>
-# include <u8c/u32free.h>
+# include <u8c/err.h>
+# include <u8c/u32.h>
 bool u8c_geterr(size_t * const _sz,char32_t const * * const _out) {
 	# if defined(u8c_bethrdsafe)
 		mtx_lock(&u8c_dat.errlock);

@@ -1,5 +1,5 @@
 CC     =  clang
-CFLAGS =  -std=c17 -Wall -Wextra -Wmissing-prototypes -Wpadded -pedantic-errors -Iinclude -fPIC
+CFLAGS =  -std=c17 -Wall -Wextra -Wmissing-prototypes -pedantic-errors -Iinclude -fPIC
 ifneq ($(thrdsafe),0)
 CFLAGS += -Du8c_bethrdsafe
 endif
@@ -10,52 +10,16 @@ CFLAGS += -O3 -DNDEBUG
 endif
 LDFLAGS = -shared -lpthread
 HDRS = \
-	include/u8c/SIZE_C.h      \
-	include/u8c/abrt.h        \
-	include/u8c/col.h         \
-	include/u8c/dbg.h         \
-	include/u8c/dbgprint.h    \
-	include/u8c/end.h         \
-	include/u8c/errhandltyp.h \
-	include/u8c/errtyp.h      \
-	include/u8c/fmt.h         \
-	include/u8c/fmttyp.h      \
-	include/u8c/geterr.h      \
-	include/u8c/init.h        \
-	include/u8c/isalnum.h     \
-	include/u8c/isalpha.h     \
-	include/u8c/iscntrl.h     \
-	include/u8c/isdigit.h     \
-	include/u8c/ispunct.h     \
-	include/u8c/isspace.h     \
-	include/u8c/isxdigit.h    \
-	include/u8c/print.h       \
-	include/u8c/println.h     \
-	include/u8c/regerrhandl.h \
-	include/u8c/seterr.h      \
-	include/u8c/setfmt.h      \
-	include/u8c/thrdsafe.h    \
-	include/u8c/u32alloc.h    \
-	include/u8c/u32cat.h      \
-	include/u8c/u32cmp.h      \
-	include/u8c/u32cp.h       \
-	include/u8c/u32fndchr.h   \
-	include/u8c/u32fndpat.h   \
-	include/u8c/u32free.h     \
-	include/u8c/u32ins.h      \
-	include/u8c/u32substr.h   \
-	include/u8c/u32sz.h       \
-	include/u8c/u8alloc.h     \
-	include/u8c/u8dec.h       \
-	include/u8c/u8enc.h       \
-	include/u8c/u8free.h      \
-	include/u8c/unimax.h      \
-	include/u8c/ver.h         \
-	include/u8c/vfmt.h        \
-	include/u8c/vprint.h
+	include/u8c/err.h    \
+	include/u8c/fmt.h    \
+	include/u8c/is.h     \
+	include/u8c/main.h   \
+	include/u8c/SIZE_C.h \
+	include/u8c/u16.h    \
+	include/u8c/u32.h    \
+	include/u8c/u8.h
 HDRS_PRIV = \
-	src/u8c/dat.h    \
-	src/u8c/dattyp.h
+	src/u8c/intern.h
 SRCS = \
 	src/u8c/abrt.c        \
 	src/u8c/dat.c         \
@@ -77,6 +41,8 @@ SRCS = \
 	src/u8c/seterr.c      \
 	src/u8c/setfmt.c      \
 	src/u8c/thrdsafe.c    \
+	src/u8c/u16alloc.c    \
+	src/u8c/u16free.c     \
 	src/u8c/u32alloc.c    \
 	src/u8c/u32cat.c      \
 	src/u8c/u32cmp.c      \
@@ -141,7 +107,7 @@ DOCS = \
 	docs/u8c_ver.3.gz         \
 	docs/u8c_vfmt.3.gz        \
 	docs/u8c_vprint.3.gz
-$(DOCS):
+$(DOCS):errhandltyp
 	gzip --keep $(DOCS:.gz=)
 test: $(LIB) test.c
 	$(CC) -std=c17 -Wall -Wextra -Wpedantic -Iinclude -O3 -g -L. -lu8c -o $@ $@.c

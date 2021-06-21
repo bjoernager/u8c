@@ -5,43 +5,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <u8c/SIZE_C.h>
-# include <u8c/abrt.h>
-# include <u8c/col.h>
-# include <u8c/dbgprint.h>
-# include <u8c/dbg.h>
-# include <u8c/end.h>
+# include <u8c/err.h>
 # include <u8c/fmt.h>
-# include <u8c/fmttyp.h>
-# include <u8c/geterr.h>
-# include <u8c/init.h>
-# include <u8c/isalnum.h>
-# include <u8c/isalpha.h>
-# include <u8c/iscntrl.h>
-# include <u8c/isdigit.h>
-# include <u8c/isxdigit.h>
-# include <u8c/ispunct.h>
-# include <u8c/isspace.h>
-# include <u8c/print.h>
-# include <u8c/println.h>
-# include <u8c/regerrhandl.h>
-# include <u8c/seterr.h>
-# include <u8c/setfmt.h>
-# include <u8c/thrdsafe.h>
-# include <u8c/u32cat.h>
-# include <u8c/u32cmp.h>
-# include <u8c/u32cp.h>
-# include <u8c/u32fndchr.h>
-# include <u8c/u32fndpat.h>
-# include <u8c/u32free.h>
-# include <u8c/u32ins.h>
-# include <u8c/u32substr.h>
-# include <u8c/u32sz.h>
-# include <u8c/u8dec.h>
-# include <u8c/u8enc.h>
-# include <u8c/u8free.h>
-# include <u8c/ver.h>
-# include <u8c/vfmt.h>
-# include <u8c/vprint.h>
+# include <u8c/is.h>
+# include <u8c/main.h>
+# include <u8c/u32.h>
+# include <u8c/u8.h>
 static void testmsg(char const * fmt,...) {
 	va_list args;
 	va_start(args,fmt);
@@ -109,12 +78,12 @@ int main(void) {
 	testmsgdone();
 	testmsg("Text formatting");
 	{
-		u8c_println(stdout,U"The ￼number￼ is ￼.",u8c_fmttyp_fgcol,u8c_col_mint,u8c_fmttyp_fgcol0,u8c_fmttyp_int,(int_least64_t){-0x10});
+		u8c_println(stdout,U"The \uFFFCnumber\uFFFC is \uFFFC.",u8c_fmttyp_fgcol,u8c_col_mint,u8c_fmttyp_fgcol0,u8c_fmttyp_int,(int_least64_t){-0x10});
 	}
 	testmsgdone();
 	testmsg("Colour text");
 	{
-		u8c_println(stdout,U"￼red￼orange￼yellow￼chartreuse￼green￼mint￼cyan￼azure￼blue￼violet￼magenta￼rose￼",u8c_fmttyp_fgcol,u8c_col_red,u8c_fmttyp_fgcol,u8c_col_orange,u8c_fmttyp_fgcol,u8c_col_yellow,u8c_fmttyp_fgcol,u8c_col_chartreuse,u8c_fmttyp_fgcol,u8c_col_green,u8c_fmttyp_fgcol,u8c_col_mint,u8c_fmttyp_fgcol,u8c_col_cyan,u8c_fmttyp_fgcol,u8c_col_azure,u8c_fmttyp_fgcol,u8c_col_blue,u8c_fmttyp_fgcol,u8c_col_violet,u8c_fmttyp_fgcol,u8c_col_magenta,u8c_fmttyp_fgcol,u8c_col_rose,u8c_fmttyp_fgcol0);
+		u8c_println(stdout,U"\uFFFCred\uFFFCorange\uFFFCyellow\uFFFCchartreuse\uFFFCgreen\uFFFCmint\uFFFCcyan\uFFFCazure\uFFFCblue\uFFFCviolet\uFFFCmagenta\uFFFCrose\uFFFC",u8c_fmttyp_fgcol,u8c_col_red,u8c_fmttyp_fgcol,u8c_col_orange,u8c_fmttyp_fgcol,u8c_col_yellow,u8c_fmttyp_fgcol,u8c_col_chartreuse,u8c_fmttyp_fgcol,u8c_col_green,u8c_fmttyp_fgcol,u8c_col_mint,u8c_fmttyp_fgcol,u8c_col_cyan,u8c_fmttyp_fgcol,u8c_col_azure,u8c_fmttyp_fgcol,u8c_col_blue,u8c_fmttyp_fgcol,u8c_col_violet,u8c_fmttyp_fgcol,u8c_col_magenta,u8c_fmttyp_fgcol,u8c_col_rose,u8c_fmttyp_fgcol0);
 	}
 	testmsgdone();
 	testmsg("Combining characters");
@@ -252,7 +221,7 @@ int main(void) {
 	testmsgdone();
 	testmsg("u8c_u32fndchr");
 	{
-		char32_t const * str  = U"Proprietary as in Microsoft.";
+		char32_t const * str  = U"Proprietary as in Micro$oft.";
 		size_t                 pos0 = SIZE_C(0x0);
 		size_t                 pos1 = SIZE_C(0x0);
 		u8c_u32fndchr(&pos0,str,U'M');
@@ -265,7 +234,7 @@ int main(void) {
 	testmsgdone();
 	testmsg("u8c_u32fndpat");
 	{
-		char32_t const * str  = U"Proprietary as in Microsoft.";
+		char32_t const * str  = U"Proprietary as in Micro$oft.";
 		size_t                 pos0 = SIZE_C(0x0);
 		size_t                 pos1 = SIZE_C(0x0);
 		u8c_u32fndpat(&pos0,str,U"as in");

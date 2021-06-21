@@ -13,7 +13,7 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "dat.h"
+# include "intern.h"
 # include <inttypes.h>
 # include <stdbool.h>
 # include <stdint.h>
@@ -21,11 +21,7 @@
 # include <stdlib.h>
 # include <stdnoreturn.h>
 # include <time.h>
-# include <u8c/abrt.h>
-# include <u8c/dbg.h>
-# include <u8c/end.h>
-# include <u8c/thrdsafe.h>
-# include <u8c/ver.h>
+# include <u8c/main.h>
 noreturn bool u8c_abrt(char const * const _fl,long long const _ln,char const * const _fn,char const * const _why) {
 	fprintf(stderr,"u8c: *** Aborted (\"%s\":%lld in function \"%s\": \"%s\" @ %" PRIuMAX ") ***\nLibrary diagnostics:\n    debug:%s\n    status:%" PRIuLEAST8 "\n    thread-safe:%s\n    version:%" PRIuLEAST64 "\n",_fl,_ln,_fn,_why,(intmax_t)time(NULL),u8c_dbg ? "true" : "false",u8c_dat.stat,u8c_thrdsafe ? "true" : "false",u8c_ver);
 	fprintf(stderr,"Trying to clean up...\n");

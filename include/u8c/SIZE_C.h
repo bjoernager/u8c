@@ -13,18 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-/* Size constant */
 # if !defined(SIZE_C)
 # include <limits.h>
 # include <stdint.h>
-# if SIZE_MAX == USHRT_MAX
-# define SIZE_C(val) ((unsigned short)val)
-# elif SIZE_MAX == UINT_MAX
-# define SIZE_C(val) val
-# elif SIZE_MAX == ULONG_MAX
-# define SIZE_C(val) val ## lu
-# elif SIZE_MAX == ULLONG_MAX
-# define SIZE_C(val) val ## llu
+# if SIZE_MAX == UINT_LEAST8_MAX
+# define SIZE_C(val) UINT8_C(val)
+# elif SIZE_MAX == UINT_LEAST16_MAX
+# define SIZE_C(val) UINT16_C(val)
+# elif SIZE_MAX == UINT_LEAST32_MAX
+# define SIZE_C(val) UINT32s_C(val)
+# elif SIZE_MAX == UINT_LEAST64_MAX
+# define SIZE_C(val) UINT64_C(val)
 # else
 # define SIZE_C(val) ((size_t)UINTMAX_C(val))
 # endif

@@ -17,9 +17,7 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/isalnum.h>
-# include <u8c/isalpha.h>
-# include <u8c/isdigit.h>
+# include <u8c/is.h>
 bool u8c_isalnum(uint_least8_t * const _res,char32_t const _chr) {
 	assert(_res != NULL);
 	uint_least8_t res = UINT8_C(0x0);

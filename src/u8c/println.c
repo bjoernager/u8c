@@ -18,20 +18,21 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
-# include <u8c/errtyp.h>
-# include <u8c/println.h>
-# include <u8c/seterr.h>
-# include <u8c/vprint.h>
+# include <u8c/fmt.h>
+# include <u8c/u32.h>
+# include <uchar.h>
 bool u8c_println(FILE * _fp,char32_t const * const _msg,...) {
 	assert(_fp != NULL);
 	va_list args;
 	va_start(args,_msg);
-	if(u8c_vprint(_fp,_msg,args)) {
-		return true;
-	}
-	if(fputc(0xA,stdout) == EOF) {
-		u8c_seterr(U"u8c_println: Unable to write to stdout (end of file).",u8c_errtyp_badio);
-		return false;
+	char32_t const * msg = NULL;
+	u8c_u32cat(NULL,&msg,_msg,U"\n");
+	{
+		register bool const val = u8c_vprint(_fp,msg,args);
+		u8c_u32free(&msg);
+		if(val) {
+			return true;
+		}
 	}
 	va_end(args);
 	return false;
