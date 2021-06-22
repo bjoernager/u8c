@@ -13,36 +13,19 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# if !defined(u8c_sym_dattyp)
-# define u8c_sym_dattyp
-# include <stdalign.h>
+# include <inttypes.h>
 # include <stdbool.h>
-# include <stddef.h>
 # include <stdint.h>
-# include <u8c/SIZE_C.h>
-# include <u8c/err.h>
-# include <uchar.h>
-# if defined(u8c_bethrdsafe)
-# include <threads.h>
-# endif
-/* Enumerations: */
-/* Type definitions: */
-/* Structures: */
-struct u8c_dattyp {
-	char32_t const * err;
-	u8c_errhandltyp  errhandls[(size_t)u8c_errtyp_maxerrtyp];
-	uint_least8_t    fmtbase;
-	bool             fmtendian;
-	uint_least8_t    stat;
-# if defined(u8c_bethrdsafe)
-	mtx_t         errlock;
-	mtx_t         errhandlslock;
-	mtx_t         fmtlock;
-	mtx_t         outlock;
-# endif
-};
-/* Functions */
-/* Constants & Variables: */
-extern struct u8c_dattyp u8c_dat;
-/* Macros: */
-# endif
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdnoreturn.h>
+# include <time.h>
+# include <u8c/intern.h>
+# include <u8c/main.h>
+noreturn bool u8c_abrtfn(char const * const _fl,long const _ln,char const * const _fn,char const * const _why) {
+	fprintf(stderr,"u8c: *** Aborted (\"%s\":%li in function \"%s\": \"%s\" @ %" PRIuMAX ") ***\nLibrary diagnostics:\n    debug:%s\n    status:%" PRIuLEAST8 "\n    thread-safe:%s\n    version:%" PRIuLEAST64 "\n",_fl,_ln,_fn,_why,(intmax_t)time(NULL),u8c_dbg ? "true" : "false",u8c_dat.stat,u8c_thrdsafe ? "true" : "false",u8c_ver);
+	fprintf(stderr,"Trying to clean up...\n");
+	u8c_end();
+	fprintf(stderr,"Aborting...\n");
+	abort();
+}

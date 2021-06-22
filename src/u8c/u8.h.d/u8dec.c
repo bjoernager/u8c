@@ -33,19 +33,19 @@ bool u8c_u8dec(size_t * const _sz,char32_t const * * const _out,unsigned char co
 			insz = n;
 			goto nottoobig;
 		}
-		if(tmp >= UINT8_C(0xF8)) { /* Too big. */
+		if(tmp >= UINT8_C(0b11111000)) { /* Too big. */
 			u8c_seterr(U"u8c_u8dec: Character out of range (too big).",u8c_errtyp_u8oor);
 			return true;
 		}
-		if(tmp >= UINT8_C(0xF0)) { /* Four byte. */
+		if(tmp >= UINT8_C(0b11110000)) { /* Four byte. */
 			n += SIZE_C(0x4);
 			continue;
 		}
-		if(tmp >= UINT8_C(0xE0)) { /* Three bytes. */
+		if(tmp >= UINT8_C(0b11100000)) { /* Three bytes. */
 			n += SIZE_C(0x3);
 			continue;
 		}
-		if(tmp >= UINT8_C(0xC0)) { /* Two bytes. */
+		if(tmp >= UINT8_C(0b11000000)) { /* Two bytes. */
 			n += SIZE_C(0x2);
 			continue;
 		}
@@ -64,39 +64,39 @@ nottoobig:;
 		return false;
 	}
 	for(register size_t n = SIZE_C(0x0),outn = SIZE_C(0x0);n < insz;outn += SIZE_C(0x1)) { /* Second pass: decode UTF-8. */
-		if(_in[n] >= UINT8_C(0xF0)) { /* Four byte. */
-			uint_least32_t codep =  (_in[n] ^ UINT32_C(0xF0)) << UINT32_C(0x12);
+		if(_in[n] >= UINT8_C(0b11110000)) { /* Four bytes. */
+			uint_least32_t codep =  (_in[n] ^ UINT32_C(0b11110000)) << UINT32_C(0x12);
 			n                    += SIZE_C(0x1);
-			codep                += (_in[n] ^ UINT32_C(0x80)) << UINT32_C(0xC);
+			codep                += (_in[n] ^ UINT32_C(0b10000000)) << UINT32_C(0xC);
 			n                    += SIZE_C(0x1);
-			codep                += (_in[n] ^ UINT32_C(0x80)) << UINT32_C(0x6);
+			codep                += (_in[n] ^ UINT32_C(0b10000000)) << UINT32_C(0x6);
 			n                    += SIZE_C(0x1);
-			codep                += (uint_least32_t)(_in[n]) ^ SIZE_C(0x80);
-			n                    += SIZE_C(0x1);
-			out[outn]        =  codep;
-			continue;
-		}
-		if(_in[n] >= UINT8_C(0xE0)) { /* Three bytes. */
-			uint_least32_t codep =  (_in[n] ^ UINT32_C(0xE0)) << UINT32_C(0xC);
-			n                    += SIZE_C(0x1);
-			codep                += (_in[n] ^ UINT32_C(0x80)) << UINT32_C(0x6);
-			n                    += SIZE_C(0x1);
-			codep                += _in[n] ^ UINT32_C(0x80);
+			codep                += (uint_least32_t)(_in[n]) ^ SIZE_C(0b10000000);
 			n                    += SIZE_C(0x1);
 			out[outn]        =  codep;
 			continue;
 		}
-		if(_in[n] >= UINT8_C(0xC0)) { /* Two bytes. */
-			uint_least32_t codep =  (_in[n] ^ UINT32_C(0xC0)) << UINT32_C(0x6);
+		if(_in[n] >= UINT8_C(0b11100000)) { /* Three bytes. */
+			uint_least32_t codep =  (_in[n] ^ UINT32_C(0b11100000)) << UINT32_C(0xC);
 			n                    += SIZE_C(0x1);
-			codep                += _in[n] ^ UINT32_C(0x80);
+			codep                += (_in[n] ^ UINT32_C(0b10000000)) << UINT32_C(0x6);
+			n                    += SIZE_C(0x1);
+			codep                += _in[n] ^ UINT32_C(0b10000000);
+			n                    += SIZE_C(0x1);
+			out[outn]        =  codep;
+			continue;
+		}
+		if(_in[n] >= UINT8_C(0b11000000)) { /* Two bytes. */
+			uint_least32_t codep =  (_in[n] ^ UINT32_C(0b11000000)) << UINT32_C(0x6);
+			n                    += SIZE_C(0x1);
+			codep                += _in[n] ^ UINT32_C(0b10000000);
 			n                    += SIZE_C(0x1);
 			out[outn] =  codep;
 			continue;
 		}
 		/* One byte. */
 		out[outn] =  (uint_least32_t)(_in[n]);
-		n             += SIZE_C(0x1);
+		n         += SIZE_C(0x1);
 		continue;
 	}
 	u8c_u32free(_out);

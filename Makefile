@@ -1,5 +1,5 @@
-CC     =  clang
-CFLAGS =  -std=c17 -Wall -Wextra -Wmissing-prototypes -pedantic-errors -Iinclude -fPIC
+CC     =  gcc
+CFLAGS =  -std=c2x -Wall -Wextra -Wmissing-prototypes -pedantic-errors -Iinclude -fPIC
 ifneq ($(thrdsafe),0)
 CFLAGS += -Du8c_bethrdsafe
 endif
@@ -19,46 +19,46 @@ HDRS = \
 	include/u8c/u32.h    \
 	include/u8c/u8.h
 HDRS_PRIV = \
-	src/u8c/intern.h
+	include/u8c/intern.h
 SRCS = \
-	src/u8c/abrt.c        \
-	src/u8c/dat.c         \
-	src/u8c/debug.c       \
-	src/u8c/end.c         \
-	src/u8c/fmt.c         \
-	src/u8c/geterr.c      \
-	src/u8c/init.c        \
-	src/u8c/isalnum.c     \
-	src/u8c/isalpha.c     \
-	src/u8c/iscntrl.c     \
-	src/u8c/isdigit.c     \
-	src/u8c/isspace.c     \
-	src/u8c/ispunct.c     \
-	src/u8c/isxdigit.c    \
-	src/u8c/print.c       \
-	src/u8c/println.c     \
-	src/u8c/regerrhandl.c \
-	src/u8c/seterr.c      \
-	src/u8c/setfmt.c      \
-	src/u8c/thrdsafe.c    \
-	src/u8c/u16alloc.c    \
-	src/u8c/u16free.c     \
-	src/u8c/u32alloc.c    \
-	src/u8c/u32cat.c      \
-	src/u8c/u32cmp.c      \
-	src/u8c/u32cp.c       \
-	src/u8c/u32fndchr.c   \
-	src/u8c/u32fndpat.c   \
-	src/u8c/u32free.c     \
-	src/u8c/u32ins.c      \
-	src/u8c/u32substr.c   \
-	src/u8c/u32sz.c       \
-	src/u8c/u8alloc.c     \
-	src/u8c/u8dec.c       \
-	src/u8c/u8enc.c       \
-	src/u8c/u8free.c      \
-	src/u8c/vfmt.c        \
-	src/u8c/vprint.c
+	src/u8c/err.h.d/geterr.c      \
+	src/u8c/err.h.d/regerrhandl.c \
+	src/u8c/err.h.d/seterr.c      \
+	src/u8c/fmt.h.d/fmt.c         \
+	src/u8c/fmt.h.d/print.c       \
+	src/u8c/fmt.h.d/println.c     \
+	src/u8c/fmt.h.d/setfmt.c      \
+	src/u8c/fmt.h.d/vfmt.c        \
+	src/u8c/fmt.h.d/vprint.c      \
+	src/u8c/intern.h.d/dat.c      \
+	src/u8c/is.h.d/isalnum.c      \
+	src/u8c/is.h.d/isalpha.c      \
+	src/u8c/is.h.d/iscntrl.c      \
+	src/u8c/is.h.d/isdigit.c      \
+	src/u8c/is.h.d/ispunct.c      \
+	src/u8c/is.h.d/isspace.c      \
+	src/u8c/is.h.d/isxdigit.c     \
+	src/u8c/main.h.d/abrtfn.c     \
+	src/u8c/main.h.d/debug.c      \
+	src/u8c/main.h.d/end.c        \
+	src/u8c/main.h.d/init.c       \
+	src/u8c/main.h.d/thrdsafe.c   \
+	src/u8c/u8.h.d/u8alloc.c      \
+	src/u8c/u8.h.d/u8dec.c        \
+	src/u8c/u8.h.d/u8enc.c        \
+	src/u8c/u8.h.d/u8free.c       \
+	src/u8c/u16.h.d/u16alloc.c    \
+	src/u8c/u16.h.d/u16free.c     \
+	src/u8c/u32.h.d/u32alloc.c    \
+	src/u8c/u32.h.d/u32cat.c      \
+	src/u8c/u32.h.d/u32cmp.c      \
+	src/u8c/u32.h.d/u32cp.c       \
+	src/u8c/u32.h.d/u32fndchr.c   \
+	src/u8c/u32.h.d/u32fndpat.c   \
+	src/u8c/u32.h.d/u32free.c     \
+	src/u8c/u32.h.d/u32ins.c      \
+	src/u8c/u32.h.d/u32substr.c   \
+	src/u8c/u32.h.d/u32sz.c
 OBJS = $(SRCS:.c=.o)
 LIB  = libu8c.so
 $(LIB): $(OBJS)
@@ -66,6 +66,7 @@ $(LIB): $(OBJS)
 $(OBJS): $(HDRS) $(HDRS_PRIV)
 DOCS = \
 	docs/u8c_abrt.3.gz        \
+	docs/u8c_abrtfn.3.gz      \
 	docs/u8c_col.3.gz         \
 	docs/u8c_dbg.3.gz         \
 	docs/u8c_dbgprint.3.gz    \
@@ -79,7 +80,7 @@ DOCS = \
 	docs/u8c_isalnum.3.gz     \
 	docs/u8c_isalpha.3.gz     \
 	docs/u8c_iscntrl.3.gz     \
-	docs/u8c_isdigit.3.gz      \
+	docs/u8c_isdigit.3.gz     \
 	docs/u8c_ispunct.3.gz     \
 	docs/u8c_isspace.3.gz     \
 	docs/u8c_isxdigit.3.gz    \
@@ -103,14 +104,14 @@ DOCS = \
 	docs/u8c_u32ins.3.gz      \
 	docs/u8c_u32substr.3.gz   \
 	docs/u8c_u32sz.3.gz       \
-	docs/u8c_unimax.3.gz      \
+	docs/u8c_u32max.3.gz      \
 	docs/u8c_ver.3.gz         \
 	docs/u8c_vfmt.3.gz        \
 	docs/u8c_vprint.3.gz
-$(DOCS):errhandltyp
+$(DOCS):
 	gzip --keep $(DOCS:.gz=)
 test: $(LIB) test.c
-	$(CC) -std=c17 -Wall -Wextra -Wpedantic -Iinclude -O3 -g -L. -lu8c -o $@ $@.c
+	$(CC) -std=c2x -Wall -Wextra -Wpedantic -Iinclude -O3 -g -L. -lu8c -o $@ $@.c
 .PHONY: clean docs install runtest
 clean:
 	rm --force test $(DOCS) $(LIB) $(OBJS)

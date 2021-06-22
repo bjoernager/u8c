@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
 # include <stdbool.h>
 # include <stdlib.h>
 # include <u8c/err.h>

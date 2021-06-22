@@ -13,27 +13,16 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
 # include <stdbool.h>
-# include <stddef.h>
+# include <stdlib.h>
 # include <u8c/err.h>
-static void u8c_regerrhandl_seterrhandl(enum u8c_errtyp _typ,u8c_errhandltyp _errhandl) {
-	u8c_dat.errhandls[(size_t)_typ] = _errhandl;
-}
-bool u8c_regerrhandl(enum u8c_errtyp _typ,u8c_errhandltyp _errhandl) {
-# if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_dat.errhandlslock);
-# endif
-	if(_typ == u8c_errtyp_all) {
-		for(register int n = 0x0;n < (int)u8c_errtyp_maxerrtyp;n += 0x1) {
-			u8c_regerrhandl_seterrhandl((enum u8c_errtyp)n,_errhandl);
-		}
+# include <u8c/u8.h>
+bool u8c_u8alloc(unsigned char * * const _u8,size_t const _sz) {
+	unsigned char * arr = NULL;
+	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
+		u8c_seterr(U"u8c_u8alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
+		return false;
 	}
-	else {
-		u8c_regerrhandl_seterrhandl(_typ,_errhandl);
-	}
-# if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_dat.errhandlslock);
-# endif
+	*_u8 = arr;
 	return false;
 }

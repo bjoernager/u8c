@@ -13,13 +13,27 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdint.h>
-# include <u8c/SIZE_C.h>
-struct u8c_dattyp u8c_dat = {
-	.err       = NULL,
-	.fmtendian = false,
-	.stat      = UINT8_C(0x0),
-};
+# include <u8c/err.h>
+# include <u8c/intern.h>
+static void u8c_regerrhandl_seterrhandl(enum u8c_errtyp _typ,u8c_errhandltyp _errhandl) {
+	u8c_dat.errhandls[(size_t)_typ] = _errhandl;
+}
+bool u8c_regerrhandl(enum u8c_errtyp _typ,u8c_errhandltyp _errhandl) {
+# if defined(u8c_bethrdsafe)
+	mtx_lock(&u8c_dat.errhandlslock);
+# endif
+	if(_typ == u8c_errtyp_all) {
+		for(register int n = 0x0;n < (int)u8c_errtyp_maxerrtyp;n += 0x1) {
+			u8c_regerrhandl_seterrhandl((enum u8c_errtyp)n,_errhandl);
+		}
+	}
+	else {
+		u8c_regerrhandl_seterrhandl(_typ,_errhandl);
+	}
+# if defined(u8c_bethrdsafe)
+	mtx_unlock(&u8c_dat.errhandlslock);
+# endif
+	return false;
+}

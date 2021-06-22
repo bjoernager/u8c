@@ -24,13 +24,13 @@
 /* Type definitions: */
 /* Structures: */
 /* Functions */
-extern noreturn bool u8c_abrt(char const * const fl,long long const ln,char const * const fn,char const * const why);
-extern bool          u8c_end( void);
-extern bool          u8c_init(void);
+extern noreturn bool u8c_abrtfn(char const * const fl,long const ln,char const * const fn,char const * const why);
+extern bool          u8c_end(   void);
+extern bool          u8c_init(  void);
 /* Constants & Variables: */
 extern bool const           u8c_dbg;
 extern bool const           u8c_thrdsafe;
-static char32_t const       u8c_unimax   = (char32_t)UINT32_C(0x10FFFF);
 static uint_least64_t const u8c_ver      = UINT64_C(0x19);
 /* Macros: */
+# define u8c_abrt(why) u8c_abrtfn(__FILE__,(long)__LINE__,__func__,why)
 # endif

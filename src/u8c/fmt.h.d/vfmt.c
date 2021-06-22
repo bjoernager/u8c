@@ -13,21 +13,14 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
+# include <stdarg.h>
 # include <stdbool.h>
-# include <stddef.h>
-# include <stdint.h>
-# include <u8c/err.h>
+# include <u8c/fmt.h>
 # include <u8c/u32.h>
-bool u8c_geterr(size_t * const _sz,char32_t const * * const _out) {
-	# if defined(u8c_bethrdsafe)
-		mtx_lock(&u8c_dat.errlock);
-	# endif
-		u8c_u32cp(_sz,_out,u8c_dat.err);
-		u8c_u32free(&u8c_dat.err);
-		u8c_u32cp(_sz,&u8c_dat.err,U"");
-	# if defined(u8c_bethrdsafe)
-		mtx_unlock(&u8c_dat.errlock);
-	# endif
-		return false;
-	}
+# include <uchar.h>
+# if defined(u8c_bethrdsafe)
+# include <threads.h>
+# endif
+bool u8c_vfmt(size_t * const _sz,char32_t const * * const _out,char32_t const * const _in,[[maybe_unused]] va_list _args) {
+	return u8c_u32cp(_sz,_out,_in);
+}

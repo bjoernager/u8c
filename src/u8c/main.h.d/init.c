@@ -16,12 +16,11 @@
 # if !defined(__STDC_UTF_32__)
 # error UTF-32 is required.
 # endif
-# include "intern.h"
-# include <setjmp.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/err.h>
+# include <u8c/intern.h>
 # include <u8c/main.h>
 # include <u8c/u32.h>
 # if defined(u8c_bethrdsafe)

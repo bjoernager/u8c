@@ -13,36 +13,33 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
-# include <assert.h>
 # include <stdbool.h>
-# include <stddef.h>
 # include <stdint.h>
-# include <u8c/err.h>
-# include <u8c/fmt.h>
+# include <stdlib.h>
+# include <u8c/SIZE_C.h>
+# include <u8c/intern.h>
+# include <u8c/main.h>
 # include <u8c/u32.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_seterr(char32_t const * const _msg,enum u8c_errtyp _typ) {
-	assert(_msg != NULL);
-	//u8c_dbgprint(_msg);
-# if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_dat.errlock);
-# endif
-	u8c_u32free(&u8c_dat.err);
-	u8c_u32cp(NULL,&u8c_dat.err,_msg);
-# if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_dat.errlock);
-# endif
-# if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_dat.errhandlslock);
-# endif
-	if(u8c_dat.errhandls[(size_t)_typ] != NULL) {
-		u8c_dat.errhandls[(size_t)_typ](_typ);
+bool u8c_end(void) {
+	if(!u8c_dat.stat) {
+		return false;
 	}
 # if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_dat.errhandlslock);
+	/* Destroy mutexes: */
+	mtx_destroy(&u8c_dat.errhandlslock);
+	mtx_destroy(&u8c_dat.errlock);
+	mtx_destroy(&u8c_dat.fmtlock);
+	mtx_destroy(&u8c_dat.outlock);
 # endif
+	/* Free error message: */
+	u8c_u32free(&u8c_dat.err);
+	/* Set default formatting options: */
+	u8c_dat.fmtbase   = UINT8_C(0xC);
+	u8c_dat.fmtendian = UINT8_C(0x0);
+	/* Set status: */
+	u8c_dat.stat = UINT8_C(0x0);
 	return false;
 }

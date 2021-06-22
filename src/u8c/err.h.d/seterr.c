@@ -13,29 +13,36 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include "intern.h"
+# include <assert.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
+# include <u8c/err.h>
 # include <u8c/fmt.h>
+# include <u8c/intern.h>
+# include <u8c/u32.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_setfmt(unsigned char const _base,unsigned char const _endian) {
-	uint_least8_t base   = _base;
-	uint_least8_t endian = _endian;
-	if(_base > UINT8_C(0x20)) {
-		base = UINT8_C(0xC);
-	}
-	if(_endian > UINT8_C(0x1)) {
-		endian = UINT8_C(0x0);
-	}
+bool u8c_seterr(char32_t const * const _msg,enum u8c_errtyp _typ) {
+	assert(_msg != NULL);
+	//u8c_dbgprint(_msg);
 # if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_dat.fmtlock);
+	mtx_lock(&u8c_dat.errlock);
 # endif
-	u8c_dat.fmtbase   = base;
-	u8c_dat.fmtendian = endian;
+	u8c_u32free(&u8c_dat.err);
+	u8c_u32cp(NULL,&u8c_dat.err,_msg);
 # if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_dat.fmtlock);
+	mtx_unlock(&u8c_dat.errlock);
+# endif
+# if defined(u8c_bethrdsafe)
+	mtx_lock(&u8c_dat.errhandlslock);
+# endif
+	if(u8c_dat.errhandls[(size_t)_typ] != NULL) {
+		u8c_dat.errhandls[(size_t)_typ](_typ);
+	}
+# if defined(u8c_bethrdsafe)
+	mtx_unlock(&u8c_dat.errhandlslock);
 # endif
 	return false;
 }

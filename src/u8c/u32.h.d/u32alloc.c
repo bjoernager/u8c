@@ -13,14 +13,17 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <stdarg.h>
 # include <stdbool.h>
-# include <u8c/fmt.h>
+# include <stdlib.h>
+# include <u8c/err.h>
 # include <u8c/u32.h>
 # include <uchar.h>
-# if defined(u8c_bethrdsafe)
-# include <threads.h>
-# endif
-bool u8c_vfmt(size_t * const _sz,char32_t const * * const _out,char32_t const * const _in,va_list _args) {
-	return u8c_u32cp(_sz,_out,_in);
+bool u8c_u32alloc(char32_t * * const _u32,size_t const _sz) {
+	char32_t * arr = NULL;
+	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
+		u8c_seterr(U"u8c_u32alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
+		return false;
+	}
+	*_u32 = arr;
+	return false;
 }

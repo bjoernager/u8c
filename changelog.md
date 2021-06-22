@@ -1,3 +1,15 @@
+# 21
+
+* Update readme.
+* Require C23 (C2x).
+* Use GCC (has better C23 support).
+* Cleanup UTF-8 decoder and encoder (using binary literals).
+* Rename `u8c_u32max` to `u8c_u32max` and move it to `u8c/u32.h`.
+* Don't clear last error message on calls to `u8c_geterr`.
+* Restructure source files.
+* Fix makefile.
+* Update test program.
+
 # 20
 
 * Update documentation.
@@ -38,7 +50,7 @@
 		* `u8c_end`
 		* `u8c_init`
 		* `u8c_thrdsafe`
-		* `u8c_unimax`
+		* `u8c_u32max`
 		* `u8c_ver`
 	* `u8c/u16.h`:
 		* `u8c_u16alloc`
@@ -121,7 +133,7 @@
 * Remove `u8c_txt` in favour of Unicode string literals (much clearer code, but less portable).
 * Add function for getting a sub-string of an UTF-32 string; `u8c_u32substr`.
 * Don't count the null-terminator in string sizes.
-* Add macro for maximum valid Unicode codepoint; `u8c_unimax`.
+* Add macro for maximum valid Unicode codepoint; `u8c_u32max`.
 * Remove `txttolit`.
 * Add function for deallocating UTF-8 strings; `u8c_u8free`.
 * Turn both `u8c_dbg` and `u8c_thrdsafe` into type `bool` from `uint_least8_t`.

@@ -22,8 +22,8 @@
 /* Type definitions: */
 /* Structures: */
 /* Functions */
-extern bool u8c_u16alloc(char16_t * * const u16,size_t const sz);
-extern bool u8c_u16free(char16_t const * * const u16);
+extern bool u8c_u16alloc(char16_t * * const       u16,size_t const sz);
+extern bool u8c_u16free( char16_t const * * const u16);
 /* Constants & Variables: */
 /* Macros: */
 # endif
