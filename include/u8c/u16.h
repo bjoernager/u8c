@@ -21,9 +21,16 @@
 /* Enumerations: */
 /* Type definitions: */
 /* Structures: */
-/* Functions */
-extern bool u8c_u16alloc(char16_t * * const       u16,size_t const sz);
-extern bool u8c_u16free( char16_t const * * const u16);
+struct u8c_u16alloc_tuple {
+	bool       stat;
+	char16_t * u16;
+};
+struct u8c_u16free_tuple {
+	bool stat;
+};
+/* Functions: */
+extern struct u8c_u16alloc_tuple u8c_u16alloc(size_t const                    sz);  /* UTF-16 allocate */
+extern struct u8c_u16free_tuple  u8c_u16free( char16_t const * const restrict u16); /* UTF-16 free */
 /* Constants & Variables: */
 /* Macros: */
 # endif

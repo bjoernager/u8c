@@ -13,27 +13,21 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <assert.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <u8c/fmt.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # include <uchar.h>
-bool u8c_println(FILE * _fp,char32_t const * const _msg,...) {
-	assert(_fp != NULL);
+struct u8c_println_tuple u8c_println(FILE * restrict _fp,char32_t const * const restrict _msg,...) {
+	struct u8c_println_tuple ret;
 	va_list args;
 	va_start(args,_msg);
-	char32_t const * msg = NULL;
-	u8c_u32cat(NULL,&msg,_msg,U"\n");
-	{
-		register bool const val = u8c_vprint(_fp,msg,args);
-		u8c_u32free(&msg);
-		if(val) {
-			return true;
-		}
-	}
+	char32_t const * msg                         = u8c_strcat(_msg,U"\n").str;
+	register struct u8c_vprint_tuple const tuple = u8c_vprint(_fp,msg,args);
+	u8c_strfree(msg);
 	va_end(args);
-	return false;
+	ret.stat = tuple.stat;
+	return ret;
 }

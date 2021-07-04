@@ -16,11 +16,18 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <u8c/fmt.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # include <uchar.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_vfmt(size_t * const _sz,char32_t const * * const _out,char32_t const * const _in,[[maybe_unused]] va_list _args) {
-	return u8c_u32cp(_sz,_out,_in);
+struct u8c_vfmt_tuple u8c_vfmt(char32_t const * const restrict _in,[[maybe_unused]] va_list _args) {
+	struct u8c_vfmt_tuple ret = {
+		.stat = false,
+	};
+	struct u8c_strcp_tuple const tuple = u8c_strcp(_in);
+	ret.stat  = tuple.stat;
+	ret.str   = tuple.str;
+	ret.strsz = tuple.strsz;
+	return ret;
 }

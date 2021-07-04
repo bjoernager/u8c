@@ -13,25 +13,26 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <assert.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/err.h>
 # include <u8c/fmt.h>
 # include <u8c/intern.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_seterr(char32_t const * const _msg,enum u8c_errtyp _typ) {
-	assert(_msg != NULL);
-	//u8c_dbgprint(_msg);
+struct u8c_seterr_tuple u8c_seterr(enum u8c_errtyp _typ,char32_t const * const restrict _msg) {
+	struct u8c_seterr_tuple ret = {
+		.stat = false,
+	};
+	/* u8c_dbgprint(_msg); */
 # if defined(u8c_bethrdsafe)
 	mtx_lock(&u8c_dat.errlock);
 # endif
-	u8c_u32free(&u8c_dat.err);
-	u8c_u32cp(NULL,&u8c_dat.err,_msg);
+	u8c_strfree(u8c_dat.err);
+	u8c_dat.err = u8c_strcp(_msg).str;
 # if defined(u8c_bethrdsafe)
 	mtx_unlock(&u8c_dat.errlock);
 # endif
@@ -44,5 +45,5 @@ bool u8c_seterr(char32_t const * const _msg,enum u8c_errtyp _typ) {
 # if defined(u8c_bethrdsafe)
 	mtx_unlock(&u8c_dat.errhandlslock);
 # endif
-	return false;
+	return ret;
 }

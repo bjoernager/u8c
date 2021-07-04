@@ -54,13 +54,35 @@ enum u8c_fmttyp {
 };
 /* Type definitions: */
 /* Structures: */
-/* Functions */
-extern bool u8c_fmt(    size_t * const      outsz,char32_t const * * const out,   char32_t const * const in,...);
-extern bool u8c_print(  FILE *              fp,   char32_t const * const   msg,   ...);
-extern bool u8c_println(FILE *              fp,   char32_t const * const   msg,   ...);
-extern bool u8c_setfmt( uint_least8_t const base, uint_least8_t const      endian);
-extern bool u8c_vfmt(   size_t * const      sz,   char32_t const * * const out,   char32_t const * const in,va_list args);
-extern bool u8c_vprint( FILE *              fp,   char32_t const * const   msg,   va_list                args);
+struct u8c_fmt_tuple {
+	char32_t const * str;
+	size_t           strsz;
+	bool             stat;
+};
+struct u8c_print_tuple {
+	bool stat;
+};
+struct u8c_println_tuple {
+	bool stat;
+};
+struct u8c_setfmt_tuple {
+	bool stat;
+};
+struct u8c_vfmt_tuple {
+	char32_t const * str;
+	size_t           strsz;
+	bool             stat;
+};
+struct u8c_vprint_tuple {
+	bool stat;
+};
+/* Functions: */
+extern struct u8c_fmt_tuple     u8c_fmt(    char32_t const * const restrict in,                                  ...);                 /* Format */
+extern struct u8c_print_tuple   u8c_print(  FILE * restrict                 fp,  char32_t const * const restrict msg,           ...);  /* Print */
+extern struct u8c_println_tuple u8c_println(FILE * restrict                 fp,  char32_t const * const restrict msg,           ...);  /* Print line */
+extern struct u8c_setfmt_tuple  u8c_setfmt( uint_least8_t const             base,bool const                      endian);              /* Set format */
+extern struct u8c_vfmt_tuple    u8c_vfmt(   char32_t const * const restrict in,  va_list                         args);                /* Variadic format */
+extern struct u8c_vprint_tuple  u8c_vprint( FILE * restrict                 fp,  char32_t const * const restrict msg,   va_list args); /* Variadic print */
 /* Constants & Variables: */
 static uint_least32_t const u8c_col_azure      = UINT32_C(0x3DA9E1);
 static uint_least32_t const u8c_col_ash        = UINT32_C(0xD2D2CC);
@@ -80,6 +102,7 @@ static uint_least32_t const u8c_col_white      = UINT32_C(0xF8F8F1);
 static uint_least32_t const u8c_col_yellow     = UINT32_C(0xE1E13D);
 /* Macros: */
 # if defined(NDEBUG)
+/* Debug print */
 # define u8c_dbgprint(...) ((void)0x0)
 # else
 # define u8c_dbgprint(...) u8c_println(stderr,__VA_ARGS__)

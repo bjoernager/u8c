@@ -1,10 +1,43 @@
+# 22
+
+* Remove documentation (too hight-maintainence).
+* Rename `include/u8c/is.h` to `include/u8c/chk.h`
+* Revert u8c-9 “Remove some optimisations, as they prevent C++ compatibility.”.
+* Fix #1.
+* Use binary literals for bitwise operations.
+* Add more control characters to `u8c_iscntrl`.
+* Change type of result of the `u8c_is`* functions fromt `uint_least8_t` to `bool`.
+* Add more characters to `u8c_ispunct`.
+* Update Makefile.
+* Revert u8c-21 “Rename `u8c_unimax` to `u8c_u32max` and move it to `u8c/u32.h`.”.
+* Add function for checking if a character is a surrogate point; `u8c_issurro`.
+* Split `u8c_isalpha` into `u8c_islower` and `u8c_isupper`, move current mapping to `u8c_islower`. All characters that are neither upper case or lower case must be put in `u8c_isalpha`.
+* Add function for getting the name of an Unicode codepoint; `u8c_uninm` (has currently only mapped around ⅔% of all Unicode characters).
+* Revert accidental changes to changelog (please be more careful and observant in the future).
+* Delete `u8c_errtyp_maxerrtyp` (in favour of `u8c_errtyp_all`).
+* Switch the arguments of `u8c_seterr`.
+* Add function for getting the name of the block an Unicode codepoint is located in; `u8c_uniblk` (has currently only mapped around 39% of the Unicode blocks).
+* Rename all instances of `u32` to `str`.
+* Optimise for size (`-Os` instead of `-O3`).
+* Update Readme.
+* **MAJOR**: Return a tuple (structures) in all returning functions, otherwise void.
+* Add help screen to test program.
+* Update Gitignore.
+* Restructure test program.
+* Add more characters to `u8c_islower`.
+* Add more characters to `u8c_isupper`.
+* Remove the `runtest` target (just use `make && export LD_LIBRARY_PATH=$PWD && ./test`, which can more easily be modified to pass arguments).
+* Add more characters to `u8c_isalpha`.
+* Fix incorrect error being set (somewhere, I forgot where).
+* Fix `SIZE_C`.
+
 # 21
 
 * Update readme.
 * Require C23 (C2x).
 * Use GCC (has better C23 support).
 * Cleanup UTF-8 decoder and encoder (using binary literals).
-* Rename `u8c_u32max` to `u8c_u32max` and move it to `u8c/u32.h`.
+* Rename `u8c_unimax` to `u8c_u32max` and move it to `u8c/u32.h`.
 * Don't clear last error message on calls to `u8c_geterr`.
 * Restructure source files.
 * Fix makefile.
@@ -50,7 +83,7 @@
 		* `u8c_end`
 		* `u8c_init`
 		* `u8c_thrdsafe`
-		* `u8c_u32max`
+		* `u8c_unimax`
 		* `u8c_ver`
 	* `u8c/u16.h`:
 		* `u8c_u16alloc`
@@ -133,7 +166,7 @@
 * Remove `u8c_txt` in favour of Unicode string literals (much clearer code, but less portable).
 * Add function for getting a sub-string of an UTF-32 string; `u8c_u32substr`.
 * Don't count the null-terminator in string sizes.
-* Add macro for maximum valid Unicode codepoint; `u8c_u32max`.
+* Add macro for maximum valid Unicode codepoint; `u8c_unimax`.
 * Remove `txttolit`.
 * Add function for deallocating UTF-8 strings; `u8c_u8free`.
 * Turn both `u8c_dbg` and `u8c_thrdsafe` into type `bool` from `uint_least8_t`.

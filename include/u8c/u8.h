@@ -21,11 +21,28 @@
 /* Enumerations: */
 /* Type definitions: */
 /* Structures: */
-/* Functions */
-extern bool u8c_u8alloc(unsigned char * * const       u32,size_t const                  sz);
-extern bool u8c_u8dec(  size_t * const                sz, char32_t const * * const      out,unsigned char const * const in);
-extern bool u8c_u8enc(  size_t * const                sz, unsigned char const * * const out,char32_t const * const      in);
-extern bool u8c_u8free( unsigned char const * * const u8);
+struct u8c_u8alloc_tuple {
+	bool            stat;
+	unsigned char * u8;
+};
+struct u8c_u8dec_tuple {
+	bool             stat;
+	char32_t const * str;
+	size_t           strsz;
+};
+struct u8c_u8enc_tuple {
+	bool                  stat;
+	unsigned char const * u8;
+	size_t                u8sz;
+};
+struct u8c_u8free_tuple {
+	bool stat;
+};
+/* Functions: */
+extern struct u8c_u8alloc_tuple u8c_u8alloc(size_t const                         sz); /* UTF-8 allocate */
+extern struct u8c_u8dec_tuple   u8c_u8dec(  unsigned char const * const restrict u8); /* UTF-8 decode */
+extern struct u8c_u8enc_tuple   u8c_u8enc(  char32_t const * const restrict      u8); /* UTF-8 encode */
+extern struct u8c_u8free_tuple  u8c_u8free( unsigned char const * const restrict u8); /* UTF-8 free */
 /* Constants & Variables: */
 /* Macros: */
 # endif

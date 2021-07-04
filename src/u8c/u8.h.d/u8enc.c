@@ -19,48 +19,53 @@
 # include <stdint.h>
 # include <u8c/SIZE_C.h>
 # include <u8c/err.h>
-# include <u8c/u32.h>
+# include <u8c/main.h>
+# include <u8c/str.h>
 # include <u8c/u8.h>
 # include <uchar.h>
-bool u8c_u8enc(size_t * const _sz,unsigned char const * * const _out,char32_t const * const _in) {
-	assert(_out != NULL);
-	assert(_in != NULL);
-	size_t insz  = SIZE_C(0x0); /* Size of input array (bytes). */
-	size_t outsz = SIZE_C(0x0); /* Size of output array /bytes). */
+struct u8c_u8enc_tuple u8c_u8enc(char32_t const * const restrict _in) {
+	struct u8c_u8enc_tuple ret = {
+		.stat = false,
+	};
+	size_t insz = SIZE_C(0x0); /* Size of input array (bytes). */
 	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) { /* First pass: get size of input array, and determine size of output array. */
 		register char32_t const tmp = _in[n];
-		if(tmp > u8c_u32max) { /* Codepoint out of range. */
-			u8c_seterr(U"u8c_u8enc: Codepoint out of range (too big).",u8c_errtyp_u32oor);
-			return true;
+		if(tmp > u8c_unimax) { /* Codepoint out of range. */
+			u8c_seterr(u8c_errtyp_stroor,U"u8c_u8enc: Codepoint out of range (too big).");
+			ret.stat = true;
+			return ret;
 		}
 		if(tmp >= UINT32_C(0x10000)) { /* 4 bytes. */
-			outsz += SIZE_C(0x4);
+			ret.u8sz += SIZE_C(0x4);
 			continue;
 		}
 		if(tmp >= UINT32_C(0x800)) { /* 3 bytes. */
-			outsz += SIZE_C(0x3);
+			ret.u8sz += SIZE_C(0x3);
 			continue;
 		}
 		if(tmp >= UINT32_C(0x80)) { /* 2 bytes. */
-			outsz += SIZE_C(0x2);
+			ret.u8sz += SIZE_C(0x2);
 			continue;
 		}
 		/* 1 byte. */
-		outsz += SIZE_C(0x1);
+		ret.u8sz += SIZE_C(0x1);
 		if(tmp == UINT32_C(0x0)) {
 			insz = n + SIZE_C(0x1);
 			goto nottoobig;
 		}
 	}
-	u8c_seterr(U"u8c_u8enc: Unterminated input.",u8c_errtyp_untermin);
-	return true;
+	u8c_seterr(u8c_errtyp_untermin,U"u8c_u8enc: Unterminated input.");
+	ret.stat = true;
+	return ret;
 nottoobig:;
-	if(_sz != NULL) {
-		*_sz = outsz;
-	}
 	unsigned char * out = NULL;
-	if(u8c_u8alloc(&out,outsz + SIZE_C(0x1))) {
-		return true;
+	{
+		struct u8c_u8alloc_tuple const tuple = u8c_u8alloc(ret.u8sz + SIZE_C(0x1));
+		if(tuple.stat) {
+			ret.stat = true;
+			return ret;
+		}
+		out = tuple.u8;
 	}
 	for(register size_t n = SIZE_C(0x0), outn = SIZE_C(0x0);n < insz;n += SIZE_C(0x1),outn += SIZE_C(0x1)) { /* Second pass: encode each codepoint into UTF-8. */
 		register char32_t const tmp = _in[n];
@@ -91,7 +96,6 @@ nottoobig:;
 		/* One byte. */
 		out[outn] = (uint_least8_t)tmp;
 	}
-	u8c_u8free(_out);
-	*_out = out;
-	return false;
+	ret.u8 = out;
+	return ret;
 }

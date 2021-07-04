@@ -19,13 +19,16 @@
 # include <u8c/SIZE_C.h>
 # include <u8c/intern.h>
 # include <u8c/main.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_end(void) {
+struct u8c_end_tuple u8c_end(void) {
+	struct u8c_end_tuple ret = {
+		.stat = false,
+	};
 	if(!u8c_dat.stat) {
-		return false;
+		return ret;
 	}
 # if defined(u8c_bethrdsafe)
 	/* Destroy mutexes: */
@@ -35,11 +38,11 @@ bool u8c_end(void) {
 	mtx_destroy(&u8c_dat.outlock);
 # endif
 	/* Free error message: */
-	u8c_u32free(&u8c_dat.err);
+	u8c_strfree(u8c_dat.err);
 	/* Set default formatting options: */
 	u8c_dat.fmtbase   = UINT8_C(0xC);
 	u8c_dat.fmtendian = UINT8_C(0x0);
 	/* Set status: */
 	u8c_dat.stat = UINT8_C(0x0);
-	return false;
+	return ret;
 }

@@ -14,13 +14,22 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/SIZE_C.h>
+# include <u8c/str.h>
+# include <uchar.h>
+struct u8c_strsz_tuple u8c_strsz(char32_t const * const restrict _in) {
+	struct u8c_strsz_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	{
+		struct u8c_strfndchr_tuple const tuple = u8c_strfndchr(_in,UINT8_C(0x0));
+		if(tuple.stat) {
+			ret.stat = true;
+			return ret;
+		}
+		ret.sz = tuple.pos;
+	}
 	return ret;
 }

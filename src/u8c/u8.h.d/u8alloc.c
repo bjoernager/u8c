@@ -17,12 +17,16 @@
 # include <stdlib.h>
 # include <u8c/err.h>
 # include <u8c/u8.h>
-bool u8c_u8alloc(unsigned char * * const _u8,size_t const _sz) {
+struct u8c_u8alloc_tuple u8c_u8alloc(size_t const _sz) {
+	struct u8c_u8alloc_tuple ret = {
+		.stat = false,
+	};
 	unsigned char * arr = NULL;
 	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
-		u8c_seterr(U"u8c_u8alloc: Unable to allocate resources (not enough memory?).",u8c_errtyp_badalloc);
-		return false;
+		u8c_seterr(u8c_errtyp_badalloc,U"u8c_u8alloc: Unable to allocate resources (not enough memory?).");
+		ret.stat = true;
+		return ret;
 	}
-	*_u8 = arr;
-	return false;
+	ret.u8 = arr;
+	return ret;
 }

@@ -18,14 +18,21 @@
 # include <stdint.h>
 # include <u8c/err.h>
 # include <u8c/intern.h>
-# include <u8c/u32.h>
-bool u8c_geterr(size_t * const _sz,char32_t const * * const _out) {
-	# if defined(u8c_bethrdsafe)
-		mtx_lock(&u8c_dat.errlock);
-	# endif
-		u8c_u32cp(_sz,_out,u8c_dat.err);
-	# if defined(u8c_bethrdsafe)
-		mtx_unlock(&u8c_dat.errlock);
-	# endif
-		return false;
+# include <u8c/str.h>
+struct u8c_geterr_tuple u8c_geterr(void) {
+	struct u8c_geterr_tuple ret = {
+		.stat = false,
+	};
+	{
+# if defined(u8c_bethrdsafe)
+	mtx_lock(&u8c_dat.errlock);
+# endif
+		struct u8c_strcp_tuple const tuple = u8c_strcp(u8c_dat.err);
+# if defined(u8c_bethrdsafe)
+	mtx_unlock(&u8c_dat.errlock);
+# endif
+		ret.err   = tuple.str;
+		ret.errsz = tuple.strsz;
 	}
+	return ret;
+}

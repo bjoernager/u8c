@@ -14,28 +14,35 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <u8c/fmt.h>
-# include <u8c/intern.h>
-# if defined(u8c_bethrdsafe)
-# include <threads.h>
-# endif
-struct u8c_setfmt_tuple u8c_setfmt(uint_least8_t const _base,bool const _endian) {
-	struct u8c_setfmt_tuple ret = {
+# include <u8c/chk.h>
+struct u8c_isxdigit_tuple u8c_isxdigit(char32_t const _chr) {
+	struct u8c_isxdigit_tuple ret = {
 		.stat = false,
 	};
-	register uint_least8_t base   = _base;
-	register bool          endian = _endian;
-	if(_base > UINT8_C(0x20)) {
-		base = UINT8_C(0xC);
+	switch(_chr) {
+	default:
+		ret.res = false;
+		break;
+	case U'0': /* DIGIT ZERO */
+	case U'1': /* DIGIT ONE */
+	case U'2': /* DIGIT TWO */
+	case U'3': /* DIGIT THREE */
+	case U'4': /* DIGIT FOUR */
+	case U'5': /* DIGIT FIVE */
+	case U'6': /* DIGIT SIX */
+	case U'7': /* DIGIT SEVEN */
+	case U'8': /* DIGIT EIGHT */
+	case U'9': /* DIGIT NINE */
+	case U'A': /* LATIN CAPITAL LETTER A */
+	case U'B': /* LATIN CAPITAL LETTER B */
+	case U'C': /* LATIN CAPITAL LETTER C */
+	case U'D': /* LATIN CAPITAL LETTER D */
+	case U'E': /* LATIN CAPITAL LETTER E */
+	case U'F': /* LATIN CAPITAL LETTER F */
+		ret.res = true;
+		break;
 	}
-# if defined(u8c_bethrdsafe)
-	mtx_lock(&u8c_dat.fmtlock);
-# endif
-	u8c_dat.fmtbase   = base;
-	u8c_dat.fmtendian = endian;
-# if defined(u8c_bethrdsafe)
-	mtx_unlock(&u8c_dat.fmtlock);
-# endif
 	return ret;
 }

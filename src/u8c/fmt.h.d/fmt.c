@@ -18,11 +18,15 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <u8c/fmt.h>
-# include <u8c/u32.h>
-bool u8c_fmt(size_t * const _outsz,char32_t const * * const _out,char32_t const * const _in,...) {
+# include <u8c/str.h>
+struct u8c_fmt_tuple u8c_fmt(char32_t const * const restrict _in,...) {
+	struct u8c_fmt_tuple ret;
 	va_list args;
 	va_start(args,_in);
-	uint_least8_t val = u8c_vfmt(_outsz,_out,_in,args);
+	struct u8c_vfmt_tuple tuple = u8c_vfmt(_in,args);
 	va_end(args);
-	return val;
+	ret.stat  = tuple.stat;
+	ret.str   = tuple.str;
+	ret.strsz = tuple.strsz;
+	return ret;
 }

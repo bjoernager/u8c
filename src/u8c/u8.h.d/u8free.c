@@ -17,8 +17,10 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <u8c/u8.h>
-bool u8c_u8free(unsigned char const * * const _u8) {
-	free((unsigned char *)*_u8);
-	*_u8 = NULL;
-	return false;
+struct u8c_u8free_tuple u8c_u8free(unsigned char const * const restrict _u8) {
+	struct u8c_u8free_tuple ret = {
+		.stat = false,
+	};
+	free((unsigned char *)_u8);
+	return ret;
 }

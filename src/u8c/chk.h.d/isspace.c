@@ -14,13 +14,25 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/chk.h>
+struct u8c_isspace_tuple u8c_isspace(char32_t const _chr) {
+	struct u8c_isspace_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	switch(_chr) {
+	default:
+		ret.res = false;
+		break;
+	case U'\t':  /* HORIZONTAL TABULATION */
+	case U'\n':  /* NEW LINE */
+	case U'\v':  /* VERTICAL TABULATION */
+	case U'\f':  /* FORM FEED */
+	case U'\r':  /* CARRIAGE RETURN */
+	case U' ':   /* SPACE */
+		ret.res = true;
+		break;
+	}
 	return ret;
 }

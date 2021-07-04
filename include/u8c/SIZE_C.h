@@ -21,7 +21,7 @@
 # elif SIZE_MAX == UINT_LEAST16_MAX
 # define SIZE_C(val) UINT16_C(val)
 # elif SIZE_MAX == UINT_LEAST32_MAX
-# define SIZE_C(val) UINT32s_C(val)
+# define SIZE_C(val) UINT32_C(val)
 # elif SIZE_MAX == UINT_LEAST64_MAX
 # define SIZE_C(val) UINT64_C(val)
 # else

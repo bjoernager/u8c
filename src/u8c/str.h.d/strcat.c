@@ -14,13 +14,33 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
-# include <stdint.h>
 # include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/SIZE_C.h>
+# include <u8c/err.h>
+# include <u8c/str.h>
+# include <uchar.h>
+struct u8c_strcat_tuple u8c_strcat(char32_t const * const restrict _lstr,char32_t const * const restrict _rstr) {
+	struct u8c_strcat_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	size_t lsz = u8c_strsz(_lstr).sz;
+	size_t rsz = u8c_strsz(_rstr).sz;
+	ret.strsz = lsz + rsz;
+	char32_t * out = NULL;
+	{
+		struct u8c_stralloc_tuple const tuple = u8c_stralloc(ret.strsz + SIZE_C(0x1));
+		if(tuple.stat) {
+			ret.stat = true;
+			return ret;
+		}
+		out = tuple.str;
+	}
+	for(register size_t n = SIZE_C(0x0);n < lsz;n += SIZE_C(0x1)) {
+		out[n] = _lstr[n];
+	}
+	for(register size_t n = SIZE_C(0x0);n < rsz;n += SIZE_C(0x1)) {
+		out[n + lsz] = _rstr[n];
+	}
+	ret.str = out;
 	return ret;
 }

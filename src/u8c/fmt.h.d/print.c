@@ -17,10 +17,12 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <u8c/fmt.h>
-bool u8c_print(FILE * _fp,char32_t const * const _msg,...) {
+struct u8c_print_tuple u8c_print(FILE * restrict _fp,char32_t const * const restrict _msg,...) {
+	struct u8c_print_tuple ret;
 	va_list args;
 	va_start(args,_msg);
-	uint_least8_t val = u8c_vprint(_fp,_msg,args);
+	struct u8c_vprint_tuple tuple = u8c_vprint(_fp,_msg,args);
 	va_end(args);
-	return val;
+	ret.stat = tuple.stat;
+	return ret;
 }

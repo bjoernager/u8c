@@ -16,11 +16,11 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/str.h>
+struct u8c_strfree_tuple u8c_strfree(char32_t const * const restrict _str) {
+	struct u8c_strfree_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	free((char32_t *)_str); /* This cast does indeed discard a const-qualifier, but it is not undefined behaviour, as the array must have been allocated by calloc or malloc, meaning it's original type is not const-qualified. */
 	return ret;
 }

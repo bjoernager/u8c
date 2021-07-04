@@ -14,13 +14,20 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
-# include <stdint.h>
 # include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/err.h>
+# include <u8c/str.h>
+# include <uchar.h>
+struct u8c_stralloc_tuple u8c_stralloc(size_t const _sz) {
+	struct u8c_stralloc_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	char32_t * arr = NULL;
+	if((arr = calloc(sizeof *arr,_sz)) == NULL) {
+		u8c_seterr(u8c_errtyp_badalloc,U"u8c_stralloc: Unable to allocate resources (not enough memory?).");
+		ret.stat = true;
+		return ret;
+	}
+	ret.str = arr;
 	return ret;
 }

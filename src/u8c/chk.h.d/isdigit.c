@@ -14,13 +14,31 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/chk.h>
+struct u8c_isdigit_tuple u8c_isdigit(char32_t const _chr) {
+	struct u8c_isdigit_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	switch(_chr) {
+	default:
+		ret.res = false;
+		break;
+	case U'0':      /* DIGIT ZERO */
+	case U'1':      /* DIGIT ONE */
+	case U'2':      /* DIGIT TWO */
+	case U'3':      /* DIGIT THREE */
+	case U'4':      /* DIGIT FOUR */
+	case U'5':      /* DIGIT FIVE */
+	case U'6':      /* DIGIT SIX */
+	case U'7':      /* DIGIT SEVEN */
+	case U'8':      /* DIGIT EIGHT */
+	case U'9':      /* DIGIT NINE */
+	case U'\u218A': /* TURNED DIGIT TWO */
+	case U'\u218B': /* TURNED DIGIT THREE */
+		ret.res = true;
+		break;
+	}
 	return ret;
 }

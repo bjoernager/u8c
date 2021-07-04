@@ -15,34 +15,35 @@
 */
 # if !defined(u8c_sym_dattyp)
 # define u8c_sym_dattyp
-# include <stdalign.h>
+# if defined(u8c_bethrdsafe) && defined(__STDC_NO_THREADS__)
+# error u8c is set to be thread-safe, but the implementation does not support multithreading.
+# endif
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <u8c/SIZE_C.h>
-# include <u8c/err.h>
 # include <uchar.h>
+# include <u8c/err.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
 /* Enumerations: */
 /* Type definitions: */
 /* Structures: */
-struct u8c_dattyp {
-	char32_t const * err;
-	u8c_errhandltyp  errhandls[(size_t)u8c_errtyp_maxerrtyp];
-	uint_least8_t    fmtbase;
-	bool             fmtendian;
-	uint_least8_t    stat;
+struct u8c_dattyp { /* Data type */
+	char32_t const * err;                                     /* Error */
+	u8c_errhandltyp  errhandls[(size_t)u8c_errtyp_all]; /* Error handlers */
+	uint_least8_t    fmtbase;                                 /* Format base */
+	bool             fmtendian;                               /* Format endian */
+	uint_least8_t    stat;                                    /* Status */
 # if defined(u8c_bethrdsafe)
-	mtx_t errlock;
-	mtx_t errhandlslock;
-	mtx_t fmtlock;
-	mtx_t outlock;
+	mtx_t errhandlslock;                                      /* Error handlers lock */
+	mtx_t errlock;                                            /* Error lock */
+	mtx_t fmtlock;                                            /* Format lock */
+	mtx_t outlock;                                            /* Output lock */
 # endif
 };
-/* Functions */
+/* Functions: */
 /* Constants & Variables: */
-extern struct u8c_dattyp u8c_dat;
+extern struct u8c_dattyp u8c_dat; /* Data */
 /* Macros: */
 # endif

@@ -14,13 +14,17 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/chk.h>
+struct u8c_issurro_tuple u8c_issurro(char32_t const _chr) {
+	struct u8c_issurro_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	bool res = false;
+	if(_chr >= U'\xD800' && _chr <= U'\xDFFF') {
+		res = true;
+	}
+	ret.res = res;
 	return ret;
 }

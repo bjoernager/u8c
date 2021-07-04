@@ -20,22 +20,32 @@
 # include <uchar.h>
 /* Enumerations: */
 enum u8c_errtyp {
-	u8c_errtyp_badalloc,  /* Bad allocation */
-	u8c_errtyp_badio,     /* Bad input or output */
-	u8c_errtyp_u32oor,    /* UTF-32 out of range */
-	u8c_errtyp_u8oor,     /* UTF-8 out of range */
-	u8c_errtyp_deferr,    /* Default error */
-	u8c_errtyp_untermin,  /* Unterminated input */
-	u8c_errtyp_maxerrtyp, /* Maximum error type */
-	u8c_errtyp_all,       /* All */
+	u8c_errtyp_badalloc, /* Bad allocation */
+	u8c_errtyp_badio,    /* Bad input or output */
+	u8c_errtyp_stroor,   /* UTF-32 out of range */
+	u8c_errtyp_u8oor,    /* UTF-8 out of range */
+	u8c_errtyp_deferr,   /* Default error */
+	u8c_errtyp_untermin, /* Unterminated input */
+	u8c_errtyp_all,      /* All */
 };
 /* Type definitions: */
-typedef void (* u8c_errhandltyp)(enum u8c_errtyp);
+typedef void (* u8c_errhandltyp)(enum u8c_errtyp); /* Error handler type */
 /* Structures: */
-/* Functions */
-extern bool u8c_geterr(     size_t * const         sz, char32_t const * * const out);
-extern bool u8c_regerrhandl(enum u8c_errtyp        typ,u8c_errhandltyp          errhandl);
-extern bool u8c_seterr(     char32_t const * const msg,enum u8c_errtyp          typ);
+struct u8c_geterr_tuple {
+	char32_t const * err;
+	size_t           errsz;
+	bool             stat;
+};
+struct u8c_regerrhandl_tuple {
+	bool stat;
+};
+struct u8c_seterr_tuple {
+	bool stat;
+};
+/* Functions: */
+extern struct u8c_geterr_tuple      u8c_geterr(     void);                                                         /* Get error */
+extern struct u8c_regerrhandl_tuple u8c_regerrhandl(enum u8c_errtyp typ,u8c_errhandltyp                 errhandl); /* Register error handler */
+extern struct u8c_seterr_tuple      u8c_seterr(     enum u8c_errtyp typ,char32_t const * const restrict msg);      /* Set error */
 /* Constants & Variables: */
 /* Macros: */
 # endif

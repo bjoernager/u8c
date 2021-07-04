@@ -19,37 +19,45 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <u8c/SIZE_C.h>
 # include <u8c/err.h>
 # include <u8c/intern.h>
 # include <u8c/main.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_init() {
+struct u8c_init_tuple u8c_init() {
+	struct u8c_init_tuple ret = {
+		.stat = false,
+	};
 	/* Initialise mutexes: */
 # if defined(u8c_bethrdsafe)
 	if(mtx_init(&u8c_dat.errhandlslock,mtx_plain) == thrd_error) {
-		return true;
+		ret.stat = true;
+		return ret;
 	}
 	if(mtx_init(&u8c_dat.errlock,mtx_plain) == thrd_error) {
-		return true;
+		ret.stat = true;
+		return ret;
 	}
 	if(mtx_init(&u8c_dat.fmtlock,mtx_plain) == thrd_error) {
-		return true;
+		ret.stat = true;
+		return ret;
 	}
 	if(mtx_init(&u8c_dat.outlock,mtx_plain) == thrd_error) {
-		return true;
+		ret.stat = true;
+		return ret;
 	}
 # endif
 	/* Set default error message: */
 	u8c_dat.err = NULL;
-	u8c_seterr(U"",u8c_errtyp_deferr);
+	u8c_seterr(u8c_errtyp_deferr,U"");
 	/* Initialise error handler array: */
-	for(register size_t n = SIZE_C(0x0);n < u8c_errtyp_maxerrtyp;n += SIZE_C(0x1)) {
+	for(register size_t n = SIZE_C(0x0);n < u8c_errtyp_all;n += SIZE_C(0x1)) {
 		u8c_dat.errhandls[n] = NULL;
 	}
 	/* Set status: */
 	u8c_dat.stat = UINT8_C(0x1);
-	return false;
+	return ret;
 }

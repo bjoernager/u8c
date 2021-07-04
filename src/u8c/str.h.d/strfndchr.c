@@ -14,13 +14,32 @@
 	If not, see <https://www.gnu.org/licenses/>.
 */
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-# include <u8c/u16.h>
-struct u8c_u16free_tuple u8c_u16free(char16_t const * const restrict _u16) {
-	struct u8c_u16free_tuple ret = {
+# include <u8c/SIZE_C.h>
+# include <u8c/err.h>
+# include <u8c/str.h>
+struct u8c_strfndchr_tuple u8c_strfndchr(char32_t const * const restrict _in,char32_t const _chr) {
+	struct u8c_strfndchr_tuple ret = {
 		.stat = false,
 	};
-	free((char16_t *)_u16);
+	for(register size_t n = SIZE_C(0x0);n <= SIZE_MAX;n += SIZE_C(0x1)) {
+		register uint_least32_t const tmp = _in[n];
+		if(tmp == U'\x0') {
+			if(_chr == U'\x0') {
+				ret.pos = n;
+				return ret;
+			}
+			ret.pos = SIZE_C(-0x1);
+			return ret;
+		}
+		if(tmp == _chr) {
+			ret.pos = n;
+			return ret;
+		}
+	}
+	u8c_seterr(u8c_errtyp_untermin,U"u8c_strfndchr: Unterminated input.");
+	ret.pos  = SIZE_C(-0x1);
+	ret.stat = true;
 	return ret;
 }

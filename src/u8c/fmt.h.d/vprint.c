@@ -13,7 +13,6 @@
 
 	If not, see <https://www.gnu.org/licenses/>.
 */
-# include <assert.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdint.h>
@@ -23,20 +22,24 @@
 # include <u8c/err.h>
 # include <u8c/fmt.h>
 # include <u8c/intern.h>
-# include <u8c/u32.h>
+# include <u8c/str.h>
 # include <u8c/u8.h>
 # include <uchar.h>
 # if defined(u8c_bethrdsafe)
 # include <threads.h>
 # endif
-bool u8c_vprint(FILE * _fp,char32_t const * const _msg,va_list _args) {
-	assert(_msg != NULL);
-	char32_t const * str0 = NULL;
-	u8c_vfmt(NULL,&str0,_msg,_args);
+struct u8c_vprint_tuple u8c_vprint(FILE * restrict _fp,char32_t const * const restrict _msg,va_list _args) {
+	struct u8c_vprint_tuple ret = {
+		.stat = false,
+	};
+	char32_t const *      str0   = u8c_vfmt(_msg,_args).str;
 	size_t                str1sz = SIZE_C(0x0);
 	unsigned char const * str1   = NULL;
-	u8c_u8enc(&str1sz,&str1,str0);
-	assert(str1sz > SIZE_C(0x0));
+	{
+		struct u8c_u8enc_tuple const tuple  = u8c_u8enc(str0);
+		                             str1   = tuple.u8;
+		                             str1sz = tuple.u8sz;
+	}
 # if defined(u8c_bethrdsafe)
 	mtx_lock(&u8c_dat.outlock);
 # endif
@@ -46,11 +49,12 @@ bool u8c_vprint(FILE * _fp,char32_t const * const _msg,va_list _args) {
 		mtx_unlock(&u8c_dat.outlock);
 # endif
 		if(val < str1sz - SIZE_C(0x1)) {
-			u8c_seterr(U"u8c_vprint: fwrite: Unable to write to stdout.",u8c_errtyp_badio);
-			return true;
+			u8c_seterr(u8c_errtyp_badio,U"u8c_vprint: Unable to write to stdout.");
+			ret.stat = true;
+			return ret;
 		}
 	}
-	u8c_u32free(&str0);
-	u8c_u8free(&str1);
-	return false;
+	u8c_strfree(str0);
+	u8c_u8free(str1);
+	return ret;
 }
