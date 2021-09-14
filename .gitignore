@@ -1,4 +1,2 @@
-*.o
-*.so
-/test
-vgcore.*
+/.vscode
+/build

@@ -1,3 +1,9 @@
+# 23
+
+* Rewrite for C++ *(read readme for list of current features)*.
+* Use CMake for building.
+* Update logo.
+
 # 22
 
 * Remove documentation (too hight-maintainence).

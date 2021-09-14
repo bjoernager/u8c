@@ -1,46 +1,61 @@
 # u8c
 
-[*u8c*](https://mandelbrot.dk/delta/u8c) is a free, open-source and (very) portable library for Unicode manipulation.
+[*u8c*](https://mandelbrot.dk/delta/u8c) is a free, open-source and portable general-purpose library. It is written in the C++ *(C++2b)* programming language. A wrapper for C may arrive in the future.
 
-*u8c* is very portable, and should work (with a trivial build system) on **any** hosted conforming C23 implementation, be it one with 64 bits a byte, 4096 byte shorts, with or without multithreading. In the event it doesn't for you, I really want you to open an issue on GitLab (<https://mandelbrot.dk>).
+## Features
 
-## Compiling
+u8c has the following features:
 
-*u8c* can be compiled via the provided *Makefile* using the command `make`.
+* Array container with support for compile-time, dynamic, and static arrays.
+* Compile-time-compatible alternatives to the C maths library *(incomplete)*.
+* Compile-time-compatible alternatives to the C string manipulation facilities *(incomplete)*.
+* Facilities for determining the target platform using immediate functions *(Supports major platforms, including AIX, FreeBSD, Linux, macOS, OpenBSD, Windows NT)*.
+* Optional platform-specific behaviour, including vendor-specific attributes, pointer-restriction.
+* Quota type for fractional mathematics *(incomplete)*.
+* String container with built-in UTF-conversions
+* Unicode *(UTF-8, UTF-16 and UTF-32)* conversions and manipulations facilities *(UTF-16 lacking full support)*.
 
-By default, GCC-11 is used to build *u8c*. Clang-12 doesn't support C23 to the same extend, and may therefore require some modifications.
-
-Currently, the following C23 features are required:
-
-* Attributes.
-* Binary literals.
-
-Yet even with only these two seemingly trivial features, the newest version of Clang (Clang-12 at this time) is unable to compile the library without the `-Wno-gnu-binary-literal`.
-
-To enable debug mode, the option `debug=1` must be passed to Make.
-
-To enable thread-safe operations (where logical), the option `thrdsafe=1` must be passed to Make.
+With more to come in the future.
 
 ## Installing
 
-*u8c* can be installed, either via the `install` target in the provided Makefile, or using the PKGBUILD found [here](https://mandelbrot.dk/pkgbuild/delta/u8c).
+TBA
 
-If it's installed so, one must make a note of the output, as it logs what system files have changed.
+## Compiling
 
-Using the PKGBUILD is as simple as `git clone https://mandelbrot.dk/pkg/u8c.git && cd u8c && makepkg --clean --install --syncdeps` (on Arch-based distributions).
+u8c has been tested to work with Clang 14.
+
+1. Checkout u8c using `git`:
+
+    * Clone the repository: `git clone https://mandelbrot.dk/delta/u8c.git
+    * Or do a shallow cone: `git clone --depth 1 https://mandelbrot.dk/delta/u8c.git`
+
+2. Configure the compilation of u8c:
+
+	* `cd u8c`
+	* `cmake -B build`
+
+		You can append the following options to the command:
+
+		* `-DCMAKE_BUILD_TYPE` — Set the build type. Can be either `Debug`or `Release`.
+		* `-DU8C_TEST` — Enables compilation of the test program if set to `ON`.
+
+3. Build u8c build
+
+	* `cmake --build build`
+
+## Contributing
+
+u8c does currently not accept **any** merge requests.
 
 ## Copyright & License
 
-Copyright 2021 Gabriel Jensen.
+Copyright 2021 Gabriel Jensen
 
-All rights reserved.
+This file is part of u8c.
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+u8c is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+u8c is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
-See the GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License along with this program.
-
-If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License along with u8c. If not, see <https://www.gnu.org/licenses/>.
