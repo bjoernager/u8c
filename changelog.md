@@ -1,3 +1,12 @@
+# 24
+
+* Remove constructor taking a single value for `u8c::arr`.
+* Add new overload taking a single value for `u8c::arr::app`.
+* Add function `u8c::arr::log` to enable logging of array operations *(doesn't currently log a lot)*.
+* Remove `u8c::trunc`.
+* Initialise memory allocated by `u8c::arr`.
+* Add overload taking value used for memory-initialisation for `u8c::arr::alloc`.
+
 # 23
 
 * Rewrite for C++ *(read readme for list of current features)*.

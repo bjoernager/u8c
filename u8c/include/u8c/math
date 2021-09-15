@@ -64,7 +64,6 @@ namespace u8c {
 	template<u8c::arith    T>                  [[u8c_attr_const]] constexpr auto pow(    T             base,T             exp)                noexcept -> T;
 	template<typename      T>                  [[u8c_attr_const]] constexpr auto sqrt(   u8c::quota<T> val)                                   noexcept -> u8c::quota<T>;
 	template<u8c::arith    T>                  [[u8c_attr_const]] constexpr auto sqrt(   T             val)                                   noexcept -> T;
-	template<std::integral T,std::integral T0> [[u8c_attr_const]] constexpr auto trunc(  T val,             T0)                               noexcept -> T0;
 }
 
 #include <u8c/math.d/abs>
@@ -75,6 +74,5 @@ namespace u8c {
 #include <u8c/math.d/pow>
 #include <u8c/math.d/quota>
 #include <u8c/math.d/sqrt>
-#include <u8c/math.d/trunc>
 
 #endif

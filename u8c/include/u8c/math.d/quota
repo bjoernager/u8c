@@ -72,7 +72,7 @@ template<std::signed_integral T> template<std::convertible_to<T> T0> constexpr a
 	return this->upper() * _oth.lower() == _oth.upper() * this->lower();
 }
 template<std::signed_integral T> template<std::integral T0> constexpr u8c::quota<T>::operator T0 () const noexcept {
-	return u8c::trunc<T0>(this->_upper / this->_lower);
+	return static_cast<T0>(this->_upper / this->_lower);
 }
 template<std::signed_integral T> template<std::convertible_to<T> T0> constexpr u8c::quota<T>::quota(T0 const _val) noexcept {
 	if (u8c::isnan(_val)) [[unlikely]] {

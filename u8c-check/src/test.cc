@@ -50,8 +50,6 @@ static_assert(u8c::quota(0x1,0x3) == u8c::quota(0x2,0x6));
 static_assert(u8c::quota<>::inf() == u8c::quota<>::inf());
 static_assert(u8c::quota<>::nan() != u8c::quota<>::nan());
 
-static_assert(u8c::trunc(static_cast<u8c::ubyte>(std::numeric_limits<u8c::byte>::max()) + u8c_uint16c(0x1),u8c_bytec(0x0)) == std::numeric_limits<u8c::byte>::min());
-
 static_assert(u8c::cstrlen("This is a string!") == 0x11uz);
 static_assert(u8c::cstrlen("Das war ein Befehl!") == 0x13uz);
 
