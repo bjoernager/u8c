@@ -56,35 +56,39 @@
 
 #ifdef __GNUC__
 
-#define u8c_ALWAYS_INLINE __attribute__ ((__always_inline__))
-#define u8c_NO_DISCARD    __attribute__ ((__warn_unused_result__))
-#define u8c_NO_THROW      __attribute__ ((__nothrow__))
-#define u8c_UNSEQUENCED   __attribute__ ((__const__))
+#define u8c_ALWAYS_INLINE  __attribute__ ((__always_inline__))
+#define u8c_DEPRECATED(_m) __attribute__ ((__deprecated__((_m))))
+#define u8c_NO_DISCARD     __attribute__ ((__warn_unused_result__))
+#define u8c_NO_THROW       __attribute__ ((__nothrow__))
+#define u8c_UNSEQUENCED    __attribute__ ((__const__))
 
 #elif __STDC_VERSION__ >= 202311
 
 #define u8c_ALWAYS_INLINE
-#define u8c_NO_DISCARD    [[nodiscard]]
+#define u8c_DEPRECATED(_m) [[deprecated((_m))]]
+#define u8c_NO_DISCARD     [[nodiscard]]
 #define u8c_NO_THROW
-#define u8c_UNSEQUENCED   [[unsequenced]]
+#define u8c_UNSEQUENCED    [[unsequenced]]
 
 #elif __cplusplus >= 201703
 
 #define u8c_ALWAYS_INLINE
-#define u8c_NO_DISCARD    [[nodiscard]]
+#define u8c_DEPRECATED(_m) [[deprecated((_m))]]
+#define u8c_NO_DISCARD     [[nodiscard]]
 #define u8c_NO_THROW
 #define u8c_UNSEQUENCED
 
 #else
 
 #define u8c_ALWAYS_INLINE
+#define u8c_DEPRECATED(_m)
 #define u8c_NO_DISCARD
 #define u8c_NO_THROW
 #define u8c_UNSEQUENCED
 
 #endif
 
-#define u8c_VERSION ((uint_least32_t)+UINT32_C(0x1D))
+#define u8c_VERSION ((uint_least32_t)+UINT32_C(0x1E))
 
 #define u8c_MAXIMUM_CODE_POINT ((uint_least32_t)+UINT32_C(0x0010FFFF))
 

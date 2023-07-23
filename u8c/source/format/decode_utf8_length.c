@@ -34,13 +34,15 @@ size_t u8c_decode_utf8_length(char const* const restrict _source, size_t const c
 	for (ptrdiff_t index = 0x0; index < (ptrdiff_t)count; ++length) {
 		char unsigned const octet = source[index];
 
-		if (octet >= 0xF0u) {
-			index += 0x4u;
-		} else if (octet >= 0xE0u) {
-			index += 0x3u;
-		} else if (octet >= 0xC0u) {
-			index += 0x2u;
+		if ((octet & UINT32_C(0xF8)) == UINT32_C(0xF0)) {
+			index += 0x4;
+		} else if ((octet & UINT32_C(0xF0)) == UINT32_C(0xE0)) {
+			index += 0x3;
+		} else if ((octet & UINT32_C(0xE0)) == UINT32_C(0xC0)) {
+			index += 0x2;
 		} else {
+			// Valid or not, this is decoded as a single code
+			// point.
 			++index;
 		}
 	}

@@ -1,3 +1,10 @@
+# 26
+
+* Update comments
+* Fix u8c_decode_utf8_length not validating
+* Add attribute u8c_DEPRECATED
+* Deprecate u8c_encode_utf16 and u8c_encode_utf16_length as they're untested (this is not permanent)
+
 # 25
 
 * Rename source directory: src => source

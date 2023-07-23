@@ -42,8 +42,8 @@ u8c_NO_DISCARD u8c_NO_THROW size_t u8c_decode_utf16_length(uint_least16_t const*
 u8c_NO_THROW size_t u8c_encode_utf8(char*           u8c_RESTRICT _buffer, uint_least32_t const* u8c_RESTRICT _source, size_t _count);
 u8c_NO_THROW size_t u8c_decode_utf8(uint_least32_t* u8c_RESTRICT _buffer, char const*           u8c_RESTRICT _source, size_t _count);
 
-u8c_NO_THROW size_t u8c_encode_utf16(uint_least16_t* u8c_RESTRICT _buffer, uint_least32_t const* u8c_RESTRICT _source, size_t _count);
-u8c_NO_THROW size_t u8c_decode_utf16(uint_least32_t* u8c_RESTRICT _buffer, uint_least16_t const* u8c_RESTRICT _source, size_t _count);
+u8c_DEPRECATED("utf-16 may not be safe") u8c_NO_THROW size_t u8c_encode_utf16(uint_least16_t* u8c_RESTRICT _buffer, uint_least32_t const* u8c_RESTRICT _source, size_t _count);
+u8c_DEPRECATED("utf-16 may not be safe") u8c_NO_THROW size_t u8c_decode_utf16(uint_least32_t* u8c_RESTRICT _buffer, uint_least16_t const* u8c_RESTRICT _source, size_t _count);
 
 #ifdef __cplusplus
 }

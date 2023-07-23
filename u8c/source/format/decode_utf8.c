@@ -39,7 +39,31 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 
 		uint_least32_t code_point = UINT32_C(0x0);
 
+		// For each octet in the input, we assert the
+		// following:
+		//
+		// 1. It has an appropriate value for its position.
+		// 2. The ammount of remaining octets is
+		//    sufficient to fully decode the current
+		//    sequence.
+		//
+		// If these predicates are not true, the octet is
+		// discard and the	replacement character U+FFFD
+		// written set its place.
+		//
+		// If the decoded code point lies outside the
+		// defined valid range of a UTF-32 value - that is,
+		// it's a surrogate point or larger than
+		// U+0010FFFF - it is likewise replaced.
+		//
+		// If an octet sequence with an otherwise valid
+		// initiating octet contains any ammount of invalid
+		// values, it is skipped in its entirety and
+		// replaced.
+
 		if ((octet & UINT32_C(0xF8)) == UINT32_C(0xF0)) {
+			// Four octets:
+
 			if (remaining < 0x3u) {
 				code_point = UINT32_C(0xFFFD);
 			} else {
@@ -48,9 +72,9 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 				uint_least32_t const octet3 = (uint_least32_t)source[index_in + 0x3];
 
 				if (
-					   (octet1 & 0xC0) != 0x80
-					|| (octet2 & 0xC0) != 0x80
-					|| (octet3 & 0xC0) != 0x80
+					   (octet1 & UINT32_C(0xC0)) != UINT32_C(0x80)
+					|| (octet2 & UINT32_C(0xC0)) != UINT32_C(0x80)
+					|| (octet3 & UINT32_C(0xC0)) != UINT32_C(0x80)
 				) {
 					code_point = UINT32_C(0xFFFD);
 				} else {
@@ -63,6 +87,8 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 
 			index_in += 0x4;
 		} else if ((octet & UINT32_C(0xF0)) == UINT32_C(0xE0)) {
+			// Three octets:
+
 			if (remaining < 0x2u) {
 				code_point = UINT32_C(0xFFFD);
 			} else {
@@ -70,8 +96,8 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 				uint_least32_t const octet2 = (uint_least32_t)source[index_in + 0x2];
 
 				if (
-					   (octet1 & 0xC0) != 0x80
-					|| (octet2 & 0xC0) != 0x80
+					   (octet1 & UINT32_C(0xC0)) != UINT32_C(0x80)
+					|| (octet2 & UINT32_C(0xC0)) != UINT32_C(0x80)
 				) {
 					code_point = UINT32_C(0xFFFD);
 				} else {
@@ -82,13 +108,15 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 			}
 
 			index_in += 0x3;
-		} else if ((octet & UINT32_C(0xE0)) == 0xC0) {
+		} else if ((octet & UINT32_C(0xE0)) == UINT32_C(0xC0)) {
+			// Two octets:
+
 			if (remaining < 0x1u) {
 				code_point = UINT32_C(0xFFFD);
 			} else {
 				uint_least32_t const octet1 = (uint_least32_t)source[index_in + 0x1];
 
-				if ((octet1 & 0xC0) != 0x80) {
+				if ((octet1 & UINT32_C(0xC0)) != UINT32_C(0x80)) {
 					code_point = UINT32_C(0xFFFD);
 				} else {
 					code_point |= (octet  ^ UINT32_C(0xC0)) << UINT32_C(0x6);
@@ -98,10 +126,14 @@ size_t u8c_decode_utf8(uint_least32_t* const restrict buffer, char const* const 
 
 			index_in += 0x2;
 		} else if ((octet & UINT32_C(0x80)) == UINT32_C(0x0)) {
+			// One octet:
+
 			code_point |= octet;
 
 			++index_in;
 		} else {
+			// Invalid:
+
 			code_point = UINT32_C(0xFFFD);
 
 			++index_in;
