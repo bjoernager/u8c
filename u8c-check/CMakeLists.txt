@@ -23,13 +23,41 @@
 
 cmake_minimum_required(VERSION 3.21)
 
-project(
-	u8c
-	VERSION 29
-	DESCRIPTION "Unicode for C."
-	HOMEPAGE_URL "https://mandelbrot.dk/u8c"
-	LANGUAGES C CXX
-)
+option(U8C_CHECK "build the test program" OFF)
 
-add_subdirectory(u8c)
-add_subdirectory(u8c-check)
+if(U8C_CHECK)
+	set(CMAKE_CXX_STANDARD 17)
+
+	set(CMAKE_CXX_EXTENSIONS OFF)
+
+	add_executable(
+		check
+
+		"source/check.cc"
+	)
+
+	add_dependencies(
+		check
+
+		u8c
+	)
+
+	target_link_libraries(
+		check
+
+		u8c
+	)
+
+	if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang|GNU")
+		target_compile_options(
+			check PRIVATE
+
+			-Og
+			-Wall
+			-Wextra
+			-Wpedantic
+			-fdiagnostics-color=always
+			-g
+		)
+	endif()
+endif()
