@@ -88,7 +88,7 @@
 
 #endif
 
-#define u8c_VERSION ((uint_least32_t)+UINT32_C(0x1E))
+#define u8c_VERSION ((uint_least32_t)+UINT32_C(0x1F))
 
 #define u8c_MAXIMUM_CODE_POINT ((uint_least32_t)+UINT32_C(0x0010FFFF))
 

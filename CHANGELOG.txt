@@ -1,3 +1,7 @@
+# 27
+
+* Add missing newlines and end-of-files
+
 # 26
 
 * Update comments
